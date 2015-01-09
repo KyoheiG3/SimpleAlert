@@ -139,7 +139,6 @@ public class Controller: UIViewController {
     let ButtonFontSize: CGFloat = 17
     var animator: UIDynamicAnimator?
     var presentedAnimation: Bool = true
-    var keyboardHeight: CGFloat = 0
     
     var message: String?
     
@@ -169,9 +168,7 @@ public class Controller: UIViewController {
         modalTransitionStyle = .CrossDissolve
         transitioningDelegate = self
         
-        let center = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        center.addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
     }
     
     public override func viewDidLoad() {
@@ -207,8 +204,6 @@ public class Controller: UIViewController {
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        backgroundViewBottomSpaceConstraint.constant = keyboardHeight
-        
         layoutContainer()
         layoutContents()
         layoutButtons()
@@ -217,7 +212,7 @@ public class Controller: UIViewController {
             buttonViewHeightConstraint.constant = buttonView.contentSize.height
         }
         
-        let backgroundViewHeight = view.bounds.size.height - keyboardHeight
+        let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpaceConstraint.constant
         if buttonViewHeightConstraint.constant > backgroundViewHeight {
             buttonView.contentSize.height = buttonViewHeightConstraint.constant
             buttonViewHeightConstraint.constant = backgroundViewHeight
@@ -383,13 +378,9 @@ extension Controller {
             if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
                 let rect = window.convertRect(frame, toView: view)
                 
-                keyboardHeight = view.bounds.size.height - rect.origin.y
+                backgroundViewBottomSpaceConstraint.constant = view.bounds.size.height - rect.origin.y
             }
         }
-    }
-    
-    func keyboardDidShow(notification: NSNotification) {
-        backgroundViewBottomSpaceConstraint.constant = keyboardHeight
     }
 }
 
