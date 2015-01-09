@@ -84,7 +84,7 @@ public class ContentView: UIView {
         backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
     }
     
-    public override func layoutSubviews() {
+    func layoutContents() {
         if textBackgroundView.subviews.isEmpty {
             messageSpaceConstraint.constant = 0
         }
@@ -100,7 +100,8 @@ public class ContentView: UIView {
             titleSpaceConstraint.constant = 0
         }
         
-        super.layoutSubviews()
+        baseView.setNeedsLayout()
+        baseView.layoutIfNeeded()
         
         frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
     }
@@ -287,8 +288,7 @@ public class Controller: UIViewController {
         if displayTargetView == contentView {
             contentView?.textViewHeightConstraint.constant = 0
             textFields.map { self.contentView?.layoutTextField($0) }
-            contentView?.setNeedsLayout()
-            contentView?.layoutIfNeeded()
+            contentView?.layoutContents()
         }
         
         if let targetView = displayTargetView {
