@@ -230,7 +230,7 @@ public class Controller: UIViewController {
             }
         }
         
-        view.layoutIfNeeded()
+        view.layoutSubviews()
     }
     
     public func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
