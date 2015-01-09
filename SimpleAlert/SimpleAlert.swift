@@ -324,8 +324,10 @@ public class Controller: UIViewController {
     }
     
     func takeOverColor(targetView: UIView?) {
-        mainView.backgroundColor = targetView?.backgroundColor
-        buttonView.backgroundColor = targetView?.backgroundColor
+        if let color = targetView?.backgroundColor {
+            mainView.backgroundColor = color
+            buttonView.backgroundColor = color
+        }
         targetView?.backgroundColor = nil
     }
     

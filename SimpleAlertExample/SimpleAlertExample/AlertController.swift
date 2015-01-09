@@ -44,7 +44,6 @@ class AlertController: Controller {
         
         configContentView = { [weak self] view in
             if let view = view as? ContentView {
-                view.backgroundColor = UIColor.whiteColor()
                 view.titleLabel.textColor = UIColor.lightGrayColor()
                 view.messageLabel.textColor = UIColor.lightGrayColor()
                 view.textBackgroundView.layer.cornerRadius = 3.0
