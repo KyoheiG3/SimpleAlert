@@ -9,7 +9,7 @@
 import UIKit
 import SimpleAlert
 
-class AlertController: Controller {
+class AlertController: SimpleAlert.Controller {
     override func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
         super.addTextFieldWithConfigurationHandler() { textField in
             textField.frame.size.height = 33
@@ -21,7 +21,7 @@ class AlertController: Controller {
         }
     }
     
-    override func configurButton(style :AlertAction.Style, forButton button: UIButton) {
+    override func configurButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
         super.configurButton(style, forButton: button)
         
         if let font = button.titleLabel?.font {
@@ -43,7 +43,7 @@ class AlertController: Controller {
         super.viewDidLoad()
         
         configContentView = { [weak self] view in
-            if let view = view as? ContentView {
+            if let view = view as? SimpleAlert.ContentView {
                 view.titleLabel.textColor = UIColor.lightGrayColor()
                 view.messageLabel.textColor = UIColor.lightGrayColor()
                 view.textBackgroundView.layer.cornerRadius = 3.0

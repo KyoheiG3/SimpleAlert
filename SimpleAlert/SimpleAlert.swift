@@ -8,341 +8,289 @@
 
 import UIKit
 
-public class AlertAction : NSObject {
-    public enum Style {
-        case Default
-        case OK
-        case Cancel
-        case Destructive
-    }
-
-    public init(title: String, style: Style, handler: ((AlertAction!) -> Void)? = nil) {
-        self.title = title
-        self.handler = handler
-        self.style = style
-        super.init()
-    }
-    
-    private func setButton(forButton: UIButton) {
-        button = forButton
-        button.setTitle(title, forState: .Normal)
-        button.enabled = enabled
-    }
-    
-    var title: String
-    var handler: ((AlertAction) -> Void)?
-    var style: AlertAction.Style
-    public var enabled: Bool = true {
-        didSet {
-            button?.enabled = enabled
-        }
-    }
-    public private(set) var button: UIButton!
-}
-
-public class ContentView: UIView {
-    class ContentTextField: UITextField {
-        let TextLeftOffset: CGFloat = 4
-        override func textRectForBounds(bounds: CGRect) -> CGRect {
-            return CGRectOffset(bounds, TextLeftOffset, 0)
+public class SimpleAlert {
+    @objc(SimpleAlertAction)
+    public class Action : NSObject {
+        public enum Style {
+            case Default
+            case OK
+            case Cancel
+            case Destructive
         }
         
-        override func editingRectForBounds(bounds: CGRect) -> CGRect {
-            return CGRectOffset(bounds, TextLeftOffset, 0)
-        }
-    }
-    
-    let TextFieldFontSize: CGFloat = 14
-    let TextFieldHeight: CGFloat = 25
-
-    @IBOutlet public weak var baseView: UIView!
-    @IBOutlet public weak var titleLabel: UILabel!
-    @IBOutlet public weak var messageLabel: UILabel!
-    @IBOutlet public weak var textBackgroundView: UIView!
-    
-    @IBOutlet var verticalSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var titleSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var messageSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var textViewHeightConstraint: NSLayoutConstraint!
-    
-    func addTextField() -> UITextField {
-        let textField = ContentTextField(frame: textBackgroundView.bounds)
-        textField.autoresizingMask = .FlexibleWidth
-        textField.font = UIFont.systemFontOfSize(TextFieldFontSize)
-        textField.backgroundColor = UIColor.whiteColor()
-        textField.layer.borderColor = UIColor.darkGrayColor().CGColor
-        textField.layer.borderWidth = 0.5
-        
-        textBackgroundView.addSubview(textField)
-        
-        return textField
-    }
-    
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        backgroundColor = UIColor.whiteColor()
-    }
-    
-    func layoutContents() {
-        if textBackgroundView.subviews.isEmpty {
-            messageSpaceConstraint.constant = 0
+        public init(title: String, style: Style, handler: ((Action!) -> Void)? = nil) {
+            self.title = title
+            self.handler = handler
+            self.style = style
+            super.init()
         }
         
-        if titleLabel.text == nil && messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-            messageSpaceConstraint.constant = 0
-            
-            if textBackgroundView.subviews.isEmpty {
-                verticalSpaceConstraint.constant = 0
+        var title: String
+        var handler: ((Action) -> Void)?
+        var style: Action.Style
+        public var enabled: Bool = true {
+            didSet {
+                button?.enabled = enabled
             }
-        } else if titleLabel.text == nil || messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
         }
-        
-        baseView.layoutIfNeeded()
-        
-        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
+        public private(set) var button: UIButton!
     }
     
-    func layoutTextField(textField: UITextField) {
-        textField.frame.origin.y = textViewHeightConstraint.constant
-        if textField.frame.height <= 0 {
-            textField.frame.size.height = TextFieldHeight
-        }
-        textViewHeightConstraint.constant += textField.frame.height
-    }
-}
-
-public class Controller: UIViewController {
-    public enum Style {
-        case Alert
-        case ActionSheet
-    }
-    
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var coverView: UIView!
-    @IBOutlet weak var marginView: UIView!
-    @IBOutlet weak var baseView: UIView!
-    @IBOutlet weak var mainView: UIScrollView!
-    @IBOutlet weak var buttonView: UIScrollView!
-    @IBOutlet weak var cancelButtonView: UIScrollView!
-    @IBOutlet weak var contentView: ContentView?
-    
-    @IBOutlet private var containerViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private var containerViewBottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private var backgroundViewTopSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private var backgroundViewBottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private var coverViewHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet private var mainViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private var buttonViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private var cancelButtonViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private var buttonViewSpaceConstraint: NSLayoutConstraint!
-    
-    @IBOutlet private var marginViewTopSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private var marginViewLeftSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private var marginViewBottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private var marginViewRightSpaceConstraint: NSLayoutConstraint!
-    
-    public var configContainerWidth: (() -> CGFloat?)?
-    public var configContentView: ((UIView!) -> Void)?
-    
-    public private(set) var actions: [AlertAction] = []
-    public private(set) var textFields: [UITextField] = []
-    var textFieldHandlers: [((UITextField!) -> Void)?] = []
-    weak var customView: UIView?
-    var transitionCoverView: UIView?
-    var displayTargetView: UIView?
-    let AlertDefaultWidth: CGFloat = 260
-    let AlertButtonHeight: CGFloat = 48
-    let AlertButtonFontSize: CGFloat = 17
-    let ActionSheetMargin: CGFloat = 8
-    let ActionSheetButtonHeight: CGFloat = 44
-    let ActionSheetButtonFontSize: CGFloat = 21
-    let ConstraintPriorityRequired: Float = 1000
-    var presentedAnimation: Bool = true
-    
-    var message: String?
-    var preferredStyle: Style = .Alert
-    
-    var marginInsets: UIEdgeInsets {
-        set {
-            marginViewTopSpaceConstraint.constant = newValue.top
-            marginViewLeftSpaceConstraint.constant = newValue.left
-            marginViewBottomSpaceConstraint.constant = newValue.bottom
-            marginViewRightSpaceConstraint.constant = newValue.right
-        }
-        get {
-            let top = marginViewTopSpaceConstraint.constant
-            let left = marginViewLeftSpaceConstraint.constant
-            let bottom = marginViewBottomSpaceConstraint.constant
-            let right = marginViewRightSpaceConstraint.constant
-            return UIEdgeInsetsMake(top, left, bottom, right)
-        }
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    public convenience init(title: String?, message: String?, style: Style) {
-        self.init()
-        self.title = title
-        self.message = message
-        self.preferredStyle = style
-    }
-    
-    public convenience init(view: UIView?, style: Style) {
-        self.init()
-        self.customView = view
-        self.preferredStyle = style
-    }
-    
-    public required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    public override init(nibName nibNameOrNil: String? = "SimpleAlert", bundle nibBundleOrNil: NSBundle? = NSBundle(forClass: Controller.self)) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    @objc(SimpleAlertContentView)
+    public class ContentView: UIView {
+        let TextFieldFontSize: CGFloat = 14
+        let TextFieldHeight: CGFloat = 25
         
-        modalPresentationStyle = .Custom
-        modalTransitionStyle = .CrossDissolve
-        transitioningDelegate = self
+        @IBOutlet public weak var baseView: UIView!
+        @IBOutlet public weak var titleLabel: UILabel!
+        @IBOutlet public weak var messageLabel: UILabel!
+        @IBOutlet public weak var textBackgroundView: UIView!
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-    }
-    
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+        @IBOutlet var verticalSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet var titleSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet var messageSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet var textViewHeightConstraint: NSLayoutConstraint!
         
-        view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        
-        baseView.layer.cornerRadius = 3.0
-        baseView.clipsToBounds = true
-        
-        cancelButtonView.layer.cornerRadius = 3.0
-        cancelButtonView.clipsToBounds = true
-        
-        containerView.layer.cornerRadius = 3.0
-        containerView.clipsToBounds = true
-        
-        displayTargetView = contentView
-    }
-    
-    public override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if let view = customView {
-            displayTargetView = view
-        }
-        
-        if displayTargetView == contentView {
-            setupContnetView()
-        }
-        textFieldHandlers.removeAll()
-        
-        if let textField = textFields.first {
-            textField.becomeFirstResponder()
-        }
-        
-        if preferredStyle == .ActionSheet {
-            containerViewBottomSpaceConstraint.priority = ConstraintPriorityRequired
-        }
-    }
-    
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if transitionCoverView == nil {
-            return
-        }
-        
-        layoutContainer()
-        layoutContents()
-        layoutButtons()
-        
-        let margin = marginInsets.top + marginInsets.bottom
-        let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpaceConstraint.constant - margin
-        
-        if cancelButtonView.contentSize.height > cancelButtonViewHeightConstraint.constant {
-            cancelButtonViewHeightConstraint.constant = cancelButtonView.contentSize.height
-        }
-        
-        if cancelButtonViewHeightConstraint.constant > backgroundViewHeight {
-            cancelButtonView.contentSize.height = cancelButtonViewHeightConstraint.constant
-            cancelButtonViewHeightConstraint.constant = backgroundViewHeight
+        public override func awakeFromNib() {
+            super.awakeFromNib()
             
-            mainViewHeightConstraint.constant = 0
-            buttonViewHeightConstraint.constant = 0
-        } else {
-            let baseViewHeight = backgroundViewHeight - cancelButtonViewHeightConstraint.constant - buttonViewSpaceConstraint.constant
-            if buttonView.contentSize.height > buttonViewHeightConstraint.constant {
-                buttonViewHeightConstraint.constant = buttonView.contentSize.height
+            backgroundColor = UIColor.whiteColor()
+        }
+    }
+    
+    @objc(SimpleAlertController)
+    public class Controller: UIViewController {
+        public enum Style {
+            case Alert
+            case ActionSheet
+        }
+        
+        @IBOutlet weak var containerView: UIView!
+        @IBOutlet weak var backgroundView: UIView!
+        @IBOutlet weak var coverView: UIView!
+        @IBOutlet weak var marginView: UIView!
+        @IBOutlet weak var baseView: UIView!
+        @IBOutlet weak var mainView: UIScrollView!
+        @IBOutlet weak var buttonView: UIScrollView!
+        @IBOutlet weak var cancelButtonView: UIScrollView!
+        @IBOutlet weak var contentView: ContentView?
+        
+        @IBOutlet private var containerViewWidthConstraint: NSLayoutConstraint!
+        @IBOutlet private var containerViewBottomSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var backgroundViewTopSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var backgroundViewBottomSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var coverViewHeightConstraint: NSLayoutConstraint!
+        
+        @IBOutlet private var mainViewHeightConstraint: NSLayoutConstraint!
+        @IBOutlet private var buttonViewHeightConstraint: NSLayoutConstraint!
+        @IBOutlet private var cancelButtonViewHeightConstraint: NSLayoutConstraint!
+        @IBOutlet private var buttonViewSpaceConstraint: NSLayoutConstraint!
+        
+        @IBOutlet private var marginViewTopSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var marginViewLeftSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var marginViewBottomSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var marginViewRightSpaceConstraint: NSLayoutConstraint!
+        
+        public var configContainerWidth: (() -> CGFloat?)?
+        public var configContentView: ((UIView!) -> Void)?
+        
+        public private(set) var actions: [Action] = []
+        public private(set) var textFields: [UITextField] = []
+        var textFieldHandlers: [((UITextField!) -> Void)?] = []
+        weak var customView: UIView?
+        var transitionCoverView: UIView?
+        var displayTargetView: UIView?
+        let AlertDefaultWidth: CGFloat = 260
+        let AlertButtonHeight: CGFloat = 48
+        let AlertButtonFontSize: CGFloat = 17
+        let ActionSheetMargin: CGFloat = 8
+        let ActionSheetButtonHeight: CGFloat = 44
+        let ActionSheetButtonFontSize: CGFloat = 21
+        let ConstraintPriorityRequired: Float = 1000
+        var presentedAnimation: Bool = true
+        
+        var message: String?
+        var preferredStyle: Style = .Alert
+        
+        var marginInsets: UIEdgeInsets {
+            set {
+                marginViewTopSpaceConstraint.constant = newValue.top
+                marginViewLeftSpaceConstraint.constant = newValue.left
+                marginViewBottomSpaceConstraint.constant = newValue.bottom
+                marginViewRightSpaceConstraint.constant = newValue.right
+            }
+            get {
+                let top = marginViewTopSpaceConstraint.constant
+                let left = marginViewLeftSpaceConstraint.constant
+                let bottom = marginViewBottomSpaceConstraint.constant
+                let right = marginViewRightSpaceConstraint.constant
+                return UIEdgeInsetsMake(top, left, bottom, right)
+            }
+        }
+        
+        deinit {
+            NSNotificationCenter.defaultCenter().removeObserver(self)
+        }
+        
+        public convenience init(title: String?, message: String?, style: Style) {
+            self.init()
+            self.title = title
+            self.message = message
+            self.preferredStyle = style
+        }
+        
+        public convenience init(view: UIView?, style: Style) {
+            self.init()
+            self.customView = view
+            self.preferredStyle = style
+        }
+        
+        public required init(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        
+        public override init(nibName nibNameOrNil: String? = "SimpleAlert", bundle nibBundleOrNil: NSBundle? = NSBundle(forClass: Controller.self)) {
+            super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+            
+            modalPresentationStyle = .Custom
+            modalTransitionStyle = .CrossDissolve
+            transitioningDelegate = self
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        }
+        
+        public override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+            
+            baseView.layer.cornerRadius = 3.0
+            baseView.clipsToBounds = true
+            
+            cancelButtonView.layer.cornerRadius = 3.0
+            cancelButtonView.clipsToBounds = true
+            
+            containerView.layer.cornerRadius = 3.0
+            containerView.clipsToBounds = true
+            
+            displayTargetView = contentView
+        }
+        
+        public override func viewWillAppear(animated: Bool) {
+            super.viewWillAppear(animated)
+            
+            if let view = customView {
+                displayTargetView = view
             }
             
-            if buttonViewHeightConstraint.constant > baseViewHeight {
-                buttonView.contentSize.height = buttonViewHeightConstraint.constant
-                buttonViewHeightConstraint.constant = baseViewHeight
+            if displayTargetView == contentView {
+                setupContnetView()
+            }
+            textFieldHandlers.removeAll()
+            
+            if let textField = textFields.first {
+                textField.becomeFirstResponder()
+            }
+            
+            if preferredStyle == .ActionSheet {
+                containerViewBottomSpaceConstraint.priority = ConstraintPriorityRequired
+            }
+        }
+        
+        public override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
+            
+            if transitionCoverView == nil {
+                return
+            }
+            
+            layoutContainer()
+            layoutContents()
+            layoutButtons()
+            
+            let margin = marginInsets.top + marginInsets.bottom
+            let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpaceConstraint.constant - margin
+            
+            if cancelButtonView.contentSize.height > cancelButtonViewHeightConstraint.constant {
+                cancelButtonViewHeightConstraint.constant = cancelButtonView.contentSize.height
+            }
+            
+            if cancelButtonViewHeightConstraint.constant > backgroundViewHeight {
+                cancelButtonView.contentSize.height = cancelButtonViewHeightConstraint.constant
+                cancelButtonViewHeightConstraint.constant = backgroundViewHeight
+                
                 mainViewHeightConstraint.constant = 0
+                buttonViewHeightConstraint.constant = 0
             } else {
-                let mainViewHeight = baseViewHeight - buttonViewHeightConstraint.constant
-                if mainViewHeightConstraint.constant > mainViewHeight {
-                    mainView.contentSize.height = mainViewHeightConstraint.constant
-                    mainViewHeightConstraint.constant = mainViewHeight
+                let baseViewHeight = backgroundViewHeight - cancelButtonViewHeightConstraint.constant - buttonViewSpaceConstraint.constant
+                if buttonView.contentSize.height > buttonViewHeightConstraint.constant {
+                    buttonViewHeightConstraint.constant = buttonView.contentSize.height
+                }
+                
+                if buttonViewHeightConstraint.constant > baseViewHeight {
+                    buttonView.contentSize.height = buttonViewHeightConstraint.constant
+                    buttonViewHeightConstraint.constant = baseViewHeight
+                    mainViewHeightConstraint.constant = 0
+                } else {
+                    let mainViewHeight = baseViewHeight - buttonViewHeightConstraint.constant
+                    if mainViewHeightConstraint.constant > mainViewHeight {
+                        mainView.contentSize.height = mainViewHeightConstraint.constant
+                        mainViewHeightConstraint.constant = mainViewHeight
+                    }
                 }
             }
+            
+            if preferredStyle == .ActionSheet {
+                let contentHeight = cancelButtonViewHeightConstraint.constant + mainViewHeightConstraint.constant + buttonViewHeightConstraint.constant + buttonViewSpaceConstraint.constant
+                coverViewHeightConstraint.constant = contentHeight + marginInsets.top + marginInsets.bottom
+            }
+            
+            view.layoutSubviews()
         }
         
-        if preferredStyle == .ActionSheet {
-            let contentHeight = cancelButtonViewHeightConstraint.constant + mainViewHeightConstraint.constant + buttonViewHeightConstraint.constant + buttonViewSpaceConstraint.constant
-            coverViewHeightConstraint.constant = contentHeight + marginInsets.top + marginInsets.bottom
+        public func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
+            textFieldHandlers.append(configurationHandler)
         }
         
-        view.layoutSubviews()
-    }
-    
-    public func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
-        textFieldHandlers.append(configurationHandler)
-    }
-    
-    public func addAction(action: AlertAction) {
-        var buttonHeight: CGFloat!
-        if preferredStyle == .ActionSheet {
-            buttonHeight = ActionSheetButtonHeight
-        } else {
-            buttonHeight = AlertButtonHeight
+        public func addAction(action: Action) {
+            var buttonHeight: CGFloat!
+            if preferredStyle == .ActionSheet {
+                buttonHeight = ActionSheetButtonHeight
+            } else {
+                buttonHeight = AlertButtonHeight
+            }
+            
+            let button = loadButton()
+            button.frame.size.height = buttonHeight
+            button.autoresizingMask = .FlexibleWidth
+            button.addTarget(self, action: "buttonWasTapped:", forControlEvents: .TouchUpInside)
+            action.setButton(button)
+            configurButton(action.style, forButton: button)
+            actions.append(action)
         }
         
-        let button = loadButton()
-        button.frame.size.height = buttonHeight
-        button.autoresizingMask = .FlexibleWidth
-        button.addTarget(self, action: "buttonWasTapped:", forControlEvents: .TouchUpInside)
-        action.setButton(button)
-        configurButton(action.style, forButton: button)
-        actions.append(action)
-    }
-    
-    /** override if needed */
-    public func loadButton() -> UIButton {
-        let button = UIButton.buttonWithType(.System) as UIButton
-        let borderView = UIView(frame: CGRect(x: 0, y: -0.5, width: 0, height: 0.5))
-        borderView.backgroundColor = UIColor.lightGrayColor()
-        borderView.autoresizingMask = .FlexibleWidth
-        button.addSubview(borderView)
+        /** override if needed */
+        public func loadButton() -> UIButton {
+            let button = UIButton.buttonWithType(.System) as UIButton
+            let borderView = UIView(frame: CGRect(x: 0, y: -0.5, width: 0, height: 0.5))
+            borderView.backgroundColor = UIColor.lightGrayColor()
+            borderView.autoresizingMask = .FlexibleWidth
+            button.addSubview(borderView)
+            
+            return button
+        }
         
-        return button
-    }
-    
-    public func configurButton(style: AlertAction.Style, forButton button: UIButton) {
-        if preferredStyle == .Alert {
-            configurAlertButton(style, forButton: button)
-        } else {
-            configurActionSheetButton(style, forButton: button)
+        public func configurButton(style: Action.Style, forButton button: UIButton) {
+            if preferredStyle == .Alert {
+                configurAlertButton(style, forButton: button)
+            } else {
+                configurActionSheetButton(style, forButton: button)
+            }
         }
     }
-    
+}
+
+private extension SimpleAlert.Controller {
     func setupContnetView() {
         takeOverColor(contentView)
         
@@ -424,7 +372,7 @@ public class Controller: UIViewController {
         targetView?.backgroundColor = nil
     }
     
-    func addButton(view: UIView, actions: [AlertAction]) -> CGFloat {
+    func addButton(view: UIView, actions: [SimpleAlert.Action]) -> CGFloat {
         var sizeToFit: ((button: UIButton, index: Int) -> Void) = buttonSizeToFitForVertical
         if preferredStyle == .Alert && actions.count == 2 {
             sizeToFit = buttonSizeToFitForHorizontal
@@ -459,7 +407,7 @@ public class Controller: UIViewController {
         }
     }
     
-    func configurAlertButton(style :AlertAction.Style, forButton button: UIButton) {
+    func configurAlertButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
         switch style {
         case .Destructive:
             button.setTitleColor(UIColor.redColor(), forState: .Normal)
@@ -471,7 +419,7 @@ public class Controller: UIViewController {
         }
     }
     
-    func configurActionSheetButton(style :AlertAction.Style, forButton button: UIButton) {
+    func configurActionSheetButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
         switch style {
         case .Destructive:
             button.setTitleColor(UIColor.redColor(), forState: .Normal)
@@ -484,8 +432,71 @@ public class Controller: UIViewController {
     }
 }
 
+private extension SimpleAlert.Action {
+    private func setButton(forButton: UIButton) {
+        button = forButton
+        button.setTitle(title, forState: .Normal)
+        button.enabled = enabled
+    }
+}
+
+private extension SimpleAlert.ContentView {
+    class ContentTextField: UITextField {
+        let TextLeftOffset: CGFloat = 4
+        override func textRectForBounds(bounds: CGRect) -> CGRect {
+            return CGRectOffset(bounds, TextLeftOffset, 0)
+        }
+        
+        override func editingRectForBounds(bounds: CGRect) -> CGRect {
+            return CGRectOffset(bounds, TextLeftOffset, 0)
+        }
+    }
+    
+    func addTextField() -> UITextField {
+        let textField = ContentTextField(frame: textBackgroundView.bounds)
+        textField.autoresizingMask = .FlexibleWidth
+        textField.font = UIFont.systemFontOfSize(TextFieldFontSize)
+        textField.backgroundColor = UIColor.whiteColor()
+        textField.layer.borderColor = UIColor.darkGrayColor().CGColor
+        textField.layer.borderWidth = 0.5
+        
+        textBackgroundView.addSubview(textField)
+        
+        return textField
+    }
+    
+    func layoutContents() {
+        if textBackgroundView.subviews.isEmpty {
+            messageSpaceConstraint.constant = 0
+        }
+        
+        if titleLabel.text == nil && messageLabel.text == nil {
+            titleSpaceConstraint.constant = 0
+            messageSpaceConstraint.constant = 0
+            
+            if textBackgroundView.subviews.isEmpty {
+                verticalSpaceConstraint.constant = 0
+            }
+        } else if titleLabel.text == nil || messageLabel.text == nil {
+            titleSpaceConstraint.constant = 0
+        }
+        
+        baseView.layoutIfNeeded()
+        
+        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
+    }
+    
+    func layoutTextField(textField: UITextField) {
+        textField.frame.origin.y = textViewHeightConstraint.constant
+        if textField.frame.height <= 0 {
+            textField.frame.size.height = TextFieldHeight
+        }
+        textViewHeightConstraint.constant += textField.frame.height
+    }
+}
+
 // MARK: - Action Methods
-extension Controller {
+extension SimpleAlert.Controller {
     func buttonWasTapped(sender: UIButton) {
         dismissViewControllerAnimated(true) {
             if let action = self.actions.filter({ $0.button == sender }).first {
@@ -499,7 +510,7 @@ extension Controller {
 }
 
 // MARK: - NSNotificationCenter Methods
-extension Controller {
+extension SimpleAlert.Controller {
     func keyboardWillShow(notification: NSNotification) {
         if let window = view.window {
             if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
@@ -512,7 +523,7 @@ extension Controller {
 }
 
 // MARK: - UIViewControllerTransitioningDelegate Methods
-extension Controller: UIViewControllerTransitioningDelegate {
+extension SimpleAlert.Controller: UIViewControllerTransitioningDelegate {
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         presentedAnimation = true
         return self
@@ -525,7 +536,7 @@ extension Controller: UIViewControllerTransitioningDelegate {
 }
 
 // MARK: - UIViewControllerAnimatedTransitioning Methods
-extension Controller: UIViewControllerAnimatedTransitioning {
+extension SimpleAlert.Controller: UIViewControllerAnimatedTransitioning {
     func animateDuration() -> NSTimeInterval {
         return 0.25
     }

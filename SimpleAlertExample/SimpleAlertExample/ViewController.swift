@@ -23,14 +23,21 @@ class ViewController: UIViewController {
     
     
     @IBAction func alertButtonWasTapped(sender: AnyObject) {
-        let alert = AlertController(title: "title", message: "message")
+        let alert = AlertController(title: "title", message: "message", style: .Alert)
         
-        alert.addTextFieldWithConfigurationHandler()
+        alert.addTextFieldWithConfigurationHandler() { textField in
+        }
         
-        alert.addAction(AlertAction(title: "OK", style: .OK) { action in
+        alert.addAction(SimpleAlert.Action(title: "Cancel", style: .Cancel) { action in
             })
         
-        alert.addAction(AlertAction(title: "Cancel", style: .Cancel) { action in
+        alert.addAction(SimpleAlert.Action(title: "Default", style: .Default) { action in
+            })
+        
+        alert.addAction(SimpleAlert.Action(title: "Destructive", style: .Destructive) { action in
+            })
+        
+        alert.addAction(SimpleAlert.Action(title: "OK", style: .OK) { action in
             })
         
         self.presentViewController(alert, animated: true) {

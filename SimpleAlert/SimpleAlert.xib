@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Controller">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SimpleAlertController">
             <connections>
                 <outlet property="backgroundView" destination="Wnv-iy-aW0" id="Sdg-JB-5MV"/>
                 <outlet property="backgroundViewBottomSpaceConstraint" destination="LKr-5v-f1t" id="tXU-Y8-Vx7"/>
@@ -121,7 +121,7 @@
                 <constraint firstItem="Wnv-iy-aW0" firstAttribute="leading" secondItem="sak-6U-4yN" secondAttribute="leading" id="fC7-OA-bDe"/>
             </constraints>
         </view>
-        <view contentMode="scaleToFill" id="DvE-7U-YMQ" userLabel="Default View" customClass="ContentView" customModule="SimpleAlert" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="DvE-7U-YMQ" userLabel="Default View" customClass="SimpleAlertContentView">
             <rect key="frame" x="0.0" y="0.0" width="260" height="102"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
