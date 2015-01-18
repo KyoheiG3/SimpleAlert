@@ -330,9 +330,8 @@ private extension SimpleAlert.Controller {
         if let config = configContentView {
             config(displayTargetView)
             configContentView = nil
-            
-            takeOverColor(displayTargetView)
         }
+        takeOverColor(displayTargetView)
         
         if displayTargetView == contentView {
             contentView?.textViewHeightConstraint.constant = 0
