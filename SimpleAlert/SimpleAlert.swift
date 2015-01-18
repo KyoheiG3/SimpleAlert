@@ -324,6 +324,9 @@ private extension SimpleAlert.Controller {
     }
     
     func layoutContents() {
+        displayTargetView?.frame.size.width = mainView.frame.size.width
+        displayTargetView?.layoutIfNeeded()
+        
         if let config = configContentView {
             config(displayTargetView)
             configContentView = nil
@@ -341,8 +344,6 @@ private extension SimpleAlert.Controller {
             mainViewHeightConstraint.constant = targetView.bounds.height
             mainView.frame.size.height = targetView.bounds.height
             mainView.addSubview(targetView)
-            
-            targetView.frame.size.width = mainView.frame.size.width
         }
     }
     
@@ -466,6 +467,11 @@ private extension SimpleAlert.ContentView {
     }
     
     func layoutContents() {
+        titleLabel.preferredMaxLayoutWidth = baseView.bounds.width
+        titleLabel.layoutIfNeeded()
+        messageLabel.preferredMaxLayoutWidth = baseView.bounds.width
+        messageLabel.layoutIfNeeded()
+        
         if textBackgroundView.subviews.isEmpty {
             messageSpaceConstraint.constant = 0
         }
