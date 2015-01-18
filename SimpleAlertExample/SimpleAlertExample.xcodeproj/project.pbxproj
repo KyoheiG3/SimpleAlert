@@ -18,6 +18,7 @@
 		C70C0CA31A5FC4E7002BC071 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0CA21A5FC4E7002BC071 /* AlertController.swift */; };
 		C70C0CA61A5FC4ED002BC071 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0CA41A5FC4ED002BC071 /* ContentViewController.swift */; };
 		C70C0CA71A5FC4ED002BC071 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0CA51A5FC4ED002BC071 /* ContentViewController.xib */; };
+		C7261D121A6C1A4000AAE11D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7261D111A6C1A4000AAE11D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		C70C0CA21A5FC4E7002BC071 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		C70C0CA41A5FC4ED002BC071 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		C70C0CA51A5FC4ED002BC071 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
+		C7261D111A6C1A4000AAE11D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7261D121A6C1A4000AAE11D /* MapKit.framework in Frameworks */,
 				C70C0C911A5FC059002BC071 /* SimpleAlert.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +117,7 @@
 				C70C0C631A5FC018002BC071 /* SimpleAlertExample */,
 				C70C0C791A5FC019002BC071 /* SimpleAlertExampleTests */,
 				C70C0C621A5FC018002BC071 /* Products */,
+				C7261D141A6C1C5F00AAE11D /* Frameworks */,
 				C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */,
 			);
 			sourceTree = "<group>";
@@ -175,6 +179,14 @@
 				C70C0C8E1A5FC028002BC071 /* SimpleAlertTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C7261D141A6C1C5F00AAE11D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C7261D111A6C1A4000AAE11D /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

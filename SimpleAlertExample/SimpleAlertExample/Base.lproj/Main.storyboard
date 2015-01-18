@@ -18,19 +18,85 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ylg-aa-VNT">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                                <rect key="frame" x="257" y="85" width="85" height="30"/>
+                                <state key="normal" title="Default Alert">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="alertButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LAv-cO-GjD"/>
+                                    <action selector="defaultAlertButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NOh-C7-ZDS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gq3-of-4hi">
+                                <rect key="frame" x="255" y="140" width="90" height="30"/>
+                                <state key="normal" title="Custom Alert">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="customAlertButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="EgC-WA-sDu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb3-dB-BKR">
+                                <rect key="frame" x="229" y="195" width="141" height="30"/>
+                                <state key="normal" title="Default Action Sheet">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="defaultActionSheetButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Tnc-Ne-c5p"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcL-C2-Z4u">
+                                <rect key="frame" x="227" y="250" width="146" height="30"/>
+                                <state key="normal" title="Custom Action Sheet">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="customActionSheetButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Hhp-BP-sy1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWH-Ya-kvw">
+                                <rect key="frame" x="243" y="305" width="113" height="30"/>
+                                <state key="normal" title="Custom Content">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="customContentButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0Ix-0S-nKg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uH8-ts-XFg">
+                                <rect key="frame" x="257" y="415" width="86" height="30"/>
+                                <state key="normal" title="Normal Alert">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="normalAlertButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rmD-JR-fHc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xJz-Y9-q1p">
+                                <rect key="frame" x="251" y="360" width="99" height="30"/>
+                                <state key="normal" title="Rounded Alert">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="roundedButtonWasTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cNV-7k-8jb"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="Ylg-aa-VNT" secondAttribute="centerX" id="8ul-Ee-EXy"/>
-                            <constraint firstAttribute="centerY" secondItem="Ylg-aa-VNT" secondAttribute="centerY" id="daS-6U-AaC"/>
+                            <constraint firstItem="zcL-C2-Z4u" firstAttribute="top" secondItem="hb3-dB-BKR" secondAttribute="bottom" constant="25" id="MNg-fw-jXE"/>
+                            <constraint firstAttribute="centerX" secondItem="dWH-Ya-kvw" secondAttribute="centerX" id="TaO-3T-QdP"/>
+                            <constraint firstItem="dWH-Ya-kvw" firstAttribute="top" secondItem="zcL-C2-Z4u" secondAttribute="bottom" constant="25" id="Tgf-OJ-0JG"/>
+                            <constraint firstItem="Ylg-aa-VNT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="65" id="Ufe-RR-pmb"/>
+                            <constraint firstAttribute="centerX" secondItem="uH8-ts-XFg" secondAttribute="centerX" id="bZj-i5-WY8"/>
+                            <constraint firstItem="uH8-ts-XFg" firstAttribute="top" secondItem="xJz-Y9-q1p" secondAttribute="bottom" constant="25" id="bi4-fk-6zs"/>
+                            <constraint firstAttribute="centerX" secondItem="xJz-Y9-q1p" secondAttribute="centerX" id="g41-hP-WM1"/>
+                            <constraint firstItem="hb3-dB-BKR" firstAttribute="top" secondItem="gq3-of-4hi" secondAttribute="bottom" constant="25" id="gbv-rj-P45"/>
+                            <constraint firstItem="gq3-of-4hi" firstAttribute="top" secondItem="Ylg-aa-VNT" secondAttribute="bottom" constant="25" id="iYx-8H-kmJ"/>
+                            <constraint firstItem="xJz-Y9-q1p" firstAttribute="top" secondItem="dWH-Ya-kvw" secondAttribute="bottom" constant="25" id="nKj-y2-pOq"/>
+                            <constraint firstAttribute="centerX" secondItem="gq3-of-4hi" secondAttribute="centerX" id="rt6-hH-dTR"/>
+                            <constraint firstAttribute="centerX" secondItem="zcL-C2-Z4u" secondAttribute="centerX" id="yb8-Pg-Af2"/>
+                            <constraint firstAttribute="centerX" secondItem="hb3-dB-BKR" secondAttribute="centerX" id="zrh-Le-3qY"/>
                         </constraints>
                     </view>
                 </viewController>

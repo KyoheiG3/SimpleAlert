@@ -26,15 +26,16 @@ class AlertController: SimpleAlert.Controller {
         
         if let font = button.titleLabel?.font {
             switch style {
-            case .Destructive:
-                button.backgroundColor = UIColor.lightGrayColor()
-                button.titleLabel?.font = UIFont.systemFontOfSize(font.pointSize)
             case .OK:
-                button.titleLabel?.font = UIFont.systemFontOfSize(font.pointSize)
+                button.titleLabel?.font = UIFont.boldSystemFontOfSize(20)
+                button.setTitleColor(UIColor.grayColor(), forState: .Normal)
             case .Cancel:
-                button.titleLabel?.font = UIFont.boldSystemFontOfSize(font.pointSize)
+                button.backgroundColor = UIColor.darkGrayColor()
+                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
             case .Default:
-                button.titleLabel?.font = UIFont.systemFontOfSize(font.pointSize)
+                button.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+            default:
+                break
             }
         }
     }
@@ -45,7 +46,9 @@ class AlertController: SimpleAlert.Controller {
         configContentView = { [weak self] view in
             if let view = view as? SimpleAlert.ContentView {
                 view.titleLabel.textColor = UIColor.lightGrayColor()
+                view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
                 view.messageLabel.textColor = UIColor.lightGrayColor()
+                view.messageLabel.font = UIFont.boldSystemFontOfSize(16)
                 view.textBackgroundView.layer.cornerRadius = 3.0
                 view.textBackgroundView.clipsToBounds = true
             }
