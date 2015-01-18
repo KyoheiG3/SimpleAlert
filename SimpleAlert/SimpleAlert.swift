@@ -46,10 +46,10 @@ public class SimpleAlert {
         @IBOutlet public weak var messageLabel: UILabel!
         @IBOutlet public weak var textBackgroundView: UIView!
         
-        @IBOutlet var verticalSpaceConstraint: NSLayoutConstraint!
-        @IBOutlet var titleSpaceConstraint: NSLayoutConstraint!
-        @IBOutlet var messageSpaceConstraint: NSLayoutConstraint!
-        @IBOutlet var textViewHeightConstraint: NSLayoutConstraint!
+        @IBOutlet private var verticalSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var titleSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var messageSpaceConstraint: NSLayoutConstraint!
+        @IBOutlet private var textViewHeightConstraint: NSLayoutConstraint!
         
         public override func awakeFromNib() {
             super.awakeFromNib()
@@ -65,15 +65,15 @@ public class SimpleAlert {
             case ActionSheet
         }
         
-        @IBOutlet weak var containerView: UIView!
-        @IBOutlet weak var backgroundView: UIView!
-        @IBOutlet weak var coverView: UIView!
-        @IBOutlet weak var marginView: UIView!
-        @IBOutlet weak var baseView: UIView!
-        @IBOutlet weak var mainView: UIScrollView!
-        @IBOutlet weak var buttonView: UIScrollView!
-        @IBOutlet weak var cancelButtonView: UIScrollView!
-        @IBOutlet weak var contentView: ContentView?
+        @IBOutlet private weak var containerView: UIView!
+        @IBOutlet private weak var backgroundView: UIView!
+        @IBOutlet private weak var coverView: UIView!
+        @IBOutlet private weak var marginView: UIView!
+        @IBOutlet private weak var baseView: UIView!
+        @IBOutlet private weak var mainView: UIScrollView!
+        @IBOutlet private weak var buttonView: UIScrollView!
+        @IBOutlet private weak var cancelButtonView: UIScrollView!
+        @IBOutlet private weak var contentView: ContentView?
         
         @IBOutlet private var containerViewWidthConstraint: NSLayoutConstraint!
         @IBOutlet private var containerViewBottomSpaceConstraint: NSLayoutConstraint!
@@ -96,10 +96,11 @@ public class SimpleAlert {
         
         public private(set) var actions: [Action] = []
         public private(set) var textFields: [UITextField] = []
-        var textFieldHandlers: [((UITextField!) -> Void)?] = []
-        weak var customView: UIView?
-        var transitionCoverView: UIView?
-        var displayTargetView: UIView?
+        private var textFieldHandlers: [((UITextField!) -> Void)?] = []
+        private weak var customView: UIView?
+        private var transitionCoverView: UIView?
+        private var displayTargetView: UIView?
+        private var presentedAnimation: Bool = true
         let AlertDefaultWidth: CGFloat = 260
         let AlertButtonHeight: CGFloat = 48
         let AlertButtonFontSize: CGFloat = 17
@@ -107,12 +108,11 @@ public class SimpleAlert {
         let ActionSheetButtonHeight: CGFloat = 44
         let ActionSheetButtonFontSize: CGFloat = 21
         let ConstraintPriorityRequired: Float = 1000
-        var presentedAnimation: Bool = true
         
-        var message: String?
-        var preferredStyle: Style = .Alert
+        private var message: String?
+        private var preferredStyle: Style = .Alert
         
-        var marginInsets: UIEdgeInsets {
+        private var marginInsets: UIEdgeInsets {
             set {
                 marginViewTopSpaceConstraint.constant = newValue.top
                 marginViewLeftSpaceConstraint.constant = newValue.left
