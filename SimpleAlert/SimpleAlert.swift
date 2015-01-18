@@ -166,6 +166,7 @@ public class SimpleAlert {
             transitioningDelegate = self
             
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
         }
         
         public override func viewDidLoad() {
@@ -534,6 +535,10 @@ extension SimpleAlert.Controller {
 
 // MARK: - NSNotificationCenter Methods
 extension SimpleAlert.Controller {
+    func keyboardDidHide(notification: NSNotification) {
+        backgroundViewBottomSpaceConstraint.constant = 0
+    }
+    
     func keyboardWillShow(notification: NSNotification) {
         if let window = view.window {
             if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
