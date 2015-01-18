@@ -272,7 +272,9 @@ public class SimpleAlert {
             }
             
             let button = loadButton()
-            button.frame.size.height = buttonHeight
+            if button.bounds.height <= 0 {
+                button.frame.size.height = buttonHeight
+            }
             button.autoresizingMask = .FlexibleWidth
             button.addTarget(self, action: "buttonWasTapped:", forControlEvents: .TouchUpInside)
             action.setButton(button)
