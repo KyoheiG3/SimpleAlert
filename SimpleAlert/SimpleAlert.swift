@@ -105,7 +105,7 @@ public class SimpleAlert {
         public private(set) var actions: [Action] = []
         public private(set) var textFields: [UITextField] = []
         private var textFieldHandlers: [((UITextField!) -> Void)?] = []
-        private weak var customView: UIView?
+        private var customView: UIView?
         private var transitionCoverView: UIView?
         private var displayTargetView: UIView?
         private var presentedAnimation: Bool = true
