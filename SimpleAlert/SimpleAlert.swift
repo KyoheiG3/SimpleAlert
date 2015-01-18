@@ -100,6 +100,7 @@ public class SimpleAlert {
         @IBOutlet private var marginViewRightSpaceConstraint: NSLayoutConstraint!
         
         public var configContainerWidth: (() -> CGFloat?)?
+        public var configContainerCornerRadius: (() -> CGFloat?)?
         public var configContentView: ((UIView!) -> Void)?
         
         public private(set) var actions: [Action] = []
@@ -177,9 +178,6 @@ public class SimpleAlert {
             
             cancelButtonView.layer.cornerRadius = 3.0
             cancelButtonView.clipsToBounds = true
-            
-            containerView.layer.cornerRadius = 3.0
-            containerView.clipsToBounds = true
             
             displayTargetView = contentView
         }
@@ -397,6 +395,10 @@ private extension SimpleAlert.Controller {
         
         if let width = configContainerWidth?() {
             containerWidth = width
+        }
+        if let radius = configContainerCornerRadius?() {
+            baseView.layer.cornerRadius = radius
+            cancelButtonView.layer.cornerRadius = radius
         }
         
         containerViewWidthConstraint.constant = containerWidth
