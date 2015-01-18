@@ -65,8 +65,16 @@ public class SimpleAlert {
             case ActionSheet
         }
         
+        @objc(SimpleAlertControllerRespondView)
+        private class RespondView: UIView {
+            var touchHandler: ((UIView) -> Void)?
+            override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+                touchHandler?(self)
+            }
+        }
+        
         @IBOutlet private weak var containerView: UIView!
-        @IBOutlet private weak var backgroundView: UIView!
+        @IBOutlet private weak var backgroundView: RespondView!
         @IBOutlet private weak var coverView: UIView!
         @IBOutlet private weak var marginView: UIView!
         @IBOutlet private weak var baseView: UIView!
@@ -194,6 +202,10 @@ public class SimpleAlert {
             
             if preferredStyle == .ActionSheet {
                 containerViewBottomSpaceConstraint.priority = ConstraintPriorityRequired
+                backgroundView.touchHandler = { [weak self] view in
+                    self?.dismissViewController()
+                    return
+                }
             }
         }
         
@@ -287,6 +299,74 @@ public class SimpleAlert {
                 configurActionSheetButton(style, forButton: button)
             }
         }
+    }
+}
+
+private extension SimpleAlert.Action {
+    private func setButton(forButton: UIButton) {
+        button = forButton
+        button.setTitle(title, forState: .Normal)
+        button.enabled = enabled
+    }
+}
+
+private extension SimpleAlert.ContentView {
+    class ContentTextField: UITextField {
+        let TextLeftOffset: CGFloat = 4
+        override func textRectForBounds(bounds: CGRect) -> CGRect {
+            return CGRectOffset(bounds, TextLeftOffset, 0)
+        }
+        
+        override func editingRectForBounds(bounds: CGRect) -> CGRect {
+            return CGRectOffset(bounds, TextLeftOffset, 0)
+        }
+    }
+    
+    func addTextField() -> UITextField {
+        let textField = ContentTextField(frame: textBackgroundView.bounds)
+        textField.autoresizingMask = .FlexibleWidth
+        textField.font = UIFont.systemFontOfSize(TextFieldFontSize)
+        textField.backgroundColor = UIColor.whiteColor()
+        textField.layer.borderColor = UIColor.darkGrayColor().CGColor
+        textField.layer.borderWidth = 0.5
+        
+        textBackgroundView.addSubview(textField)
+        
+        return textField
+    }
+    
+    func layoutContents() {
+        titleLabel.preferredMaxLayoutWidth = baseView.bounds.width
+        titleLabel.layoutIfNeeded()
+        messageLabel.preferredMaxLayoutWidth = baseView.bounds.width
+        messageLabel.layoutIfNeeded()
+        
+        if textBackgroundView.subviews.isEmpty {
+            messageSpaceConstraint.constant = 0
+        }
+        
+        if titleLabel.text == nil && messageLabel.text == nil {
+            titleSpaceConstraint.constant = 0
+            messageSpaceConstraint.constant = 0
+            
+            if textBackgroundView.subviews.isEmpty {
+                verticalSpaceConstraint.constant = 0
+            }
+        } else if titleLabel.text == nil || messageLabel.text == nil {
+            titleSpaceConstraint.constant = 0
+        }
+        
+        baseView.layoutIfNeeded()
+        
+        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
+    }
+    
+    func layoutTextField(textField: UITextField) {
+        textField.frame.origin.y = textViewHeightConstraint.constant
+        if textField.frame.height <= 0 {
+            textField.frame.size.height = TextFieldHeight
+        }
+        textViewHeightConstraint.constant += textField.frame.height
     }
 }
 
@@ -430,87 +510,23 @@ private extension SimpleAlert.Controller {
             button.titleLabel?.font = UIFont.systemFontOfSize(ActionSheetButtonFontSize)
         }
     }
-}
-
-private extension SimpleAlert.Action {
-    private func setButton(forButton: UIButton) {
-        button = forButton
-        button.setTitle(title, forState: .Normal)
-        button.enabled = enabled
-    }
-}
-
-private extension SimpleAlert.ContentView {
-    class ContentTextField: UITextField {
-        let TextLeftOffset: CGFloat = 4
-        override func textRectForBounds(bounds: CGRect) -> CGRect {
-            return CGRectOffset(bounds, TextLeftOffset, 0)
-        }
-        
-        override func editingRectForBounds(bounds: CGRect) -> CGRect {
-            return CGRectOffset(bounds, TextLeftOffset, 0)
-        }
-    }
     
-    func addTextField() -> UITextField {
-        let textField = ContentTextField(frame: textBackgroundView.bounds)
-        textField.autoresizingMask = .FlexibleWidth
-        textField.font = UIFont.systemFontOfSize(TextFieldFontSize)
-        textField.backgroundColor = UIColor.whiteColor()
-        textField.layer.borderColor = UIColor.darkGrayColor().CGColor
-        textField.layer.borderWidth = 0.5
-        
-        textBackgroundView.addSubview(textField)
-        
-        return textField
-    }
-    
-    func layoutContents() {
-        titleLabel.preferredMaxLayoutWidth = baseView.bounds.width
-        titleLabel.layoutIfNeeded()
-        messageLabel.preferredMaxLayoutWidth = baseView.bounds.width
-        messageLabel.layoutIfNeeded()
-        
-        if textBackgroundView.subviews.isEmpty {
-            messageSpaceConstraint.constant = 0
-        }
-        
-        if titleLabel.text == nil && messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-            messageSpaceConstraint.constant = 0
-            
-            if textBackgroundView.subviews.isEmpty {
-                verticalSpaceConstraint.constant = 0
-            }
-        } else if titleLabel.text == nil || messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-        }
-        
-        baseView.layoutIfNeeded()
-        
-        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
-    }
-    
-    func layoutTextField(textField: UITextField) {
-        textField.frame.origin.y = textViewHeightConstraint.constant
-        if textField.frame.height <= 0 {
-            textField.frame.size.height = TextFieldHeight
-        }
-        textViewHeightConstraint.constant += textField.frame.height
-    }
-}
-
-// MARK: - Action Methods
-extension SimpleAlert.Controller {
-    func buttonWasTapped(sender: UIButton) {
+    func dismissViewController(sender: AnyObject? = nil) {
         dismissViewControllerAnimated(true) {
-            if let action = self.actions.filter({ $0.button == sender }).first {
+            if let action = self.actions.filter({ $0.button == sender as? UIButton }).first {
                 action.handler?(action)
             }
             
             self.actions.removeAll()
             self.textFields.removeAll()
         }
+    }
+}
+
+// MARK: - Action Methods
+extension SimpleAlert.Controller {
+    func buttonWasTapped(sender: UIButton) {
+        dismissViewController(sender: sender)
     }
 }
 
