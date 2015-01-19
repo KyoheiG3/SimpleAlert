@@ -13,12 +13,11 @@
 		C70C0C6E1A5FC018002BC071 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70C0C6D1A5FC018002BC071 /* Images.xcassets */; };
 		C70C0C711A5FC019002BC071 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0C6F1A5FC019002BC071 /* LaunchScreen.xib */; };
 		C70C0C7D1A5FC019002BC071 /* SimpleAlertExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0C7C1A5FC019002BC071 /* SimpleAlertExampleTests.swift */; };
-		C70C0C911A5FC059002BC071 /* SimpleAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70C0C8C1A5FC028002BC071 /* SimpleAlert.framework */; };
-		C70C0C921A5FC059002BC071 /* SimpleAlert.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C70C0C8C1A5FC028002BC071 /* SimpleAlert.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C70C0CA31A5FC4E7002BC071 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0CA21A5FC4E7002BC071 /* AlertController.swift */; };
 		C70C0CA61A5FC4ED002BC071 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0CA41A5FC4ED002BC071 /* ContentViewController.swift */; };
 		C70C0CA71A5FC4ED002BC071 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0CA51A5FC4ED002BC071 /* ContentViewController.xib */; };
-		C7261D121A6C1A4000AAE11D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7261D111A6C1A4000AAE11D /* MapKit.framework */; };
+		C7D544ED1A6D788000060C61 /* SimpleAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D544EA1A6D781C00060C61 /* SimpleAlert.framework */; };
+		C7D544EE1A6D789A00060C61 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7261D111A6C1A4000AAE11D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,49 +28,21 @@
 			remoteGlobalIDString = C70C0C601A5FC018002BC071;
 			remoteInfo = SimpleAlertExample;
 		};
-		C70C0C8B1A5FC028002BC071 /* PBXContainerItemProxy */ = {
+		C7D544E91A6D781C00060C61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */;
+			containerPortal = C7D544E41A6D781B00060C61 /* SimpleAlert.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C70C0C381A5FBEC8002BC071;
 			remoteInfo = SimpleAlert;
 		};
-		C70C0C8D1A5FC028002BC071 /* PBXContainerItemProxy */ = {
+		C7D544EB1A6D781C00060C61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */;
+			containerPortal = C7D544E41A6D781B00060C61 /* SimpleAlert.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C70C0C431A5FBEC8002BC071;
 			remoteInfo = SimpleAlertTests;
 		};
-		C70C0C8F1A5FC042002BC071 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C70C0C371A5FBEC8002BC071;
-			remoteInfo = SimpleAlert;
-		};
-		C70C0C931A5FC059002BC071 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C70C0C371A5FBEC8002BC071;
-			remoteInfo = SimpleAlert;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C70C0C951A5FC059002BC071 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C70C0C921A5FC059002BC071 /* SimpleAlert.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C70C0C611A5FC018002BC071 /* SimpleAlertExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleAlertExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,11 +55,11 @@
 		C70C0C761A5FC019002BC071 /* SimpleAlertExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleAlertExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70C0C7B1A5FC019002BC071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C70C0C7C1A5FC019002BC071 /* SimpleAlertExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertExampleTests.swift; sourceTree = "<group>"; };
-		C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimpleAlert.xcodeproj; path = ../SimpleAlert.xcodeproj; sourceTree = "<group>"; };
 		C70C0CA21A5FC4E7002BC071 /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		C70C0CA41A5FC4ED002BC071 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		C70C0CA51A5FC4ED002BC071 /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
 		C7261D111A6C1A4000AAE11D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C7D544E41A6D781B00060C61 /* SimpleAlert.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimpleAlert.xcodeproj; path = ../SimpleAlert.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7261D121A6C1A4000AAE11D /* MapKit.framework in Frameworks */,
-				C70C0C911A5FC059002BC071 /* SimpleAlert.framework in Frameworks */,
+				C7D544EE1A6D789A00060C61 /* MapKit.framework in Frameworks */,
+				C7D544ED1A6D788000060C61 /* SimpleAlert.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,11 +85,11 @@
 		C70C0C581A5FC018002BC071 = {
 			isa = PBXGroup;
 			children = (
+				C7D544E41A6D781B00060C61 /* SimpleAlert.xcodeproj */,
 				C70C0C631A5FC018002BC071 /* SimpleAlertExample */,
 				C70C0C791A5FC019002BC071 /* SimpleAlertExampleTests */,
 				C70C0C621A5FC018002BC071 /* Products */,
 				C7261D141A6C1C5F00AAE11D /* Frameworks */,
-				C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -172,21 +143,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C70C0C871A5FC028002BC071 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C70C0C8C1A5FC028002BC071 /* SimpleAlert.framework */,
-				C70C0C8E1A5FC028002BC071 /* SimpleAlertTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C7261D141A6C1C5F00AAE11D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				C7261D111A6C1A4000AAE11D /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C7D544E51A6D781B00060C61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7D544EA1A6D781C00060C61 /* SimpleAlert.framework */,
+				C7D544EC1A6D781C00060C61 /* SimpleAlertTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,13 +170,10 @@
 				C70C0C5D1A5FC018002BC071 /* Sources */,
 				C70C0C5E1A5FC018002BC071 /* Frameworks */,
 				C70C0C5F1A5FC018002BC071 /* Resources */,
-				C70C0C951A5FC059002BC071 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C70C0C901A5FC042002BC071 /* PBXTargetDependency */,
-				C70C0C941A5FC059002BC071 /* PBXTargetDependency */,
 			);
 			name = SimpleAlertExample;
 			productName = SimpleAlertExample;
@@ -261,8 +229,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = C70C0C871A5FC028002BC071 /* Products */;
-					ProjectRef = C70C0C861A5FC028002BC071 /* SimpleAlert.xcodeproj */;
+					ProductGroup = C7D544E51A6D781B00060C61 /* Products */;
+					ProjectRef = C7D544E41A6D781B00060C61 /* SimpleAlert.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -274,18 +242,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C70C0C8C1A5FC028002BC071 /* SimpleAlert.framework */ = {
+		C7D544EA1A6D781C00060C61 /* SimpleAlert.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SimpleAlert.framework;
-			remoteRef = C70C0C8B1A5FC028002BC071 /* PBXContainerItemProxy */;
+			remoteRef = C7D544E91A6D781C00060C61 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C70C0C8E1A5FC028002BC071 /* SimpleAlertTests.xctest */ = {
+		C7D544EC1A6D781C00060C61 /* SimpleAlertTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SimpleAlertTests.xctest;
-			remoteRef = C70C0C8D1A5FC028002BC071 /* PBXContainerItemProxy */;
+			remoteRef = C7D544EB1A6D781C00060C61 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -338,16 +306,6 @@
 			isa = PBXTargetDependency;
 			target = C70C0C601A5FC018002BC071 /* SimpleAlertExample */;
 			targetProxy = C70C0C771A5FC019002BC071 /* PBXContainerItemProxy */;
-		};
-		C70C0C901A5FC042002BC071 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SimpleAlert;
-			targetProxy = C70C0C8F1A5FC042002BC071 /* PBXContainerItemProxy */;
-		};
-		C70C0C941A5FC059002BC071 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SimpleAlert;
-			targetProxy = C70C0C931A5FC059002BC071 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -405,7 +363,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -441,7 +399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -453,7 +411,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SimpleAlertExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -465,7 +422,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SimpleAlertExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
