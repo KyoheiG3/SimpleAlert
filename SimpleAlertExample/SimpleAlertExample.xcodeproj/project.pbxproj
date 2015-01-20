@@ -16,8 +16,9 @@
 		C70C0CA31A5FC4E7002BC071 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0CA21A5FC4E7002BC071 /* AlertController.swift */; };
 		C70C0CA61A5FC4ED002BC071 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0CA41A5FC4ED002BC071 /* ContentViewController.swift */; };
 		C70C0CA71A5FC4ED002BC071 /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0CA51A5FC4ED002BC071 /* ContentViewController.xib */; };
-		C7D544ED1A6D788000060C61 /* SimpleAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D544EA1A6D781C00060C61 /* SimpleAlert.framework */; };
-		C7D544EE1A6D789A00060C61 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7261D111A6C1A4000AAE11D /* MapKit.framework */; };
+		C7B9CFB31A6E467E006F15E7 /* SimpleAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D544EA1A6D781C00060C61 /* SimpleAlert.framework */; };
+		C7B9CFB41A6E467E006F15E7 /* SimpleAlert.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7D544EA1A6D781C00060C61 /* SimpleAlert.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C7B9CFB81A6E4684006F15E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7261D111A6C1A4000AAE11D /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C70C0C601A5FC018002BC071;
 			remoteInfo = SimpleAlertExample;
+		};
+		C7B9CFB51A6E467E006F15E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7D544E41A6D781B00060C61 /* SimpleAlert.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C70C0C371A5FBEC8002BC071;
+			remoteInfo = SimpleAlert;
 		};
 		C7D544E91A6D781C00060C61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -43,6 +51,20 @@
 			remoteInfo = SimpleAlertTests;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C7B9CFB71A6E467E006F15E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C7B9CFB41A6E467E006F15E7 /* SimpleAlert.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C70C0C611A5FC018002BC071 /* SimpleAlertExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleAlertExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,8 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7D544EE1A6D789A00060C61 /* MapKit.framework in Frameworks */,
-				C7D544ED1A6D788000060C61 /* SimpleAlert.framework in Frameworks */,
+				C7B9CFB81A6E4684006F15E7 /* MapKit.framework in Frameworks */,
+				C7B9CFB31A6E467E006F15E7 /* SimpleAlert.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,10 +192,12 @@
 				C70C0C5D1A5FC018002BC071 /* Sources */,
 				C70C0C5E1A5FC018002BC071 /* Frameworks */,
 				C70C0C5F1A5FC018002BC071 /* Resources */,
+				C7B9CFB71A6E467E006F15E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C7B9CFB61A6E467E006F15E7 /* PBXTargetDependency */,
 			);
 			name = SimpleAlertExample;
 			productName = SimpleAlertExample;
@@ -307,6 +331,11 @@
 			target = C70C0C601A5FC018002BC071 /* SimpleAlertExample */;
 			targetProxy = C70C0C771A5FC019002BC071 /* PBXContainerItemProxy */;
 		};
+		C7B9CFB61A6E467E006F15E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SimpleAlert;
+			targetProxy = C7B9CFB51A6E467E006F15E7 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -411,6 +440,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SimpleAlertExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,6 +452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SimpleAlertExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
