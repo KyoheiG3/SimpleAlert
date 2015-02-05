@@ -110,7 +110,7 @@ public class SimpleAlert {
         private var transitionCoverView: UIView?
         private var displayTargetView: UIView?
         private var presentedAnimation: Bool = true
-        let AlertDefaultWidth: CGFloat = 260
+        let AlertDefaultWidth: CGFloat = 270
         let AlertButtonHeight: CGFloat = 48
         let AlertButtonFontSize: CGFloat = 17
         let ActionSheetMargin: CGFloat = 8
