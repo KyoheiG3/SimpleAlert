@@ -538,7 +538,7 @@ extension SimpleAlert.Controller {
 // MARK: - NSNotificationCenter Methods
 extension SimpleAlert.Controller {
     func keyboardDidHide(notification: NSNotification) {
-        backgroundViewBottomSpaceConstraint.constant = 0
+        backgroundViewBottomSpaceConstraint?.constant = 0
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -546,7 +546,7 @@ extension SimpleAlert.Controller {
             if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
                 let rect = window.convertRect(frame, toView: view)
                 
-                backgroundViewBottomSpaceConstraint.constant = view.bounds.size.height - rect.origin.y
+                backgroundViewBottomSpaceConstraint?.constant = view.bounds.size.height - rect.origin.y
             }
         }
     }
