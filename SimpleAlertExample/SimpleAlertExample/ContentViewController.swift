@@ -10,12 +10,12 @@ import UIKit
 
 class ContentViewController: UIViewController {
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    init() {
+        super.init(nibName: "ContentViewController", bundle: nil)
     }
     
-    override init(nibName nibNameOrNil: String? = "ContentViewController", bundle nibBundleOrNil: NSBundle? = nil) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {

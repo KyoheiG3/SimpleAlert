@@ -68,7 +68,7 @@ public class SimpleAlert {
         @objc(SimpleAlertControllerRespondView)
         private class RespondView: UIView {
             var touchHandler: ((UIView) -> Void)?
-            override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+            override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
                 touchHandler?(self)
             }
         }
@@ -142,14 +142,14 @@ public class SimpleAlert {
         }
         
         public convenience init(title: String?, message: String?, style: Style) {
-            self.init()
+            self.init(nibName: "SimpleAlert", bundle: NSBundle(forClass: Controller.self))
             self.title = title
             self.message = message
             self.preferredStyle = style
         }
         
         public convenience init(view: UIView?, style: Style) {
-            self.init()
+            self.init(nibName: "SimpleAlert", bundle: NSBundle(forClass: Controller.self))
             self.customView = view
             self.preferredStyle = style
         }
@@ -284,7 +284,7 @@ public class SimpleAlert {
         
         /** override if needed */
         public func loadButton() -> UIButton {
-            let button = UIButton.buttonWithType(.System) as UIButton
+            let button = UIButton.buttonWithType(.System) as! UIButton
             let borderView = UIView(frame: CGRect(x: 0, y: -0.5, width: 0, height: 0.5))
             borderView.backgroundColor = UIColor.lightGrayColor()
             borderView.autoresizingMask = .FlexibleWidth
