@@ -141,15 +141,19 @@ public class SimpleAlert {
             NSNotificationCenter.defaultCenter().removeObserver(self)
         }
         
-        public convenience init(title: String?, message: String?, style: Style) {
+        public convenience init() {
             self.init(nibName: "SimpleAlert", bundle: NSBundle(forClass: Controller.self))
+        }
+        
+        public convenience init(title: String?, message: String?, style: Style) {
+            self.init()
             self.title = title
             self.message = message
             self.preferredStyle = style
         }
         
         public convenience init(view: UIView?, style: Style) {
-            self.init(nibName: "SimpleAlert", bundle: NSBundle(forClass: Controller.self))
+            self.init()
             self.customView = view
             self.preferredStyle = style
         }
@@ -158,7 +162,7 @@ public class SimpleAlert {
             super.init(coder: aDecoder)
         }
         
-        public override init(nibName nibNameOrNil: String? = "SimpleAlert", bundle nibBundleOrNil: NSBundle? = NSBundle(forClass: Controller.self)) {
+        public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
             
             modalPresentationStyle = .Custom
