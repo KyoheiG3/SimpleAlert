@@ -1,6 +1,6 @@
 # SimpleAlert
 
-[![Carthage Compatibility](https://img.shields.io/badge/carthage-✓-f2a77e.svg?style=flat)](https://github.com/Carthage/Carthage/)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
 [![License](https://img.shields.io/cocoapods/l/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
 [![Platform](https://img.shields.io/cocoapods/p/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
@@ -13,47 +13,30 @@ Can be used as `UIAlertController`, it supports from iOS7.
 <img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/custom_content.png" alt="custom_content" width="150" />
 <img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/rounded_view.png" alt="rounded_view" width="150" /></p>
 
-
-## Add to your project (iOS8.0 or later)
-
-### 1. Add project
-Add `SimpleAlert.xcodeproj` to your target.
-<p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/add_file.png" alt="add_file" width="400" /></p>
-
-### 2. Add Embedded Binaries `SimpleAlert.framework`
-<p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/add_embedded.png" alt="add_embedded" width="400" /></p>
-
-Select `SimpleAlert.framework` in the `Workspace`.
-<p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/choose_framework.png" alt="choose_framework" width="200" /></p>
-
-### 3. Add `Configuration` (Option)
-If you are adding a `Configuration` to the target, please manually add the ` Configuration` in the same way also to SimpleAlert.
-<p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/configurations.png" alt="configurations" width="400" /></p>
-
-## Add to your project (iOS7.1 and earlier)
-
-### 1. Add source
-
-Add `SimpleAlert.swift` and `SimpleAlert.xib`.
-<p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/add_source.png" alt="add_source" width="400" /></p>
-
 ## How to Install SimpleAlert
 
-### Using Beta CocoaPods
+### iOS 8+
 
-You need to install the beta build of CocoaPods via `[sudo] gem install cocoapods --pre` then add SimpleAlert to your Podfile.
+#### Cocoapods
+
+Add the following to your `Podfile`:
 
 ```Ruby
 pod "SimpleAlert"
+use_frameworks!
 ```
+Note: the `use_frameworks!` is required for pods made in Swift.
 
-### Using Carthage
+#### Carthage
 
-Add SimpleAlert to your Cartfile.
+Add the following to your `Cartfile`:
 
 ```Ruby
 github "KyoheiG3/SimpleAlert"
 ```
+### iOS 7
+
+Just add everything in the `SimpleAlert.swift` and `SimpleAlert.xib` file to your project.
 
 ## Usage
 
@@ -141,14 +124,14 @@ class AlertController: SimpleAlert.Controller {
             textField.backgroundColor = nil
             textField.layer.borderColor = nil
             textField.layer.borderWidth = 0
-            
+
             configurationHandler?(textField)
         }
     }
-    
+
     override func configurButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
         super.configurButton(style, forButton: button)
-        
+
         if let font = button.titleLabel?.font {
             switch style {
             case .OK:
@@ -164,10 +147,10 @@ class AlertController: SimpleAlert.Controller {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configContentView = { [weak self] view in
             if let view = view as? SimpleAlert.ContentView {
                 view.titleLabel.textColor = UIColor.lightGrayColor()
