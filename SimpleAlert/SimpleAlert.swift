@@ -68,7 +68,7 @@ public class SimpleAlert {
         @objc(SimpleAlertControllerRespondView)
         private class RespondView: UIView {
             var touchHandler: ((UIView) -> Void)?
-            override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+            override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
                 touchHandler?(self)
             }
         }
@@ -158,7 +158,7 @@ public class SimpleAlert {
             self.preferredStyle = style
         }
         
-        public required init(coder aDecoder: NSCoder) {
+        public required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
         }
         
@@ -176,7 +176,7 @@ public class SimpleAlert {
         public override func viewDidLoad() {
             super.viewDidLoad()
             
-            view.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+            view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             
             baseView.layer.cornerRadius = 3.0
             baseView.clipsToBounds = true
@@ -207,7 +207,6 @@ public class SimpleAlert {
                 containerViewBottomSpaceConstraint.priority = ConstraintPriorityRequired
                 backgroundView.touchHandler = { [weak self] view in
                     self?.dismissViewController()
-                    return
                 }
             }
         }
@@ -288,7 +287,7 @@ public class SimpleAlert {
         
         /** override if needed */
         public func loadButton() -> UIButton {
-            let button = UIButton.buttonWithType(.System) as! UIButton
+            let button = UIButton(type: .System)
             let borderView = UIView(frame: CGRect(x: 0, y: -0.5, width: 0, height: 0.5))
             borderView.backgroundColor = UIColor.lightGrayColor()
             borderView.autoresizingMask = .FlexibleWidth
@@ -535,7 +534,7 @@ private extension SimpleAlert.Controller {
 // MARK: - Action Methods
 extension SimpleAlert.Controller {
     func buttonWasTapped(sender: UIButton) {
-        dismissViewController(sender: sender)
+        dismissViewController(sender)
     }
 }
 
@@ -547,7 +546,7 @@ extension SimpleAlert.Controller {
     
     func keyboardWillShow(notification: NSNotification) {
         if let window = view.window {
-            if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue() {
+            if let frame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue {
                 let rect = window.convertRect(frame, toView: view)
                 
                 backgroundViewBottomSpaceConstraint?.constant = view.bounds.size.height - rect.origin.y
@@ -576,14 +575,14 @@ extension SimpleAlert.Controller: UIViewControllerAnimatedTransitioning {
     }
     
     func animationOptionsForAnimationCurve(curve: UInt) -> UIViewAnimationOptions {
-        return UIViewAnimationOptions(curve << 16)
+        return UIViewAnimationOptions(rawValue: curve << 16)
     }
     
     func createCoverView(frame: CGRect) -> UIView {
         let coverView = UIView(frame: frame)
         coverView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
         coverView.alpha = 0
-        coverView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        coverView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         return coverView
     }
     
@@ -649,35 +648,41 @@ extension SimpleAlert.Controller: UIViewControllerAnimatedTransitioning {
             }, completion: completion)
     }
     
-    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    public func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return animateDuration()
     }
     
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        if let to = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) {
-            if let from = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) {
-                let container = transitionContext.containerView()
-                
-                if presentedAnimation == true {
-                    if preferredStyle == .Alert {
-                        presentAnimationForAlert(container, toView: to.view, fromView: from.view) { _ in
-                            transitionContext.completeTransition(true)
-                        }
-                    } else {
-                        presentAnimationForActionSheet(container, toView: to.view, fromView: from.view) { _ in
-                            transitionContext.completeTransition(true)
-                        }
-                    }
-                } else {
-                    if preferredStyle == .Alert {
-                        dismissAnimationForAlert(container, toView: to.view, fromView: from.view) { _ in
-                            transitionContext.completeTransition(true)
-                        }
-                    } else {
-                        dismissAnimationForActionSheet(container, toView: to.view, fromView: from.view) { _ in
-                            transitionContext.completeTransition(true)
-                        }
-                    }
+        guard let container = transitionContext.containerView() else {
+            return transitionContext.completeTransition(false)
+        }
+        
+        guard let to = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) else {
+            return transitionContext.completeTransition(false)
+        }
+        
+        guard let from = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) else {
+            return transitionContext.completeTransition(false)
+        }
+        
+        if presentedAnimation == true {
+            if preferredStyle == .Alert {
+                presentAnimationForAlert(container, toView: to.view, fromView: from.view) { _ in
+                    transitionContext.completeTransition(true)
+                }
+            } else {
+                presentAnimationForActionSheet(container, toView: to.view, fromView: from.view) { _ in
+                    transitionContext.completeTransition(true)
+                }
+            }
+        } else {
+            if preferredStyle == .Alert {
+                dismissAnimationForAlert(container, toView: to.view, fromView: from.view) { _ in
+                    transitionContext.completeTransition(true)
+                }
+            } else {
+                dismissAnimationForActionSheet(container, toView: to.view, fromView: from.view) { _ in
+                    transitionContext.completeTransition(true)
                 }
             }
         }
