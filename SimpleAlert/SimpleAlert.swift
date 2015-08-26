@@ -382,7 +382,7 @@ private extension SimpleAlert.Controller {
         contentView?.messageLabel.text = message
         
         if preferredStyle == .Alert {
-            textFieldHandlers.map() { handler -> Void in
+            for handler in textFieldHandlers {
                 if let textField = self.contentView?.addTextField() {
                     self.textFields.append(textField)
                     handler?(textField)
@@ -423,7 +423,9 @@ private extension SimpleAlert.Controller {
         
         if displayTargetView == contentView {
             contentView?.textViewHeightConstraint.constant = 0
-            textFields.map { self.contentView?.layoutTextField($0) }
+            for textField in textFields {
+                contentView?.layoutTextField(textField)
+            }
             contentView?.layoutContents()
         }
         
