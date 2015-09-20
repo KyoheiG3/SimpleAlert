@@ -14,7 +14,7 @@ class ContentViewController: UIViewController {
         super.init(nibName: "ContentViewController", bundle: nil)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

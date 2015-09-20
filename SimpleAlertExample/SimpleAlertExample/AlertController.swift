@@ -24,26 +24,24 @@ class AlertController: SimpleAlert.Controller {
     override func configurButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
         super.configurButton(style, forButton: button)
         
-        if let font = button.titleLabel?.font {
-            switch style {
-            case .OK:
-                button.titleLabel?.font = UIFont.boldSystemFontOfSize(20)
-                button.setTitleColor(UIColor.grayColor(), forState: .Normal)
-            case .Cancel:
-                button.backgroundColor = UIColor.darkGrayColor()
-                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            case .Default:
-                button.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-            default:
-                break
-            }
+        switch style {
+        case .OK:
+            button.titleLabel?.font = UIFont.boldSystemFontOfSize(20)
+            button.setTitleColor(UIColor.grayColor(), forState: .Normal)
+        case .Cancel:
+            button.backgroundColor = UIColor.darkGrayColor()
+            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        case .Default:
+            button.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        default:
+            break
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configContentView = { [weak self] view in
+        configContentView = { view in
             if let view = view as? SimpleAlert.ContentView {
                 view.titleLabel.textColor = UIColor.lightGrayColor()
                 view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
