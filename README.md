@@ -8,6 +8,8 @@
 It is simple and easily customizable alert.  
 Can be used as `UIAlertController`, it supports from iOS7.
 
+#### [Appetize's Demo](https://appetize.io/app/w12zxu30gtr8p5a7v9t37gmzp4)
+
 <p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/default_view.png" alt="default_view" width="150" />
 <img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/custom_view.png" alt="custom_view" width="150" />
 <img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/custom_content.png" alt="custom_content" width="150" />
