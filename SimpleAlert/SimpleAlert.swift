@@ -360,6 +360,7 @@ private extension SimpleAlert.ContentView {
             titleSpaceConstraint.constant = 0
         }
         
+        baseView.setNeedsLayout()
         baseView.layoutIfNeeded()
         
         frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
