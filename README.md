@@ -15,6 +15,11 @@ Can be used as `UIAlertController`, it supports from iOS7.
 <img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/custom_content.png" alt="custom_content" width="150" />
 <img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/rounded_view.png" alt="rounded_view" width="150" /></p>
 
+## Requirements
+
+- Swift 3.0
+- iOS 7.0 or later
+
 ## How to Install SimpleAlert
 
 ### iOS 8+
@@ -38,7 +43,7 @@ github "KyoheiG3/SimpleAlert"
 ```
 ### iOS 7
 
-Just add everything in the `SimpleAlert.swift` and `SimpleAlert.xib` file to your project.
+Just add everything in the source file to your project.
 
 ## Usage
 
@@ -56,11 +61,11 @@ import SimpleAlert
 View simple Alert
 
 ```Swift
-let alert = SimpleAlert.Controller(title: "title", message: "message", style: .Alert)
+let alert = AlertController(title: "title", message: "message", style: .Alert)
 
 alert.addTextFieldWithConfigurationHandler()
-alert.addAction(SimpleAlert.Action(title: "Cancel", style: .Cancel))
-alert.addAction(SimpleAlert.Action(title: "OK", style: .OK))
+alert.addAction(AlertAction(title: "Cancel", style: .Cancel))
+alert.addAction(AlertAction(title: "OK", style: .OK))
 
 presentViewController(alert, animated: true, completion: nil)
 ```
@@ -68,7 +73,7 @@ presentViewController(alert, animated: true, completion: nil)
 Customize default contents
 
 ```Swift
-let alert = SimpleAlert.Controller(title: "title", message: "message", style: .Alert)
+let alert = AlertController(title: "title", message: "message", style: .Alert)
 alert.addTextFieldWithConfigurationHandler() { textField in
     textField.frame.size.height = 33
     textField.backgroundColor = nil
@@ -76,7 +81,7 @@ alert.addTextFieldWithConfigurationHandler() { textField in
     textField.layer.borderWidth = 0
 }
 alert.configContentView = { [weak self] view in
-    if let view = view as? SimpleAlert.ContentView {
+    if let view = view as? AlertContentView {
         view.titleLabel.textColor = UIColor.lightGrayColor()
         view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
         view.messageLabel.textColor = UIColor.lightGrayColor()
@@ -86,8 +91,8 @@ alert.configContentView = { [weak self] view in
     }
 }
 
-alert.addAction(SimpleAlert.Action(title: "Cancel", style: .Cancel))
-alert.addAction(SimpleAlert.Action(title: "OK", style: .OK))
+alert.addAction(AlertAction(title: "Cancel", style: .Cancel))
+alert.addAction(AlertAction(title: "OK", style: .OK))
 presentViewController(alert, animated: true, completion: nil)
 
 ```
@@ -95,8 +100,8 @@ presentViewController(alert, animated: true, completion: nil)
 Rounded button Alert View
 
 ```Swift
-let alert = SimpleAlert.Controller(view: UIView(), style: .Alert)
-let action = SimpleAlert.Action(title: "?", style: .Cancel)
+let alert = AlertController(view: UIView(), style: .Alert)
+let action = AlertAction(title: "?", style: .Cancel)
 
 alert.addAction(action)
 action.button.frame.size.height = 144
@@ -119,7 +124,7 @@ presentViewController(alert, animated: true, completion: nil)
 More customizable if you create a subclass
 
 ```Swift
-class AlertController: SimpleAlert.Controller {
+class AlertController: AlertController {
     override func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
         super.addTextFieldWithConfigurationHandler() { textField in
             textField.frame.size.height = 33
@@ -131,7 +136,7 @@ class AlertController: SimpleAlert.Controller {
         }
     }
 
-    override func configurButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
+    override func configurButton(style :AlertAction.Style, forButton button: UIButton) {
         super.configurButton(style, forButton: button)
 
         if let font = button.titleLabel?.font {
@@ -154,7 +159,7 @@ class AlertController: SimpleAlert.Controller {
         super.viewDidLoad()
 
         configContentView = { [weak self] view in
-            if let view = view as? SimpleAlert.ContentView {
+            if let view = view as? AlertContentView {
                 view.titleLabel.textColor = UIColor.lightGrayColor()
                 view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
                 view.messageLabel.textColor = UIColor.lightGrayColor()
@@ -181,7 +186,7 @@ class AlertController: SimpleAlert.Controller {
 #### Initialize
 
 ```Swift
-init(title: String, style: SimpleAlert.Action.Style, handler: ((SimpleAlert.Action!) -> Void)?)
+init(title: String, style: AlertAction.Style, handler: ((AlertAction!) -> Void)?)
 ```
 * Set title and style, can add button.
 * Set button action handler.
@@ -235,7 +240,7 @@ var textBackgroundView: UIView!
 #### Initialize
 
 ```Swift
-init(title:String?, message:String?, style: SimpleAlert.Controller.Style)
+init(title:String?, message:String?, style: AlertController.Style)
 ```
 
 * Show default view.
@@ -256,7 +261,7 @@ func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) 
 * `Controller.Style` is in the case of `ActionSheet` does not add.
 
 ```Swift
-func addAction(action: SimpleAlert.Action)
+func addAction(action: AlertAction)
 ```
 * Add action button.
 
