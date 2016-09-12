@@ -169,8 +169,8 @@ public class SimpleAlert {
             modalTransitionStyle = .CrossDissolve
             transitioningDelegate = self
             
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Controller.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(Controller.keyboardDidHide(_:)), name: UIKeyboardDidHideNotification, object: nil)
         }
         
         public override func viewDidLoad() {
@@ -279,7 +279,7 @@ public class SimpleAlert {
                 button.frame.size.height = buttonHeight
             }
             button.autoresizingMask = .FlexibleWidth
-            button.addTarget(self, action: "buttonWasTapped:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(Controller.buttonWasTapped(_:)), forControlEvents: .TouchUpInside)
             action.setButton(button)
             configurButton(action.style, forButton: button)
             actions.append(action)
