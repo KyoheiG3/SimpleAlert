@@ -8,59 +8,6 @@
 
 import UIKit
 
-open class AlertAction: NSObject {
-    public enum Style {
-        case `default`
-        case ok
-        case cancel
-        case destructive
-    }
-    
-    public init(title: String, style: Style, handler: ((AlertAction?) -> Void)? = nil) {
-        self.title = title
-        self.handler = handler
-        self.style = style
-        super.init()
-    }
-    
-    public convenience init(title: String, style: Style, dismissesAlert: Bool, handler: ((AlertAction?) -> Void)? = nil) {
-        self.init(title: title, style: style, handler: handler)
-        self.dismissesAlert = dismissesAlert
-    }
-            
-    var title: String
-    var handler: ((AlertAction) -> Void)?
-    var style: AlertAction.Style
-    var dismissesAlert = true
-    open var enabled: Bool = true {
-        didSet {
-            button?.isEnabled = enabled
-        }
-    }
-    open fileprivate(set) var button: UIButton!
-}
-
-open class AlertContentView: UIView {
-    let TextFieldFontSize: CGFloat = 14
-    let TextFieldHeight: CGFloat = 25
-    
-    @IBOutlet open weak var baseView: UIView!
-    @IBOutlet open weak var titleLabel: UILabel!
-    @IBOutlet open weak var messageLabel: UILabel!
-    @IBOutlet open weak var textBackgroundView: UIView!
-    
-    @IBOutlet fileprivate var verticalSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var titleSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var messageSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var textViewHeightConstraint: NSLayoutConstraint!
-    
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        backgroundColor = UIColor.white
-    }
-}
-
 class RespondView: UIView {
     var touchHandler: ((UIView) -> Void)?
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -306,14 +253,6 @@ open class AlertController: UIViewController {
     }
 }
 
-private extension AlertAction {
-    func setButton(_ forButton: UIButton) {
-        button = forButton
-        button.setTitle(title, for: UIControlState())
-        button.isEnabled = enabled
-    }
-}
-
 private extension AlertContentView {
     class ContentTextField: UITextField {
         let TextLeftOffset: CGFloat = 4
@@ -546,8 +485,8 @@ private extension AlertController {
 }
 
 // MARK: - Action Methods
-extension AlertController {
-    func buttonWasTapped(_ sender: UIButton) {
+private extension AlertController {
+    dynamic func buttonWasTapped(_ sender: UIButton) {
         dismissViewController(sender)
     }
 }
