@@ -168,7 +168,9 @@ open class AlertController: UIViewController {
         
         layoutContainer()
         layoutContents()
-        layoutButtons()
+        UIView.performWithoutAnimation {
+            layoutButtons()
+        }
         
         let margin = marginInsets.top + marginInsets.bottom
         let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpaceConstraint.constant - margin
@@ -415,6 +417,7 @@ private extension AlertController {
             let buttonHeight = Int((button?.bounds.height)!)
             let buttonsHeight = Int(height)
             sizeToFit(button!, buttonsHeight / buttonHeight)
+            button?.layoutIfNeeded()
             
             return CGFloat(buttonsHeight + buttonHeight)
         }
@@ -576,14 +579,15 @@ extension AlertController: UIViewControllerAnimatedTransitioning {
         
         backgroundViewBottomSpaceConstraint.constant = -toView.bounds.height
         backgroundViewTopSpaceConstraint.constant = toView.bounds.height
-        backgroundView.layoutIfNeeded()
+        view.layoutIfNeeded()
+        contentView?.layoutIfNeeded()
         backgroundViewBottomSpaceConstraint.constant = 0
         backgroundViewTopSpaceConstraint.constant = 0
         
         transitionCoverView = coverView
         
         animation({
-            self.backgroundView.layoutIfNeeded()
+            self.view.layoutIfNeeded()
             coverView.alpha = 1
         }, completion: completion)
     }
@@ -595,7 +599,7 @@ extension AlertController: UIViewControllerAnimatedTransitioning {
         backgroundViewTopSpaceConstraint.constant = toView.bounds.height
         
         animation({
-            self.backgroundView.layoutIfNeeded()
+            self.view.layoutIfNeeded()
             self.transitionCoverView?.alpha = 0
             self.transitionCoverView = nil
         }, completion: completion)
