@@ -9,30 +9,30 @@
 import UIKit
 import SimpleAlert
 
-class AlertController: SimpleAlert.Controller {
-    override func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
+class CustomAlertController: AlertController {
+    override func addTextFieldWithConfigurationHandler(_ configurationHandler: ((UITextField?) -> Void)? = nil) {
         super.addTextFieldWithConfigurationHandler() { textField in
-            textField.frame.size.height = 33
-            textField.backgroundColor = nil
-            textField.layer.borderColor = nil
-            textField.layer.borderWidth = 0
+            textField?.frame.size.height = 33
+            textField?.backgroundColor = nil
+            textField?.layer.borderColor = nil
+            textField?.layer.borderWidth = 0
             
             configurationHandler?(textField)
         }
     }
     
-    override func configurButton(style :SimpleAlert.Action.Style, forButton button: UIButton) {
+    override func configurButton(_ style :AlertAction.Style, forButton button: UIButton) {
         super.configurButton(style, forButton: button)
         
         switch style {
-        case .OK:
-            button.titleLabel?.font = UIFont.boldSystemFontOfSize(20)
-            button.setTitleColor(UIColor.grayColor(), forState: .Normal)
-        case .Cancel:
-            button.backgroundColor = UIColor.darkGrayColor()
-            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        case .Default:
-            button.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
+        case .ok:
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            button.setTitleColor(UIColor.gray, for: UIControlState())
+        case .cancel:
+            button.backgroundColor = UIColor.darkGray
+            button.setTitleColor(UIColor.white, for: UIControlState())
+        case .default:
+            button.setTitleColor(UIColor.lightGray, for: UIControlState())
         default:
             break
         }
@@ -42,11 +42,11 @@ class AlertController: SimpleAlert.Controller {
         super.viewDidLoad()
         
         configContentView = { view in
-            if let view = view as? SimpleAlert.ContentView {
-                view.titleLabel.textColor = UIColor.lightGrayColor()
-                view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
-                view.messageLabel.textColor = UIColor.lightGrayColor()
-                view.messageLabel.font = UIFont.boldSystemFontOfSize(16)
+            if let view = view as? AlertContentView {
+                view.titleLabel.textColor = UIColor.lightGray
+                view.titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
+                view.messageLabel.textColor = UIColor.lightGray
+                view.messageLabel.font = UIFont.boldSystemFont(ofSize: 16)
                 view.textBackgroundView.layer.cornerRadius = 3.0
                 view.textBackgroundView.clipsToBounds = true
             }
