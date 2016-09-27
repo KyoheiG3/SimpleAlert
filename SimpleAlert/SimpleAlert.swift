@@ -25,9 +25,15 @@ public class SimpleAlert {
             super.init()
         }
         
+        public convenience init(title: String, style: Style, dismissesAlert: Bool, handler: ((Action!) -> Void)? = nil) {
+            self.init(title: title, style: style, handler: handler)
+            self.dismissesAlert = dismissesAlert
+        }
+        
         var title: String
         var handler: ((Action) -> Void)?
         var style: Action.Style
+        var dismissesAlert = true
         public var enabled: Bool = true {
             didSet {
                 button?.enabled = enabled
@@ -523,10 +529,16 @@ private extension SimpleAlert.Controller {
     }
     
     func dismissViewController(sender: AnyObject? = nil) {
-        dismiss {
-            if let action = self.actions.filter({ $0.button == sender as? UIButton }).first {
+        guard let action = self.actions.filter({ $0.button == sender as? UIButton }).first else {
+            dismiss()
+            return
+        }
+        if action.dismissesAlert {
+            dismiss {
                 action.handler?(action)
             }
+        } else {
+            action.handler?(action)
         }
     }
     
