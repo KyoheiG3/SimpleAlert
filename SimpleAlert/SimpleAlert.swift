@@ -206,7 +206,7 @@ public class SimpleAlert {
             if preferredStyle == .ActionSheet {
                 containerViewBottomSpaceConstraint.priority = ConstraintPriorityRequired
                 backgroundView.touchHandler = { [weak self] view in
-                    self?.dismissViewController()
+                    self?.dismiss()
                 }
             }
         }
@@ -523,11 +523,16 @@ private extension SimpleAlert.Controller {
     }
     
     func dismissViewController(sender: AnyObject? = nil) {
-        dismissViewControllerAnimated(true) {
+        dismiss {
             if let action = self.actions.filter({ $0.button == sender as? UIButton }).first {
                 action.handler?(action)
             }
-            
+        }
+    }
+    
+    func dismiss(withCompletion block: ()->() = {}) {
+        dismissViewControllerAnimated(true) {
+            block()
             self.actions.removeAll()
             self.textFields.removeAll()
         }
