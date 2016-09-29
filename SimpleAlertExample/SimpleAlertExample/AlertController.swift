@@ -21,8 +21,8 @@ class CustomAlertController: AlertController {
         }
     }
     
-    override func configurButton(_ style :AlertAction.Style, forButton button: UIButton) {
-        super.configurButton(style, forButton: button)
+    override func configureButton(_ style :AlertAction.Style, forButton button: UIButton) {
+        super.configureButton(style, forButton: button)
         
         switch style {
         case .ok:

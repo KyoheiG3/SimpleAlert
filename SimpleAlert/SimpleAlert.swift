@@ -231,7 +231,7 @@ open class AlertController: UIViewController {
         button.autoresizingMask = .flexibleWidth
         button.addTarget(self, action: #selector(AlertController.buttonWasTapped(_:)), for: .touchUpInside)
         action.setButton(button)
-        configurButton(action.style, forButton: button)
+        configureButton(action.style, forButton: button)
         actions.append(action)
     }
     
@@ -246,7 +246,7 @@ open class AlertController: UIViewController {
         return button
     }
     
-    open func configurButton(_ style: AlertAction.Style, forButton button: UIButton) {
+    open func configureButton(_ style: AlertAction.Style, forButton button: UIButton) {
         if preferredStyle == .alert {
             configurAlertButton(style, forButton: button)
         } else {
