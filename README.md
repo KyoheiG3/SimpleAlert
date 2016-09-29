@@ -136,8 +136,8 @@ class AlertController: AlertController {
         }
     }
 
-    override func configurButton(style :AlertAction.Style, forButton button: UIButton) {
-        super.configurButton(style, forButton: button)
+    override func configureButton(style :AlertAction.Style, forButton button: UIButton) {
+        super.configureButton(style, forButton: button)
 
         if let font = button.titleLabel?.font {
             switch style {
