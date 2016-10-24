@@ -53,6 +53,7 @@ open class AlertController: UIViewController {
     
     open fileprivate(set) var actions: [AlertAction] = []
     open fileprivate(set) var textFields: [UITextField] = []
+    open var coverColor = UIColor.black.withAlphaComponent(0.4)
     fileprivate var textFieldHandlers: [((UITextField?) -> Void)?] = []
     fileprivate var customView: UIView?
     fileprivate var transitionCoverView: UIView?
@@ -536,7 +537,7 @@ extension AlertController: UIViewControllerAnimatedTransitioning {
     
     func createCoverView(_ frame: CGRect) -> UIView {
         let coverView = UIView(frame: frame)
-        coverView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        coverView.backgroundColor = self.coverColor
         coverView.alpha = 0
         coverView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return coverView
