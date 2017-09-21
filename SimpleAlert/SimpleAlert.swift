@@ -153,7 +153,7 @@ open class AlertController: UIViewController {
         }
         
         if preferredStyle == .actionSheet {
-            containerViewBottomSpaceConstraint.priority = ConstraintPriorityRequired
+            containerViewBottomSpaceConstraint.priority = UILayoutPriority(rawValue: ConstraintPriorityRequired)
             backgroundView.touchHandler = { [weak self] view in
                 self?.dismiss()
             }
@@ -490,18 +490,18 @@ private extension AlertController {
 
 // MARK: - Action Methods
 private extension AlertController {
-    dynamic func buttonWasTapped(_ sender: UIButton) {
+    @objc dynamic func buttonWasTapped(_ sender: UIButton) {
         dismissViewController(sender)
     }
 }
 
 // MARK: - NSNotificationCenter Methods
 extension AlertController {
-    func keyboardDidHide(_ notification: Notification) {
+    @objc func keyboardDidHide(_ notification: Notification) {
         backgroundViewBottomSpaceConstraint?.constant = 0
     }
     
-    func keyboardWillShow(_ notification: Notification) {
+    @objc func keyboardWillShow(_ notification: Notification) {
         if let window = view.window {
             if let frame = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
                 let rect = window.convert(frame, to: view)
