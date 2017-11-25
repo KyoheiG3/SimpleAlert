@@ -14,6 +14,16 @@
 		C70C0C571A5FBFB4002BC071 /* SimpleAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */; };
 		C7453D5F1D868B96004E13BD /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7453D5E1D868B96004E13BD /* AlertAction.swift */; };
 		C7453D611D868C30004E13BD /* AlertContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7453D601D868C30004E13BD /* AlertContentView.swift */; };
+		C75D875D1FC80357003592E3 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D875C1FC80357003592E3 /* TextField.swift */; };
+		C75D87631FC88148003592E3 /* CGFloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87621FC88148003592E3 /* CGFloatExtension.swift */; };
+		C75D87651FC88175003592E3 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87641FC88175003592E3 /* Info.swift */; };
+		C75D87671FC995D2003592E3 /* ViewControllerAnimatedTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */; };
+		C75D87751FC99726003592E3 /* ActionSheetControllerPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */; };
+		C75D87761FC99726003592E3 /* ActionSheetControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87731FC99725003592E3 /* ActionSheetControllerTransition.swift */; };
+		C75D87771FC99726003592E3 /* ActionSheetControllerDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */; };
+		C75D877A1FC99730003592E3 /* AlertControllerDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */; };
+		C75D877B1FC99730003592E3 /* AlertControllerPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */; };
+		C75D877D1FC997F0003592E3 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D877C1FC997F0003592E3 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +47,16 @@
 		C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleAlert.xib; sourceTree = "<group>"; };
 		C7453D5E1D868B96004E13BD /* AlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		C7453D601D868C30004E13BD /* AlertContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertContentView.swift; sourceTree = "<group>"; };
+		C75D875C1FC80357003592E3 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		C75D87621FC88148003592E3 /* CGFloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtension.swift; sourceTree = "<group>"; };
+		C75D87641FC88175003592E3 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAnimatedTransition.swift; sourceTree = "<group>"; };
+		C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetControllerPresentTransition.swift; sourceTree = "<group>"; };
+		C75D87731FC99725003592E3 /* ActionSheetControllerTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetControllerTransition.swift; sourceTree = "<group>"; };
+		C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetControllerDismissTransition.swift; sourceTree = "<group>"; };
+		C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerDismissTransition.swift; sourceTree = "<group>"; };
+		C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerPresentTransition.swift; sourceTree = "<group>"; };
+		C75D877C1FC997F0003592E3 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +99,22 @@
 		C70C0C3A1A5FBEC8002BC071 /* SimpleAlert */ = {
 			isa = PBXGroup;
 			children = (
-				C70C0C3D1A5FBEC8002BC071 /* SimpleAlert.h */,
+				C70C0C3B1A5FBEC8002BC071 /* Supporting Files */,
+				C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */,
+				C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */,
+				C75D87731FC99725003592E3 /* ActionSheetControllerTransition.swift */,
 				C7453D5E1D868B96004E13BD /* AlertAction.swift */,
 				C7453D601D868C30004E13BD /* AlertContentView.swift */,
+				C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */,
+				C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */,
+				C75D87621FC88148003592E3 /* CGFloatExtension.swift */,
+				C75D87641FC88175003592E3 /* Info.swift */,
+				C70C0C3D1A5FBEC8002BC071 /* SimpleAlert.h */,
 				C70C0C541A5FBFB4002BC071 /* SimpleAlert.swift */,
 				C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */,
-				C70C0C3B1A5FBEC8002BC071 /* Supporting Files */,
+				C75D875C1FC80357003592E3 /* TextField.swift */,
+				C75D877C1FC997F0003592E3 /* UIViewExtension.swift */,
+				C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */,
 			);
 			path = SimpleAlert;
 			sourceTree = "<group>";
@@ -228,6 +258,16 @@
 				C7453D611D868C30004E13BD /* AlertContentView.swift in Sources */,
 				C7453D5F1D868B96004E13BD /* AlertAction.swift in Sources */,
 				C70C0C561A5FBFB4002BC071 /* SimpleAlert.swift in Sources */,
+				C75D87651FC88175003592E3 /* Info.swift in Sources */,
+				C75D875D1FC80357003592E3 /* TextField.swift in Sources */,
+				C75D877B1FC99730003592E3 /* AlertControllerPresentTransition.swift in Sources */,
+				C75D87671FC995D2003592E3 /* ViewControllerAnimatedTransition.swift in Sources */,
+				C75D87751FC99726003592E3 /* ActionSheetControllerPresentTransition.swift in Sources */,
+				C75D87771FC99726003592E3 /* ActionSheetControllerDismissTransition.swift in Sources */,
+				C75D877D1FC997F0003592E3 /* UIViewExtension.swift in Sources */,
+				C75D877A1FC99730003592E3 /* AlertControllerDismissTransition.swift in Sources */,
+				C75D87631FC88148003592E3 /* CGFloatExtension.swift in Sources */,
+				C75D87761FC99726003592E3 /* ActionSheetControllerTransition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

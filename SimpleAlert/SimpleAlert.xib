@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SimpleAlertController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertController" customModule="SimpleAlert" customModuleProvider="target">
             <connections>
-                <outlet property="backgroundView" destination="Wnv-iy-aW0" id="Sdg-JB-5MV"/>
+                <outlet property="backgroundView" destination="Wnv-iy-aW0" id="e0c-2f-Ke7"/>
                 <outlet property="backgroundViewBottomSpaceConstraint" destination="LKr-5v-f1t" id="tXU-Y8-Vx7"/>
                 <outlet property="backgroundViewTopSpaceConstraint" destination="F5M-9m-lVE" id="6y8-Hy-XJV"/>
                 <outlet property="baseView" destination="CjQ-Sr-lVk" id="NyD-DH-1xg"/>
@@ -21,8 +24,6 @@
                 <outlet property="containerViewBottomSpaceConstraint" destination="gfS-C0-FwT" id="1FA-UL-sql"/>
                 <outlet property="containerViewWidthConstraint" destination="guZ-NA-KZU" id="Q9J-hf-O1g"/>
                 <outlet property="contentView" destination="DvE-7U-YMQ" id="Ped-fR-iSy"/>
-                <outlet property="coverView" destination="sDi-Gd-4ta" id="o5I-qv-gEG"/>
-                <outlet property="coverViewHeightConstraint" destination="V6Y-18-kDG" id="kRr-Ql-g4S"/>
                 <outlet property="mainView" destination="E9Y-Wv-Bl0" id="tkr-6C-nB8"/>
                 <outlet property="mainViewHeightConstraint" destination="bZv-FF-68r" id="RPb-Ec-dvl"/>
                 <outlet property="marginView" destination="Su8-qx-f1b" id="ICx-QJ-8ms"/>
@@ -38,25 +39,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wnv-iy-aW0" userLabel="Background View" customClass="RespondView" customModule="SimpleAlert" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wnv-iy-aW0" userLabel="Background View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDi-Gd-4ta" userLabel="Cover View">
-                            <constraints>
-                                <constraint firstAttribute="height" constant="600" id="V6Y-18-kDG"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su8-qx-f1b" userLabel="Margin View">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHr-ee-3Le" userLabel="Container View">
+                                    <rect key="frame" x="37.5" y="619" width="300" height="48"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Sr-lVk" userLabel="Base View">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                             <subviews>
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0" userLabel="Main View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" id="bZv-FF-68r"/>
                                                     </constraints>
                                                 </scrollView>
                                                 <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX" userLabel="Button View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="Uog-n8-Fje"/>
                                                     </constraints>
@@ -73,6 +75,7 @@
                                             </constraints>
                                         </view>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-qm-e5H" userLabel="Cancel Button View">
+                                            <rect key="frame" x="0.0" y="48" width="300" height="0.0"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" id="OLq-Ho-r54"/>
                                             </constraints>
@@ -91,9 +94,8 @@
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="jHr-ee-3Le" secondAttribute="bottom" priority="250" id="gfS-C0-FwT"/>
+                                <constraint firstAttribute="bottom" secondItem="jHr-ee-3Le" secondAttribute="bottom" id="gfS-C0-FwT"/>
                                 <constraint firstAttribute="centerY" secondItem="jHr-ee-3Le" secondAttribute="centerY" priority="750" id="iLj-Z1-zl2"/>
-                                <constraint firstItem="jHr-ee-3Le" firstAttribute="top" secondItem="Su8-qx-f1b" secondAttribute="top" priority="250" id="jpk-Nw-LNV"/>
                                 <constraint firstAttribute="centerX" secondItem="jHr-ee-3Le" secondAttribute="centerX" id="wwc-61-eCc"/>
                             </constraints>
                         </view>
@@ -101,11 +103,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Su8-qx-f1b" secondAttribute="bottom" id="3Jw-RC-mcC"/>
                         <constraint firstItem="Su8-qx-f1b" firstAttribute="leading" secondItem="Wnv-iy-aW0" secondAttribute="leading" id="GYR-4L-PeN"/>
-                        <constraint firstAttribute="trailing" secondItem="sDi-Gd-4ta" secondAttribute="trailing" id="I6s-1B-ixX"/>
                         <constraint firstItem="Su8-qx-f1b" firstAttribute="top" secondItem="Wnv-iy-aW0" secondAttribute="top" id="Px6-2r-kga"/>
                         <constraint firstAttribute="trailing" secondItem="Su8-qx-f1b" secondAttribute="trailing" id="ZXz-HT-Lbc"/>
-                        <constraint firstItem="sDi-Gd-4ta" firstAttribute="leading" secondItem="Wnv-iy-aW0" secondAttribute="leading" id="sQS-Te-aiG"/>
-                        <constraint firstAttribute="bottom" secondItem="sDi-Gd-4ta" secondAttribute="bottom" id="uHF-r0-aNE"/>
                     </constraints>
                 </view>
             </subviews>
@@ -121,16 +120,20 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwo-PT-UIe" userLabel="Base View">
+                    <rect key="frame" x="20" y="20" width="220" height="62"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="xau-wx-Wz2" userLabel="Title Label">
+                            <rect key="frame" x="0.0" y="0.0" width="220" height="19.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="iC7-zZ-Tbm" userLabel="Message Label">
+                            <rect key="frame" x="0.0" y="29.5" width="220" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUM-3e-1NC" userLabel="Text View">
+                            <rect key="frame" x="0.0" y="62" width="220" height="0.0"/>
                             <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="5g5-Eq-OMM"/>
@@ -168,7 +171,7 @@
                 <outlet property="titleSpaceConstraint" destination="LPO-QY-J4G" id="cyb-eh-2ib"/>
                 <outlet property="verticalSpaceConstraint" destination="2xx-Qa-pRw" id="n3g-gr-DW3"/>
             </connections>
-            <point key="canvasLocation" x="131" y="810"/>
+            <point key="canvasLocation" x="465" y="-228"/>
         </view>
     </objects>
 </document>

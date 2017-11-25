@@ -71,24 +71,24 @@ class ViewController: UIViewController {
     }
     
     func showAlert(_ alert: AlertController) {
-        alert.addTextFieldWithConfigurationHandler() { textField in
+        alert.addTextField { textField in
         }
         
-        alert.addTextFieldWithConfigurationHandler() { textField in
+        alert.addTextField { textField in
         }
         
         alert.addAction(AlertAction(title: "Cancel", style: .cancel) { action in
-            })
-        
+        })
+
         alert.addAction(AlertAction(title: "Default", style: .default) { action in
-            })
-        
+        })
+
         alert.addAction(AlertAction(title: "Destructive", style: .destructive) { action in
-            })
-        
+        })
+
         alert.addAction(AlertAction(title: "OK", style: .ok) { action in
-            })
-        
+        })
+
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -96,10 +96,10 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
         alert.addTextField() { textField in
         }
-        
+
         alert.addTextField() { textField in
         }
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
             })
         
@@ -111,7 +111,7 @@ class ViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "OK", style: .default) { action in
             })
-        
+
         self.present(alert, animated: true, completion: nil)
     }
 }

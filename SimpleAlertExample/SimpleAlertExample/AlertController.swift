@@ -10,19 +10,19 @@ import UIKit
 import SimpleAlert
 
 class CustomAlertController: AlertController {
-    override func addTextFieldWithConfigurationHandler(_ configurationHandler: ((UITextField?) -> Void)? = nil) {
-        super.addTextFieldWithConfigurationHandler() { textField in
-            textField?.frame.size.height = 33
-            textField?.backgroundColor = nil
-            textField?.layer.borderColor = nil
-            textField?.layer.borderWidth = 0
+    override func addTextField(configurationHandler: ((UITextField) -> Void)? = nil) {
+        super.addTextField { textField in
+            textField.frame.size.height = 33
+            textField.backgroundColor = nil
+            textField.layer.borderColor = nil
+            textField.layer.borderWidth = 0
             
             configurationHandler?(textField)
         }
     }
     
-    override func configureButton(_ style :AlertAction.Style, forButton button: UIButton) {
-        super.configureButton(style, forButton: button)
+    override func configureActionButton(_ button: UIButton, at style :AlertAction.Style) {
+        super.configureActionButton(button, at: style)
         
         switch style {
         case .ok:
