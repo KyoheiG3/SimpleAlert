@@ -11,26 +11,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertController" customModule="SimpleAlert" customModuleProvider="target">
             <connections>
+                <outlet property="alertButtonView" destination="xF5-i7-QEX" id="lYl-6I-Yrv"/>
+                <outlet property="alertButtonViewHeight" destination="Uog-n8-Fje" id="Ayj-r7-8UZ"/>
+                <outlet property="alertContentView" destination="DvE-7U-YMQ" id="jFa-T1-q5G"/>
                 <outlet property="backgroundView" destination="Wnv-iy-aW0" id="e0c-2f-Ke7"/>
-                <outlet property="backgroundViewBottomSpaceConstraint" destination="LKr-5v-f1t" id="tXU-Y8-Vx7"/>
-                <outlet property="backgroundViewTopSpaceConstraint" destination="F5M-9m-lVE" id="6y8-Hy-XJV"/>
-                <outlet property="baseView" destination="CjQ-Sr-lVk" id="NyD-DH-1xg"/>
-                <outlet property="buttonView" destination="xF5-i7-QEX" id="7IO-BA-Z8a"/>
-                <outlet property="buttonViewHeightConstraint" destination="Uog-n8-Fje" id="vjk-9M-TMG"/>
-                <outlet property="buttonViewSpaceConstraint" destination="kAD-6b-zqh" id="VQB-ZD-xfp"/>
+                <outlet property="backgroundViewBottomSpace" destination="LKr-5v-f1t" id="tXU-Y8-Vx7"/>
+                <outlet property="backgroundViewTopSpace" destination="F5M-9m-lVE" id="6y8-Hy-XJV"/>
+                <outlet property="cancelBaseView" destination="kQ8-wr-Wzg" id="Ho8-v5-nUe"/>
                 <outlet property="cancelButtonView" destination="Eju-qm-e5H" id="f1S-uH-yWg"/>
-                <outlet property="cancelButtonViewHeightConstraint" destination="OLq-Ho-r54" id="YnJ-LT-2Sr"/>
+                <outlet property="cancelbuttonViewHeight" destination="AVE-lH-fhg" id="rHj-By-lwx"/>
                 <outlet property="containerView" destination="jHr-ee-3Le" id="M6g-U2-Gmu"/>
-                <outlet property="containerViewBottomSpaceConstraint" destination="gfS-C0-FwT" id="1FA-UL-sql"/>
-                <outlet property="containerViewWidthConstraint" destination="guZ-NA-KZU" id="Q9J-hf-O1g"/>
-                <outlet property="contentView" destination="DvE-7U-YMQ" id="Ped-fR-iSy"/>
-                <outlet property="mainView" destination="E9Y-Wv-Bl0" id="tkr-6C-nB8"/>
-                <outlet property="mainViewHeightConstraint" destination="bZv-FF-68r" id="RPb-Ec-dvl"/>
+                <outlet property="containerViewBottomSpace" destination="gfS-C0-FwT" id="1FA-UL-sql"/>
+                <outlet property="containerViewWidth" destination="guZ-NA-KZU" id="7rQ-rr-zue"/>
+                <outlet property="contentBaseView" destination="CjQ-Sr-lVk" id="Osg-qz-jYp"/>
+                <outlet property="contentView" destination="E9Y-Wv-Bl0" id="X5K-mw-CmN"/>
+                <outlet property="contentViewHeight" destination="bZv-FF-68r" id="RPb-Ec-dvl"/>
                 <outlet property="marginView" destination="Su8-qx-f1b" id="ICx-QJ-8ms"/>
-                <outlet property="marginViewBottomSpaceConstraint" destination="3Jw-RC-mcC" id="JGN-i7-t5b"/>
-                <outlet property="marginViewLeftSpaceConstraint" destination="GYR-4L-PeN" id="C4z-Pw-BmU"/>
-                <outlet property="marginViewRightSpaceConstraint" destination="ZXz-HT-Lbc" id="r8p-Yv-kUb"/>
-                <outlet property="marginViewTopSpaceConstraint" destination="Px6-2r-kga" id="Er3-to-fmV"/>
+                <outlet property="marginViewBottomSpace" destination="3Jw-RC-mcC" id="JGN-i7-t5b"/>
+                <outlet property="marginViewLeftSpace" destination="GYR-4L-PeN" id="C4z-Pw-BmU"/>
+                <outlet property="marginViewRightSpace" destination="ZXz-HT-Lbc" id="r8p-Yv-kUb"/>
+                <outlet property="marginViewTopSpace" destination="Px6-2r-kga" id="Er3-to-fmV"/>
+                <outlet property="spaceBetweenAlertAndCancel" destination="S1i-Be-f7H" id="ZCF-mm-A6E"/>
                 <outlet property="view" destination="sak-6U-4yN" id="aZI-F7-aVc"/>
             </connections>
         </placeholder>
@@ -48,16 +49,16 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHr-ee-3Le" userLabel="Container View">
                                     <rect key="frame" x="37.5" y="619" width="300" height="48"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Sr-lVk" userLabel="Base View">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Sr-lVk">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                             <subviews>
-                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0" userLabel="Main View">
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" id="bZv-FF-68r"/>
                                                     </constraints>
                                                 </scrollView>
-                                                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX" userLabel="Button View">
+                                                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="Uog-n8-Fje"/>
@@ -74,22 +75,31 @@
                                                 <constraint firstItem="xF5-i7-QEX" firstAttribute="top" secondItem="E9Y-Wv-Bl0" secondAttribute="bottom" id="yR4-M2-WDp"/>
                                             </constraints>
                                         </view>
-                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-qm-e5H" userLabel="Cancel Button View">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQ8-wr-Wzg">
                                             <rect key="frame" x="0.0" y="48" width="300" height="0.0"/>
+                                            <subviews>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-qm-e5H" userLabel="Cancel Button View">
+                                                    <rect key="frame" x="-0.5" y="0.0" width="300" height="0.0"/>
+                                                </scrollView>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" id="OLq-Ho-r54"/>
+                                                <constraint firstAttribute="trailing" secondItem="Eju-qm-e5H" secondAttribute="trailing" id="3y8-qU-eHI"/>
+                                                <constraint firstItem="Eju-qm-e5H" firstAttribute="top" secondItem="kQ8-wr-Wzg" secondAttribute="top" id="64Z-VZ-G5J"/>
+                                                <constraint firstAttribute="height" id="AVE-lH-fhg"/>
+                                                <constraint firstAttribute="bottom" secondItem="Eju-qm-e5H" secondAttribute="bottom" id="QeS-L4-Eyh"/>
+                                                <constraint firstItem="Eju-qm-e5H" firstAttribute="leading" secondItem="kQ8-wr-Wzg" secondAttribute="leading" id="kZ2-Ob-kZ7"/>
                                             </constraints>
-                                        </scrollView>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Eju-qm-e5H" secondAttribute="trailing" id="DFS-wr-hsG"/>
-                                        <constraint firstAttribute="bottom" secondItem="Eju-qm-e5H" secondAttribute="bottom" id="Dzh-Z0-CT9"/>
                                         <constraint firstAttribute="trailing" secondItem="CjQ-Sr-lVk" secondAttribute="trailing" id="J07-A6-rwC"/>
-                                        <constraint firstItem="Eju-qm-e5H" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="M2b-3I-G6x"/>
+                                        <constraint firstItem="kQ8-wr-Wzg" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="J7P-DI-GZe"/>
+                                        <constraint firstAttribute="trailing" secondItem="kQ8-wr-Wzg" secondAttribute="trailing" id="Phq-9C-HwR"/>
+                                        <constraint firstItem="kQ8-wr-Wzg" firstAttribute="top" secondItem="CjQ-Sr-lVk" secondAttribute="bottom" id="S1i-Be-f7H"/>
                                         <constraint firstItem="CjQ-Sr-lVk" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="gU4-tX-0a8"/>
                                         <constraint firstAttribute="width" constant="300" id="guZ-NA-KZU"/>
-                                        <constraint firstItem="Eju-qm-e5H" firstAttribute="top" secondItem="CjQ-Sr-lVk" secondAttribute="bottom" id="kAD-6b-zqh"/>
                                         <constraint firstItem="CjQ-Sr-lVk" firstAttribute="top" secondItem="jHr-ee-3Le" secondAttribute="top" id="q1Y-QA-V3h"/>
+                                        <constraint firstAttribute="bottom" secondItem="kQ8-wr-Wzg" secondAttribute="bottom" id="rTM-Y3-ATU"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -115,7 +125,7 @@
                 <constraint firstItem="Wnv-iy-aW0" firstAttribute="leading" secondItem="sak-6U-4yN" secondAttribute="leading" id="fC7-OA-bDe"/>
             </constraints>
         </view>
-        <view contentMode="scaleToFill" id="DvE-7U-YMQ" userLabel="Default View" customClass="AlertContentView" customModule="SimpleAlert" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="DvE-7U-YMQ" customClass="AlertContentView" customModule="SimpleAlert" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="260" height="102"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -153,16 +163,27 @@
                         <constraint firstAttribute="bottom" secondItem="oUM-3e-1NC" secondAttribute="bottom" id="p1G-jI-43A"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-6J-tc6">
+                    <rect key="frame" x="0.0" y="102" width="260" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="C0l-pi-PUt"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="Nwo-PT-UIe" firstAttribute="leading" secondItem="DvE-7U-YMQ" secondAttribute="leading" constant="20" id="1ui-qU-zwm"/>
                 <constraint firstItem="Nwo-PT-UIe" firstAttribute="top" secondItem="DvE-7U-YMQ" secondAttribute="top" constant="20" id="2xx-Qa-pRw"/>
+                <constraint firstItem="9pr-6J-tc6" firstAttribute="leading" secondItem="DvE-7U-YMQ" secondAttribute="leading" id="FE9-OG-oJv"/>
+                <constraint firstAttribute="trailing" secondItem="9pr-6J-tc6" secondAttribute="trailing" id="FPo-Zi-srl"/>
                 <constraint firstAttribute="centerX" secondItem="Nwo-PT-UIe" secondAttribute="centerX" id="dO5-Ul-8ho"/>
+                <constraint firstAttribute="bottom" secondItem="9pr-6J-tc6" secondAttribute="bottom" id="sSh-p1-LYM"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="baseView" destination="Nwo-PT-UIe" id="sf5-dI-9W4"/>
+                <outlet property="containerView" destination="9pr-6J-tc6" id="drs-XP-v4H"/>
+                <outlet property="containerViewHeight" destination="C0l-pi-PUt" id="Es1-Rn-VWt"/>
                 <outlet property="messageLabel" destination="iC7-zZ-Tbm" id="MVt-m5-D3D"/>
                 <outlet property="messageSpaceConstraint" destination="igM-Vb-fSX" id="OuY-hV-6Bt"/>
                 <outlet property="textBackgroundView" destination="oUM-3e-1NC" id="g1W-gP-CUj"/>
@@ -171,7 +192,7 @@
                 <outlet property="titleSpaceConstraint" destination="LPO-QY-J4G" id="cyb-eh-2ib"/>
                 <outlet property="verticalSpaceConstraint" destination="2xx-Qa-pRw" id="n3g-gr-DW3"/>
             </connections>
-            <point key="canvasLocation" x="465" y="-228"/>
+            <point key="canvasLocation" x="855" y="-228"/>
         </view>
     </objects>
 </document>

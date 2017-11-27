@@ -9,22 +9,19 @@
 import UIKit
 
 open class AlertContentView: UIView {
-    @IBOutlet open weak var baseView: UIView!
-    @IBOutlet open weak var titleLabel: UILabel!
-    @IBOutlet open weak var messageLabel: UILabel!
-    @IBOutlet open weak var textBackgroundView: UIView!
+    @IBOutlet public weak var baseView: UIView!
+    @IBOutlet public weak var titleLabel: UILabel!
+    @IBOutlet public weak var messageLabel: UILabel!
+    @IBOutlet public weak var textBackgroundView: UIView!
+    @IBOutlet public weak var containerView: UIView!
     
     @IBOutlet var verticalSpaceConstraint: NSLayoutConstraint!
     @IBOutlet var titleSpaceConstraint: NSLayoutConstraint!
     @IBOutlet var messageSpaceConstraint: NSLayoutConstraint!
     @IBOutlet var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var containerViewHeight: NSLayoutConstraint!
     
     var textFields: [UITextField] = []
-    open override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        backgroundColor = .white
-    }
 
     func addTextField() -> UITextField {
         let textField = TextField(frame: textBackgroundView.bounds)
@@ -60,8 +57,11 @@ open class AlertContentView: UIView {
             titleSpaceConstraint.constant = 0
         }
 
+        if let view = containerView.subviews.sorted(by: { $0.frame.maxY > $1.frame.maxY }).first {
+            containerViewHeight.constant = view.frame.maxY
+        }
         baseView.layoutIfNeeded()
 
-        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
+        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2) + containerViewHeight.constant
     }
 }

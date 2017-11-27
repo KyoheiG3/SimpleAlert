@@ -24,6 +24,7 @@
 		C75D877A1FC99730003592E3 /* AlertControllerDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */; };
 		C75D877B1FC99730003592E3 /* AlertControllerPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */; };
 		C75D877D1FC997F0003592E3 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D877C1FC997F0003592E3 /* UIViewExtension.swift */; };
+		C75D87801FCBD996003592E3 /* UIAlertControllerStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerDismissTransition.swift; sourceTree = "<group>"; };
 		C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerPresentTransition.swift; sourceTree = "<group>"; };
 		C75D877C1FC997F0003592E3 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerStyleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				C70C0C541A5FBFB4002BC071 /* SimpleAlert.swift */,
 				C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */,
 				C75D875C1FC80357003592E3 /* TextField.swift */,
+				C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */,
 				C75D877C1FC997F0003592E3 /* UIViewExtension.swift */,
 				C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */,
 			);
@@ -265,6 +268,7 @@
 				C75D87751FC99726003592E3 /* ActionSheetControllerPresentTransition.swift in Sources */,
 				C75D87771FC99726003592E3 /* ActionSheetControllerDismissTransition.swift in Sources */,
 				C75D877D1FC997F0003592E3 /* UIViewExtension.swift in Sources */,
+				C75D87801FCBD996003592E3 /* UIAlertControllerStyleExtension.swift in Sources */,
 				C75D877A1FC99730003592E3 /* AlertControllerDismissTransition.swift in Sources */,
 				C75D87631FC88148003592E3 /* CGFloatExtension.swift in Sources */,
 				C75D87761FC99726003592E3 /* ActionSheetControllerTransition.swift in Sources */,

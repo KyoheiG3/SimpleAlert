@@ -10,7 +10,7 @@ final class TextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         autoresizingMask = .flexibleWidth
-        font = UIFont.systemFont(ofSize: 14)
+        font = .systemFont(ofSize: 14)
         backgroundColor = UIColor.white
         layer.borderColor = UIColor.darkGray.cgColor
         layer.borderWidth = 0.5

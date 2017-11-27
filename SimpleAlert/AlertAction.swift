@@ -13,7 +13,7 @@ open class AlertAction {
         case cancel
         case destructive
 
-        func font(of style: AlertController.Style) -> UIFont {
+        func font(of style: UIAlertControllerStyle) -> UIFont {
             switch self {
             case .cancel:
                 return .boldSystemFont(ofSize: style.fontSize)

@@ -23,11 +23,22 @@ class ViewController: UIViewController {
     
     @IBAction func defaultAlertButtonWasTapped(_ sender: AnyObject) {
         let alert = AlertController(title: "title", message: "message", style: .alert)
+        alert.addTextField()
+        alert.addTextField()
         showAlert(alert)
     }
     
     @IBAction func customAlertButtonWasTapped(_ sender: AnyObject) {
+        func configureTextField(_ textField: UITextField) {
+            textField.frame.size.height = 33
+            textField.backgroundColor = nil
+            textField.layer.borderColor = nil
+            textField.layer.borderWidth = 0
+        }
+
         let alert = CustomAlertController(title: "title", message: "message", style: .alert)
+        alert.addTextField(configurationHandler: configureTextField)
+        alert.addTextField(configurationHandler: configureTextField)
         showAlert(alert)
     }
     
@@ -49,6 +60,8 @@ class ViewController: UIViewController {
     
     @IBAction func roundedButtonWasTapped(_ sender: AnyObject) {
         let alert = AlertController(view: UIView(), style: .alert)
+        alert.contentWidth = 144
+        alert.contentCornerRadius = 72
         let action = AlertAction(title: "?", style: .cancel) { action in
         }
         
@@ -57,26 +70,10 @@ class ViewController: UIViewController {
         action.button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 96)
         action.button.setTitleColor(UIColor.red, for: .normal)
 
-        alert.configContainerWidth = {
-            return 144
-        }
-        alert.configContainerCornerRadius = {
-            return 72
-        }
-        alert.configContentView = { view in
-            view?.backgroundColor = UIColor.white
-        }
-
         self.present(alert, animated: true, completion: nil)
     }
     
     func showAlert(_ alert: AlertController) {
-        alert.addTextField { textField in
-        }
-        
-        alert.addTextField { textField in
-        }
-        
         alert.addAction(AlertAction(title: "Cancel", style: .cancel) { action in
         })
 
