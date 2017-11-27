@@ -12,33 +12,55 @@ open class AlertAction {
         case ok
         case cancel
         case destructive
+
+        func font(of style: UIAlertControllerStyle) -> UIFont {
+            switch self {
+            case .cancel:
+                return .boldSystemFont(ofSize: style.fontSize)
+            default:
+                return .systemFont(ofSize: style.fontSize)
+            }
+        }
     }
-    
-    public init(title: String, style: Style, handler: ((AlertAction?) -> Void)? = nil) {
+
+    public init(title: String, style: Style, dismissesAlert: Bool = true, handler: ((AlertAction?) -> Void)? = nil) {
         self.title = title
         self.handler = handler
         self.style = style
-    }
-    
-    public convenience init(title: String, style: Style, dismissesAlert: Bool, handler: ((AlertAction?) -> Void)? = nil) {
-        self.init(title: title, style: style, handler: handler)
         self.dismissesAlert = dismissesAlert
+
+        button.setTitle(title, for: .normal)
+        button.autoresizingMask = .flexibleWidth
+        addHorizontalBorder()
     }
-    
-    var title: String
-    var handler: ((AlertAction) -> Void)?
-    var style: Style
-    var dismissesAlert = true
-    open var enabled: Bool = true {
-        didSet {
-            button?.isEnabled = enabled
-        }
+
+    func addHorizontalBorder() {
+        let borderView = UIView(frame: CGRect(x: 0, y: -CGFloat.thinWidth, width: button.bounds.width, height: CGFloat.thinWidth))
+        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+        borderView.autoresizingMask = .flexibleWidth
+        button.addSubview(borderView)
     }
-    open fileprivate(set) var button: UIButton!
-    
-    func setButton(_ forButton: UIButton) {
-        button = forButton
-        button.setTitle(title, for: UIControlState())
-        button.isEnabled = enabled
+
+    func addVerticalBorder() {
+        let borderView = UIView(frame: CGRect(x: -CGFloat.thinWidth, y: 0, width: CGFloat.thinWidth, height: button.bounds.height))
+        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+        borderView.autoresizingMask = .flexibleHeight
+        button.addSubview(borderView)
+    }
+
+    let title: String
+    let handler: ((AlertAction) -> Void)?
+    let style: Style
+    let dismissesAlert: Bool
+    public let button = UIButton(type: .system)
+    public var isEnabled: Bool  {
+        get { return button.isEnabled }
+        set { button.isEnabled = newValue }
+    }
+}
+
+extension UIView {
+    func addAction(_ action: AlertAction) {
+        addSubview(action.button)
     }
 }

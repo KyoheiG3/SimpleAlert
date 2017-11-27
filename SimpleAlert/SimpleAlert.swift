@@ -8,465 +8,318 @@
 
 import UIKit
 
-class RespondView: UIView {
-    var touchHandler: ((UIView) -> Void)?
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touchHandler?(self)
-    }
-}
-
 open class AlertController: UIViewController {
-    public enum Style {
-        case alert
-        case actionSheet
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var backgroundView: UIView! {
+        didSet {
+            if preferredStyle == .actionSheet {
+                tapGesture.addTarget(self, action: #selector(AlertController.backgroundViewTapAction(_:)))
+                backgroundView.addGestureRecognizer(tapGesture)
+            }
+        }
     }
-    
-    @IBOutlet fileprivate weak var containerView: UIView!
-    @IBOutlet fileprivate weak var backgroundView: RespondView!
-    @IBOutlet fileprivate weak var coverView: UIView!
-    @IBOutlet fileprivate weak var marginView: UIView!
-    @IBOutlet fileprivate weak var baseView: UIView!
-    @IBOutlet fileprivate weak var mainView: UIScrollView!
-    @IBOutlet fileprivate weak var buttonView: UIScrollView!
-    @IBOutlet fileprivate weak var cancelButtonView: UIScrollView!
-    @IBOutlet fileprivate weak var contentView: AlertContentView?
-    
-    @IBOutlet fileprivate var containerViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var containerViewBottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var backgroundViewTopSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var backgroundViewBottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var coverViewHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet fileprivate var mainViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var buttonViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var cancelButtonViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var buttonViewSpaceConstraint: NSLayoutConstraint!
-    
-    @IBOutlet fileprivate var marginViewTopSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var marginViewLeftSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var marginViewBottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet fileprivate var marginViewRightSpaceConstraint: NSLayoutConstraint!
-    
-    open var configContainerWidth: (() -> CGFloat?)?
-    open var configContainerCornerRadius: (() -> CGFloat?)?
-    open var configContentView: ((UIView?) -> Void)?
-    
-    open fileprivate(set) var actions: [AlertAction] = []
-    open fileprivate(set) var textFields: [UITextField] = []
-    open var coverColor = UIColor.black.withAlphaComponent(0.4)
-    fileprivate var textFieldHandlers: [((UITextField?) -> Void)?] = []
-    fileprivate var customView: UIView?
-    fileprivate var transitionCoverView: UIView?
-    fileprivate var displayTargetView: UIView?
-    fileprivate var presentedAnimation: Bool = true
-    let AlertDefaultWidth: CGFloat = 270
-    let AlertButtonHeight: CGFloat = 48
-    let AlertButtonFontSize: CGFloat = 17
-    let ActionSheetMargin: CGFloat = 8
-    let ActionSheetButtonHeight: CGFloat = 44
-    let ActionSheetButtonFontSize: CGFloat = 21
-    let ConstraintPriorityRequired: Float = 1000
-    
-    fileprivate var message: String?
-    fileprivate var preferredStyle: Style = .alert
-    
-    fileprivate var marginInsets: UIEdgeInsets {
+    @IBOutlet weak var marginView: UIView!
+    @IBOutlet weak var contentBaseView: UIVisualEffectView!
+    @IBOutlet weak var cancelBaseView: UIVisualEffectView!
+    @IBOutlet weak var contentView: UIScrollView!
+    @IBOutlet weak var alertButtonView: UIScrollView!
+    @IBOutlet weak var cancelButtonView: UIScrollView!
+    @IBOutlet weak var alertContentView: AlertContentView!
+
+    @IBOutlet weak var containerViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var containerViewBottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var backgroundViewTopSpace: NSLayoutConstraint!
+    @IBOutlet weak var backgroundViewBottomSpace: NSLayoutConstraint!
+
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var alertButtonViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var cancelbuttonViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var spaceBetweenAlertAndCancel: NSLayoutConstraint!
+
+    @IBOutlet weak var marginViewTopSpace: NSLayoutConstraint!
+    @IBOutlet weak var marginViewLeftSpace: NSLayoutConstraint!
+    @IBOutlet weak var marginViewBottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var marginViewRightSpace: NSLayoutConstraint!
+
+    public private(set) var actions: [AlertAction] = []
+    public var textFields: [UITextField] {
+        return alertContentView?.textFields ?? []
+    }
+    open var contentWidth: CGFloat = 270
+    open var contentColor: UIColor?
+    open var contentCornerRadius: CGFloat?
+    open var coverColor: UIColor = .black
+    open var message: String?
+
+    private var contentViewHandler: ((AlertContentView) -> Void)?
+    private var textFieldHandlers: [((UITextField) -> Void)?] = []
+    private var customView: UIView?
+    private var preferredStyle: UIAlertControllerStyle = .alert
+    private let tapGesture = UITapGestureRecognizer()
+
+    private var marginInsets: UIEdgeInsets {
         set {
-            marginViewTopSpaceConstraint.constant = newValue.top
-            marginViewLeftSpaceConstraint.constant = newValue.left
-            marginViewBottomSpaceConstraint.constant = newValue.bottom
-            marginViewRightSpaceConstraint.constant = newValue.right
+            marginViewLeftSpace.constant = newValue.left
+            marginViewRightSpace.constant = newValue.right
+            if #available(iOS 11.0, *) {
+                marginViewTopSpace.constant = view.safeAreaInsets.top
+                marginViewBottomSpace.constant = view.safeAreaInsets.bottom
+            } else {
+                let height = UIApplication.shared.statusBarFrame.height
+                marginViewTopSpace.constant = height == 0 ? newValue.top : height
+                marginViewBottomSpace.constant = newValue.bottom
+            }
         }
         get {
-            let top = marginViewTopSpaceConstraint.constant
-            let left = marginViewLeftSpaceConstraint.constant
-            let bottom = marginViewBottomSpaceConstraint.constant
-            let right = marginViewRightSpaceConstraint.constant
-            return UIEdgeInsetsMake(top, left, bottom, right)
+            let top = marginViewTopSpace.constant
+            let left = marginViewLeftSpace.constant
+            let bottom = marginViewBottomSpace.constant
+            let right = marginViewRightSpace.constant
+            return UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         }
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    public convenience init() {
+
+    private convenience init() {
         self.init(nibName: "SimpleAlert", bundle: Bundle(for: AlertController.self))
     }
-    
-    public convenience init(title: String?, message: String?, style: Style) {
+
+    public convenience init(title: String?, message: String?, style: UIAlertControllerStyle) {
         self.init()
         self.title = title
         self.message = message
         self.preferredStyle = style
     }
-    
-    public convenience init(view: UIView?, style: Style) {
+
+    public convenience init(title: String? = nil, message: String? = nil, view: UIView?, style: UIAlertControllerStyle) {
         self.init()
-        self.customView = view
-        self.preferredStyle = style
+        self.title = title
+        self.message = message
+        customView = view
+        preferredStyle = style
     }
-    
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
+
         modalPresentationStyle = .custom
         modalTransitionStyle = .crossDissolve
         transitioningDelegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardDidHide(_:)), name: .UIKeyboardDidHide, object: nil)
     }
-    
+
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        contentView.addSubview(alertContentView)
+
+        if let view = customView {
+            view.autoresizingMask = .flexibleWidth
+            view.frame.size.width = alertContentView.containerView.bounds.width
+            alertContentView.containerView.addSubview(view)
+            alertContentView.addHorizontalBorder()
+        }
+
+        contentBaseView.clipsToBounds = true
+        cancelBaseView.clipsToBounds = true
+
+        if #available(iOS 11.0, *) {
+            contentView.contentInsetAdjustmentBehavior = .never
+            alertButtonView.contentInsetAdjustmentBehavior = .never
+            cancelButtonView.contentInsetAdjustmentBehavior = .never
+        }
+
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        baseView.layer.cornerRadius = 3.0
-        baseView.clipsToBounds = true
-        
-        cancelButtonView.layer.cornerRadius = 3.0
-        cancelButtonView.clipsToBounds = true
-        
-        displayTargetView = contentView
+        containerViewBottomSpace.isActive = preferredStyle == .actionSheet
     }
-    
+
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let view = customView {
-            displayTargetView = view
-        }
-        
-        if displayTargetView == contentView {
-            setupContnetView()
-        }
-        textFieldHandlers.removeAll()
-        
-        if let textField = textFields.first {
-            textField.becomeFirstResponder()
-        }
-        
-        if preferredStyle == .actionSheet {
-            containerViewBottomSpaceConstraint.priority = UILayoutPriority(rawValue: ConstraintPriorityRequired)
-            backgroundView.touchHandler = { [weak self] view in
-                self?.dismiss()
-            }
-        }
-    }
-    
-    open override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if transitionCoverView == nil {
-            return
-        }
-        
-        layoutContainer()
-        layoutContents()
-        UIView.performWithoutAnimation {
-            layoutButtons()
-        }
-        
-        let margin = marginInsets.top + marginInsets.bottom
-        let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpaceConstraint.constant - margin
-        
-        if cancelButtonView.contentSize.height > cancelButtonViewHeightConstraint.constant {
-            cancelButtonViewHeightConstraint.constant = cancelButtonView.contentSize.height
-        }
-        
-        if cancelButtonViewHeightConstraint.constant > backgroundViewHeight {
-            cancelButtonView.contentSize.height = cancelButtonViewHeightConstraint.constant
-            cancelButtonViewHeightConstraint.constant = backgroundViewHeight
-            
-            mainViewHeightConstraint.constant = 0
-            buttonViewHeightConstraint.constant = 0
+
+        if let color = contentColor {
+            contentBaseView.backgroundColor = color
+            cancelBaseView.backgroundColor = color
+            contentBaseView.effect = nil
+            cancelBaseView.effect = nil
         } else {
-            let baseViewHeight = backgroundViewHeight - cancelButtonViewHeightConstraint.constant - buttonViewSpaceConstraint.constant
-            if buttonView.contentSize.height > buttonViewHeightConstraint.constant {
-                buttonViewHeightConstraint.constant = buttonView.contentSize.height
-            }
-            
-            if buttonViewHeightConstraint.constant > baseViewHeight {
-                buttonView.contentSize.height = buttonViewHeightConstraint.constant
-                buttonViewHeightConstraint.constant = baseViewHeight
-                mainViewHeightConstraint.constant = 0
+            contentBaseView.backgroundColor = .white
+            cancelBaseView.backgroundColor = .white
+        }
+
+        if let cornerRadius = contentCornerRadius {
+            contentBaseView.layer.cornerRadius = cornerRadius
+            cancelBaseView.layer.cornerRadius = cornerRadius
+        } else {
+            if #available(iOS 9.0, *) {
+                contentBaseView.layer.cornerRadius = 12
+                cancelBaseView.layer.cornerRadius = 12
             } else {
-                let mainViewHeight = baseViewHeight - buttonViewHeightConstraint.constant
-                if mainViewHeightConstraint.constant > mainViewHeight {
-                    mainView.contentSize.height = mainViewHeightConstraint.constant
-                    mainViewHeightConstraint.constant = mainViewHeight
-                }
+                contentBaseView.layer.cornerRadius = 4
+                cancelBaseView.layer.cornerRadius = 4
             }
         }
-        
-        if preferredStyle == .actionSheet {
-            let contentHeight = cancelButtonViewHeightConstraint.constant + mainViewHeightConstraint.constant + buttonViewHeightConstraint.constant + buttonViewSpaceConstraint.constant
-            coverViewHeightConstraint.constant = contentHeight + marginInsets.top + marginInsets.bottom
-        }
-        
-        view.layoutSubviews()
-    }
-    
-    open func addTextFieldWithConfigurationHandler(_ configurationHandler: ((UITextField?) -> Void)? = nil) {
-        textFieldHandlers.append(configurationHandler)
-    }
-    
-    open func addAction(_ action: AlertAction) {
-        var buttonHeight: CGFloat!
-        if preferredStyle == .actionSheet {
-            buttonHeight = ActionSheetButtonHeight
-        } else {
-            buttonHeight = AlertButtonHeight
-        }
-        
-        let button = loadButton()
-        if button.bounds.height <= 0 {
-            button.frame.size.height = buttonHeight
-        }
-        button.autoresizingMask = .flexibleWidth
-        button.addTarget(self, action: #selector(AlertController.buttonWasTapped(_:)), for: .touchUpInside)
-        action.setButton(button)
-        configureButton(action.style, forButton: button)
-        actions.append(action)
-    }
-    
-    /** override if needed */
-    open func loadButton() -> UIButton {
-        let button = UIButton(type: .system)
-        let borderView = UIView(frame: CGRect(x: 0, y: -0.5, width: 0, height: 0.5))
-        borderView.backgroundColor = UIColor.lightGray
-        borderView.autoresizingMask = .flexibleWidth
-        button.addSubview(borderView)
-        
-        return button
-    }
-    
-    open func configureButton(_ style: AlertAction.Style, forButton button: UIButton) {
-        if preferredStyle == .alert {
-            configurAlertButton(style, forButton: button)
-        } else {
-            configurActionSheetButton(style, forButton: button)
-        }
-    }
-}
 
-private extension AlertContentView {
-    class ContentTextField: UITextField {
-        let TextLeftOffset: CGFloat = 4
-        override func textRect(forBounds bounds: CGRect) -> CGRect {
-            return bounds.offsetBy(dx: TextLeftOffset, dy: 0)
-        }
-        
-        override func editingRect(forBounds bounds: CGRect) -> CGRect {
-            return bounds.offsetBy(dx: TextLeftOffset, dy: 0)
-        }
-    }
-    
-    func addTextField() -> UITextField {
-        let textField = ContentTextField(frame: textBackgroundView.bounds)
-        textField.autoresizingMask = .flexibleWidth
-        textField.font = UIFont.systemFont(ofSize: TextFieldFontSize)
-        textField.backgroundColor = UIColor.white
-        textField.layer.borderColor = UIColor.darkGray.cgColor
-        textField.layer.borderWidth = 0.5
-        
-        textBackgroundView.addSubview(textField)
-        
-        return textField
-    }
-    
-    func layoutContents() {
-        titleLabel.preferredMaxLayoutWidth = baseView.bounds.width
-        titleLabel.layoutIfNeeded()
-        messageLabel.preferredMaxLayoutWidth = baseView.bounds.width
-        messageLabel.layoutIfNeeded()
-        
-        if textBackgroundView.subviews.isEmpty {
-            messageSpaceConstraint.constant = 0
-        }
-        
-        if titleLabel.text == nil && messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-            messageSpaceConstraint.constant = 0
-            
-            if textBackgroundView.subviews.isEmpty {
-                verticalSpaceConstraint.constant = 0
-            }
-        } else if titleLabel.text == nil || messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-        }
-        
-        baseView.setNeedsLayout()
-        baseView.layoutIfNeeded()
-        
-        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2)
-    }
-    
-    func layoutTextField(_ textField: UITextField) {
-        textField.frame.origin.y = textViewHeightConstraint.constant
-        if textField.frame.height <= 0 {
-            textField.frame.size.height = TextFieldHeight
-        }
-        textViewHeightConstraint.constant += textField.frame.height
-    }
-}
+        alertContentView.titleLabel.text = title
+        alertContentView.messageLabel.text = message
 
-private extension AlertController {
-    func setupContnetView() {
-        takeOverColor(contentView)
-        
-        contentView?.titleLabel.text = title
-        contentView?.messageLabel.text = message
-        
         if preferredStyle == .alert {
             for handler in textFieldHandlers {
-                if let textField = self.contentView?.addTextField() {
-                    self.textFields.append(textField)
-                    handler?(textField)
+                let textField = alertContentView.addTextField()
+                handler?(textField)
+            }
+
+            textFieldHandlers.removeAll()
+            textFields.first?.becomeFirstResponder()
+        }
+
+        configureContentView(alertContentView)
+    }
+
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        layoutContainer()
+        layoutContents()
+        layoutButtons()
+
+        let margin = marginInsets.top + marginInsets.bottom
+        let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpace.constant - margin
+
+        if cancelButtonView.contentSize.height > cancelbuttonViewHeight.constant {
+            cancelbuttonViewHeight.constant = cancelButtonView.contentSize.height
+        }
+
+        if cancelbuttonViewHeight.constant > backgroundViewHeight {
+            cancelButtonView.contentSize.height = cancelbuttonViewHeight.constant
+            cancelbuttonViewHeight.constant = backgroundViewHeight
+
+            contentViewHeight.constant = 0
+            alertButtonViewHeight.constant = 0
+        } else {
+            let baseViewHeight = backgroundViewHeight - cancelbuttonViewHeight.constant - spaceBetweenAlertAndCancel.constant
+            if alertButtonView.contentSize.height > alertButtonViewHeight.constant {
+                alertButtonViewHeight.constant = alertButtonView.contentSize.height
+            }
+
+            if alertButtonViewHeight.constant > baseViewHeight {
+                alertButtonView.contentSize.height = alertButtonViewHeight.constant
+                alertButtonViewHeight.constant = baseViewHeight
+                contentViewHeight.constant = 0
+            } else {
+                let mainViewHeight = baseViewHeight - alertButtonViewHeight.constant
+                if contentViewHeight.constant > mainViewHeight {
+                    contentView.contentSize.height = contentViewHeight.constant
+                    contentViewHeight.constant = mainViewHeight
                 }
             }
         }
     }
-    
+
+    open func addTextField(configurationHandler: ((UITextField) -> Void)? = nil) {
+        textFieldHandlers.append(configurationHandler)
+    }
+
+    open func addAction(_ action: AlertAction) {
+        action.button.frame.size.height = preferredStyle.buttonHeight
+        action.button.addTarget(self, action: #selector(AlertController.buttonWasTapped(_:)), for: .touchUpInside)
+
+        configureActionButton(action.button, at: action.style)
+        actions.append(action)
+    }
+
+    open func configureActionButton(_ button: UIButton, at style: AlertAction.Style) {
+        if style == .destructive {
+            button.setTitleColor(.red, for: .normal)
+        }
+        button.titleLabel?.font = style.font(of: preferredStyle)
+    }
+
+    open func configureContentView(_ contentView: AlertContentView) {
+        contentViewHandler?(contentView)
+    }
+
+    @discardableResult
+    public func configureContentView(configurationHandler: @escaping (AlertContentView) -> Void) -> Self {
+        contentViewHandler = configurationHandler
+        return self
+    }
+}
+
+extension AlertController {
     func layoutContainer() {
-        var containerWidth = AlertDefaultWidth
+        let containerWidth: CGFloat
         if preferredStyle == .actionSheet {
-            marginInsets = UIEdgeInsetsMake(ActionSheetMargin, ActionSheetMargin, ActionSheetMargin, ActionSheetMargin)
-            marginView.layoutIfNeeded()
-            containerWidth = min(view.bounds.width, view.bounds.height) - marginInsets.top - marginInsets.bottom
+            let margin: CGFloat = 8
+            spaceBetweenAlertAndCancel.constant = margin
+            marginInsets = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+            containerWidth = min(view.bounds.width, view.bounds.height) - marginInsets.left - marginInsets.right
+        } else {
+            containerWidth = contentWidth
         }
-        
-        if let width = configContainerWidth?() {
-            containerWidth = width
-        }
-        if let radius = configContainerCornerRadius?() {
-            baseView.layer.cornerRadius = radius
-            cancelButtonView.layer.cornerRadius = radius
-        }
-        
-        containerViewWidthConstraint.constant = containerWidth
+
+        containerViewWidth.constant = containerWidth
         containerView.layoutIfNeeded()
     }
-    
+
     func layoutContents() {
-        displayTargetView?.frame.size.width = mainView.frame.size.width
-        displayTargetView?.layoutIfNeeded()
-        
-        if let config = configContentView {
-            config(displayTargetView)
-            configContentView = nil
-        }
-        takeOverColor(displayTargetView)
-        
-        if displayTargetView == contentView {
-            contentView?.textViewHeightConstraint.constant = 0
-            for textField in textFields {
-                contentView?.layoutTextField(textField)
-            }
-            contentView?.layoutContents()
-        }
-        
-        if let targetView = displayTargetView {
-            mainViewHeightConstraint.constant = targetView.bounds.height
-            mainView.frame.size.height = targetView.bounds.height
-            mainView.addSubview(targetView)
-        }
+        alertContentView.frame.size.width = contentView.frame.size.width
+        alertContentView.layoutContents()
+
+        contentViewHeight.constant = alertContentView.bounds.height
     }
-    
+
     func layoutButtons() {
-        var buttonActions = actions
+        let containerWidth = containerViewWidth.constant
+        let buttonActions: [AlertAction]
+
         if preferredStyle == .actionSheet {
-            let cancelActions = actions.filter { $0.style == .cancel }
-            let buttonHeight = addButton(cancelButtonView, actions: cancelActions)
-            cancelButtonViewHeightConstraint.constant = buttonHeight
-            buttonViewSpaceConstraint.constant = ActionSheetMargin
-            
             buttonActions = actions.filter { $0.style != .cancel }
+
+            let cancelActions = actions.filter { $0.style == .cancel }
+            layoutButtonVertically(with: cancelActions, width: containerWidth).forEach(cancelButtonView.addAction)
+            cancelbuttonViewHeight.constant = cancelActions.last?.button.frame.maxY ?? 0
+        } else {
+            buttonActions = actions
         }
-        
-        let buttonHeight = addButton(buttonView, actions: buttonActions)
-        if preferredStyle != .alert || buttonActions.count != 2 {
-            buttonViewHeightConstraint.constant = buttonHeight
-        }
-    }
-    
-    func takeOverColor(_ targetView: UIView?) {
-        if let color = targetView?.backgroundColor {
-            mainView.backgroundColor = color
-            buttonView.backgroundColor = color
-            cancelButtonView.backgroundColor = color
-        }
-        targetView?.backgroundColor = nil
-    }
-    
-    func addButton(_ view: UIView, actions: [AlertAction]) -> CGFloat {
-        var sizeToFit: ((_ button: UIButton, _ index: Int) -> Void) = buttonSizeToFitForVertical
+
         if preferredStyle == .alert && actions.count == 2 {
-            sizeToFit = buttonSizeToFitForHorizontal
+            layoutButtonHorizontally(with: buttonActions, width: containerWidth).forEach(alertButtonView.addAction)
+            buttonActions.last?.addVerticalBorder()
+        } else {
+            layoutButtonVertically(with: buttonActions, width: containerWidth).forEach(alertButtonView.addAction)
         }
-        
-        return actions.reduce(0) { height, action in
-            let button = action.button
-            view.addSubview(button!)
-            
-            let buttonHeight = Int((button?.bounds.height)!)
-            let buttonsHeight = Int(height)
-            sizeToFit(button!, buttonsHeight / buttonHeight)
-            button?.layoutIfNeeded()
-            
-            return CGFloat(buttonsHeight + buttonHeight)
-        }
+        alertButtonViewHeight.constant = buttonActions.last?.button.frame.maxY ?? 0
     }
-    
-    func buttonSizeToFitForVertical(_ button: UIButton, index: Int) {
-        button.frame.size.width = containerViewWidthConstraint.constant
-        button.frame.origin.y = button.bounds.height * CGFloat(index)
+
+    private func layoutButtonVertically(with actions: [AlertAction], width: CGFloat) -> [AlertAction] {
+        return actions
+            .reduce([]) { actions, action in
+                action.button.frame.size.width = width
+                action.button.frame.origin.y = actions.last?.button.frame.maxY ?? 0
+                return actions + [action]
+            }
     }
-    
-    func buttonSizeToFitForHorizontal(_ button: UIButton, index: Int) {
-        button.frame.size.width = containerViewWidthConstraint.constant / 2
-        button.frame.origin.x = button.bounds.width * CGFloat(index)
-        
-        if index != 0 {
-            let borderView = UIView(frame: CGRect(x: 0, y: 0, width: 0.5, height: button.bounds.height))
-            borderView.backgroundColor = UIColor.lightGray
-            borderView.autoresizingMask = .flexibleHeight
-            button.addSubview(borderView)
-        }
+
+    private func layoutButtonHorizontally(with actions: [AlertAction], width: CGFloat) -> [AlertAction] {
+        return actions
+            .reduce([]) { actions, action in
+                action.button.frame.size.width = width / 2
+                action.button.frame.origin.x = actions.last?.button.frame.maxX ?? 0
+                return actions + [action]
+            }
     }
-    
-    func configurAlertButton(_ style :AlertAction.Style, forButton button: UIButton) {
-        switch style {
-        case .destructive:
-            button.setTitleColor(UIColor.red, for: UIControlState())
-            button.titleLabel?.font = UIFont.systemFont(ofSize: AlertButtonFontSize)
-        case .cancel:
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: AlertButtonFontSize)
-        default:
-            button.titleLabel?.font = UIFont.systemFont(ofSize: AlertButtonFontSize)
-        }
-    }
-    
-    func configurActionSheetButton(_ style :AlertAction.Style, forButton button: UIButton) {
-        switch style {
-        case .destructive:
-            button.setTitleColor(UIColor.red, for: UIControlState())
-            button.titleLabel?.font = UIFont.systemFont(ofSize: ActionSheetButtonFontSize)
-        case .cancel:
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: ActionSheetButtonFontSize)
-        default:
-            button.titleLabel?.font = UIFont.systemFont(ofSize: ActionSheetButtonFontSize)
-        }
-    }
-    
-    func dismissViewController(_ sender: AnyObject? = nil) {
-        guard let action = self.actions.filter({ $0.button == sender as? UIButton }).first else {
+
+    func dismiss(with sender: UIButton) {
+        guard let action = actions.filter({ $0.button == sender }).first else {
             dismiss()
             return
         }
@@ -479,35 +332,37 @@ private extension AlertController {
         }
     }
 
-    func dismiss(withCompletion block: @escaping () -> () = {}) {
+    func dismiss(withCompletion block: @escaping () -> Void = {}) {
         dismiss(animated: true) {
             block()
             self.actions.removeAll()
-            self.textFields.removeAll()
+            self.alertContentView.textFields.removeAll()
         }
     }
 }
 
 // MARK: - Action Methods
-private extension AlertController {
-    @objc dynamic func buttonWasTapped(_ sender: UIButton) {
-        dismissViewController(sender)
+extension AlertController {
+    @objc func buttonWasTapped(_ button: UIButton) {
+        dismiss(with: button)
+    }
+
+    @objc func backgroundViewTapAction(_ gesture: UITapGestureRecognizer) {
+        if containerView.frame.contains(gesture.location(in: marginView)) == false {
+            dismiss()
+        }
     }
 }
 
 // MARK: - NSNotificationCenter Methods
 extension AlertController {
     @objc func keyboardDidHide(_ notification: Notification) {
-        backgroundViewBottomSpaceConstraint?.constant = 0
+        backgroundViewBottomSpace?.constant = 0
     }
-    
+
     @objc func keyboardWillShow(_ notification: Notification) {
-        if let window = view.window {
-            if let frame = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
-                let rect = window.convert(frame, to: view)
-                
-                backgroundViewBottomSpaceConstraint?.constant = view.bounds.size.height - rect.origin.y
-            }
+        if let frame = notification.info.endFrame, let rect = view.window?.convert(frame, to: view) {
+            backgroundViewBottomSpace?.constant = view.bounds.size.height - rect.origin.y
         }
     }
 }
@@ -515,132 +370,20 @@ extension AlertController {
 // MARK: - UIViewControllerTransitioningDelegate Methods
 extension AlertController: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        presentedAnimation = true
-        return self
+        switch preferredStyle {
+        case .alert:
+            return AlertControllerPresentTransition(backgroundColor: coverColor)
+        case .actionSheet:
+            return ActionSheetControllerPresentTransition(backgroundColor: coverColor, topSpace: self.backgroundViewTopSpace, bottomSpace: self.backgroundViewBottomSpace)
+        }
     }
-    
+
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        presentedAnimation = false
-        return self
-    }
-}
-
-// MARK: - UIViewControllerAnimatedTransitioning Methods
-extension AlertController: UIViewControllerAnimatedTransitioning {
-    func animateDuration() -> TimeInterval {
-        return 0.25
-    }
-    
-    func animationOptionsForAnimationCurve(_ curve: UInt) -> UIViewAnimationOptions {
-        return UIViewAnimationOptions(rawValue: curve << 16)
-    }
-    
-    func createCoverView(_ frame: CGRect) -> UIView {
-        let coverView = UIView(frame: frame)
-        coverView.backgroundColor = self.coverColor
-        coverView.alpha = 0
-        coverView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        return coverView
-    }
-    
-    func animation(_ animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
-        UIView.animate(withDuration: animateDuration(), delay: 0, options: animationOptionsForAnimationCurve(7), animations: animations, completion: completion)
-    }
-    
-    func presentAnimationForAlert(_ container: UIView, toView: UIView, fromView: UIView, completion: @escaping (Bool) -> Void) {
-        let coverView = createCoverView(container.bounds)
-        container.addSubview(coverView)
-        
-        toView.frame = container.bounds
-        toView.transform = fromView.transform.concatenating(CGAffineTransform(scaleX: 1.2, y: 1.2))
-        coverView.addSubview(toView)
-
-        transitionCoverView = coverView
-
-        animation({
-            toView.transform = fromView.transform
-            coverView.alpha = 1
-            }, completion: completion)
-    }
-    
-    func dismissAnimationForAlert(_ container: UIView, toView: UIView, fromView: UIView, completion: @escaping (Bool) -> Void) {
-        transitionCoverView?.addSubview(fromView)
-        
-        animation({
-            self.transitionCoverView?.alpha = 0
-            self.transitionCoverView = nil
-            }, completion: completion)
-    }
-    
-    func presentAnimationForActionSheet(_ container: UIView, toView: UIView, fromView: UIView, completion: @escaping (Bool) -> Void) {
-        let coverView = createCoverView(container.bounds)
-        container.addSubview(coverView)
-        toView.frame = container.bounds
-        container.addSubview(toView)
-        
-        backgroundViewBottomSpaceConstraint.constant = -toView.bounds.height
-        backgroundViewTopSpaceConstraint.constant = toView.bounds.height
-        view.layoutIfNeeded()
-        contentView?.layoutIfNeeded()
-        backgroundViewBottomSpaceConstraint.constant = 0
-        backgroundViewTopSpaceConstraint.constant = 0
-        
-        transitionCoverView = coverView
-        
-        animation({
-            self.view.layoutIfNeeded()
-            coverView.alpha = 1
-        }, completion: completion)
-    }
-    
-    func dismissAnimationForActionSheet(_ container: UIView, toView: UIView, fromView: UIView, completion: @escaping (Bool) -> Void) {
-        container.addSubview(fromView)
-        
-        backgroundViewBottomSpaceConstraint.constant = -toView.bounds.height
-        backgroundViewTopSpaceConstraint.constant = toView.bounds.height
-        
-        animation({
-            self.view.layoutIfNeeded()
-            self.transitionCoverView?.alpha = 0
-            self.transitionCoverView = nil
-        }, completion: completion)
-    }
-    
-    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return animateDuration()
-    }
-    
-    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let container = transitionContext.containerView
-        
-        guard let to = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
-            return transitionContext.completeTransition(false)
-        }
-        
-        guard let from = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) else {
-            return transitionContext.completeTransition(false)
-        }
-        
-        if presentedAnimation == true {
-            if preferredStyle == .alert {
-                presentAnimationForAlert(container, toView: to.view, fromView: from.view) { _ in
-                    transitionContext.completeTransition(true)
-                }
-            } else {
-                presentAnimationForActionSheet(container, toView: to.view, fromView: from.view) { _ in
-                    transitionContext.completeTransition(true)
-                }
-            }
-        } else {
-            if preferredStyle == .alert {
-                dismissAnimationForAlert(container, toView: to.view, fromView: from.view) { _ in
-                    transitionContext.completeTransition(true)
-                }
-            } else {
-                dismissAnimationForActionSheet(container, toView: to.view, fromView: from.view) { _ in
-                    transitionContext.completeTransition(true)
-                }
-            }
+        switch preferredStyle {
+        case .alert:
+            return AlertControllerDismissTransition(backgroundColor: coverColor)
+        case .actionSheet:
+            return ActionSheetControllerDismissTransition(backgroundColor: coverColor, topSpace: self.backgroundViewTopSpace, bottomSpace: self.backgroundViewBottomSpace)
         }
     }
 }
