@@ -36,14 +36,14 @@ open class AlertAction {
 
     func addHorizontalBorder() {
         let borderView = UIView(frame: CGRect(x: 0, y: -CGFloat.thinWidth, width: button.bounds.width, height: CGFloat.thinWidth))
-        borderView.backgroundColor = .lightGray
+        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         borderView.autoresizingMask = .flexibleWidth
         button.addSubview(borderView)
     }
 
     func addVerticalBorder() {
         let borderView = UIView(frame: CGRect(x: -CGFloat.thinWidth, y: 0, width: CGFloat.thinWidth, height: button.bounds.height))
-        borderView.backgroundColor = .lightGray
+        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         borderView.autoresizingMask = .flexibleHeight
         button.addSubview(borderView)
     }

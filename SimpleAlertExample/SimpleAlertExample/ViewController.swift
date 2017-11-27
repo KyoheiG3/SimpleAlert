@@ -29,16 +29,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func customAlertButtonWasTapped(_ sender: AnyObject) {
-        func configureTextField(_ textField: UITextField) {
-            textField.frame.size.height = 33
-            textField.backgroundColor = nil
-            textField.layer.borderColor = nil
-            textField.layer.borderWidth = 0
-        }
-
         let alert = CustomAlertController(title: "title", message: "message", style: .alert)
-        alert.addTextField(configurationHandler: configureTextField)
-        alert.addTextField(configurationHandler: configureTextField)
+        alert.addTextField()
+        alert.addTextField()
         showAlert(alert)
     }
     
@@ -54,7 +47,7 @@ class ViewController: UIViewController {
     
     @IBAction func customContentButtonWasTapped(_ sender: AnyObject) {
         let viewController = ContentViewController()
-        let alert = AlertController(view: viewController.view, style: .actionSheet)
+        let alert = AlertController(title: "Map", view: viewController.view, style: .actionSheet)
         showAlert(alert)
     }
     
@@ -62,6 +55,7 @@ class ViewController: UIViewController {
         let alert = AlertController(view: UIView(), style: .alert)
         alert.contentWidth = 144
         alert.contentCornerRadius = 72
+        alert.contentColor = .white
         let action = AlertAction(title: "?", style: .cancel) { action in
         }
         

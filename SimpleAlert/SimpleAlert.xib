@@ -17,13 +17,13 @@
                 <outlet property="backgroundView" destination="Wnv-iy-aW0" id="e0c-2f-Ke7"/>
                 <outlet property="backgroundViewBottomSpace" destination="LKr-5v-f1t" id="tXU-Y8-Vx7"/>
                 <outlet property="backgroundViewTopSpace" destination="F5M-9m-lVE" id="6y8-Hy-XJV"/>
-                <outlet property="cancelBaseView" destination="kQ8-wr-Wzg" id="Ho8-v5-nUe"/>
+                <outlet property="cancelBaseView" destination="H10-uo-1g4" id="Xj2-C3-rOR"/>
                 <outlet property="cancelButtonView" destination="Eju-qm-e5H" id="f1S-uH-yWg"/>
-                <outlet property="cancelbuttonViewHeight" destination="AVE-lH-fhg" id="rHj-By-lwx"/>
+                <outlet property="cancelbuttonViewHeight" destination="RLP-AR-rGo" id="TD7-QK-WBC"/>
                 <outlet property="containerView" destination="jHr-ee-3Le" id="M6g-U2-Gmu"/>
                 <outlet property="containerViewBottomSpace" destination="gfS-C0-FwT" id="1FA-UL-sql"/>
                 <outlet property="containerViewWidth" destination="guZ-NA-KZU" id="7rQ-rr-zue"/>
-                <outlet property="contentBaseView" destination="CjQ-Sr-lVk" id="Osg-qz-jYp"/>
+                <outlet property="contentBaseView" destination="Afj-UK-OgG" id="r3u-cj-LSy"/>
                 <outlet property="contentView" destination="E9Y-Wv-Bl0" id="X5K-mw-CmN"/>
                 <outlet property="contentViewHeight" destination="bZv-FF-68r" id="RPb-Ec-dvl"/>
                 <outlet property="marginView" destination="Su8-qx-f1b" id="ICx-QJ-8ms"/>
@@ -31,7 +31,7 @@
                 <outlet property="marginViewLeftSpace" destination="GYR-4L-PeN" id="C4z-Pw-BmU"/>
                 <outlet property="marginViewRightSpace" destination="ZXz-HT-Lbc" id="r8p-Yv-kUb"/>
                 <outlet property="marginViewTopSpace" destination="Px6-2r-kga" id="Er3-to-fmV"/>
-                <outlet property="spaceBetweenAlertAndCancel" destination="S1i-Be-f7H" id="ZCF-mm-A6E"/>
+                <outlet property="spaceBetweenAlertAndCancel" destination="QRk-1N-BaL" id="gKm-0p-E8u"/>
                 <outlet property="view" destination="sak-6U-4yN" id="aZI-F7-aVc"/>
             </connections>
         </placeholder>
@@ -49,57 +49,69 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHr-ee-3Le" userLabel="Container View">
                                     <rect key="frame" x="37.5" y="619" width="300" height="48"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Sr-lVk">
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afj-UK-OgG">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
-                                            <subviews>
-                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" id="bZv-FF-68r"/>
-                                                    </constraints>
-                                                </scrollView>
-                                                <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="Uog-n8-Fje"/>
-                                                    </constraints>
-                                                </scrollView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="E9Y-Wv-Bl0" secondAttribute="trailing" id="FER-7f-XK4"/>
-                                                <constraint firstItem="E9Y-Wv-Bl0" firstAttribute="top" secondItem="CjQ-Sr-lVk" secondAttribute="top" id="LHd-yv-my3"/>
-                                                <constraint firstAttribute="bottom" secondItem="xF5-i7-QEX" secondAttribute="bottom" id="gNt-Tl-Lvy"/>
-                                                <constraint firstItem="E9Y-Wv-Bl0" firstAttribute="leading" secondItem="CjQ-Sr-lVk" secondAttribute="leading" id="ohh-2Y-2sM"/>
-                                                <constraint firstItem="xF5-i7-QEX" firstAttribute="leading" secondItem="CjQ-Sr-lVk" secondAttribute="leading" id="qY1-R8-9Kf"/>
-                                                <constraint firstAttribute="trailing" secondItem="xF5-i7-QEX" secondAttribute="trailing" id="qYc-8J-ZdL"/>
-                                                <constraint firstItem="xF5-i7-QEX" firstAttribute="top" secondItem="E9Y-Wv-Bl0" secondAttribute="bottom" id="yR4-M2-WDp"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQ8-wr-Wzg">
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rYV-7b-1d4">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" id="bZv-FF-68r"/>
+                                                        </constraints>
+                                                    </scrollView>
+                                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="48" id="Uog-n8-Fje"/>
+                                                        </constraints>
+                                                    </scrollView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="E9Y-Wv-Bl0" firstAttribute="top" secondItem="rYV-7b-1d4" secondAttribute="top" id="00l-SF-eqN"/>
+                                                    <constraint firstItem="xF5-i7-QEX" firstAttribute="leading" secondItem="rYV-7b-1d4" secondAttribute="leading" id="CbL-25-kEJ"/>
+                                                    <constraint firstItem="xF5-i7-QEX" firstAttribute="top" secondItem="E9Y-Wv-Bl0" secondAttribute="bottom" id="GIT-xA-7yo"/>
+                                                    <constraint firstAttribute="trailing" secondItem="E9Y-Wv-Bl0" secondAttribute="trailing" id="Wce-6N-OKC"/>
+                                                    <constraint firstAttribute="trailing" secondItem="xF5-i7-QEX" secondAttribute="trailing" id="dEr-bY-B9B"/>
+                                                    <constraint firstAttribute="bottom" secondItem="xF5-i7-QEX" secondAttribute="bottom" id="hR3-eM-3d6"/>
+                                                    <constraint firstItem="E9Y-Wv-Bl0" firstAttribute="leading" secondItem="rYV-7b-1d4" secondAttribute="leading" id="hhZ-rg-Bw6"/>
+                                                </constraints>
+                                            </view>
+                                            <blurEffect style="extraLight"/>
+                                        </visualEffectView>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H10-uo-1g4">
                                             <rect key="frame" x="0.0" y="48" width="300" height="0.0"/>
-                                            <subviews>
-                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-qm-e5H" userLabel="Cancel Button View">
-                                                    <rect key="frame" x="-0.5" y="0.0" width="300" height="0.0"/>
-                                                </scrollView>
-                                            </subviews>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BxL-eN-q5k">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-qm-e5H" userLabel="Cancel Button View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                    </scrollView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="Eju-qm-e5H" secondAttribute="bottom" id="3An-Jn-idJ"/>
+                                                    <constraint firstItem="Eju-qm-e5H" firstAttribute="leading" secondItem="BxL-eN-q5k" secondAttribute="leading" id="bIA-HF-rlJ"/>
+                                                    <constraint firstItem="Eju-qm-e5H" firstAttribute="top" secondItem="BxL-eN-q5k" secondAttribute="top" id="c33-NP-ihE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Eju-qm-e5H" secondAttribute="trailing" id="d5E-08-Mjf"/>
+                                                </constraints>
+                                            </view>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Eju-qm-e5H" secondAttribute="trailing" id="3y8-qU-eHI"/>
-                                                <constraint firstItem="Eju-qm-e5H" firstAttribute="top" secondItem="kQ8-wr-Wzg" secondAttribute="top" id="64Z-VZ-G5J"/>
-                                                <constraint firstAttribute="height" id="AVE-lH-fhg"/>
-                                                <constraint firstAttribute="bottom" secondItem="Eju-qm-e5H" secondAttribute="bottom" id="QeS-L4-Eyh"/>
-                                                <constraint firstItem="Eju-qm-e5H" firstAttribute="leading" secondItem="kQ8-wr-Wzg" secondAttribute="leading" id="kZ2-Ob-kZ7"/>
+                                                <constraint firstAttribute="height" id="RLP-AR-rGo"/>
                                             </constraints>
-                                        </view>
+                                            <blurEffect style="extraLight"/>
+                                        </visualEffectView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="CjQ-Sr-lVk" secondAttribute="trailing" id="J07-A6-rwC"/>
-                                        <constraint firstItem="kQ8-wr-Wzg" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="J7P-DI-GZe"/>
-                                        <constraint firstAttribute="trailing" secondItem="kQ8-wr-Wzg" secondAttribute="trailing" id="Phq-9C-HwR"/>
-                                        <constraint firstItem="kQ8-wr-Wzg" firstAttribute="top" secondItem="CjQ-Sr-lVk" secondAttribute="bottom" id="S1i-Be-f7H"/>
-                                        <constraint firstItem="CjQ-Sr-lVk" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="gU4-tX-0a8"/>
+                                        <constraint firstItem="Afj-UK-OgG" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="1qJ-Wo-dze"/>
+                                        <constraint firstAttribute="bottom" secondItem="H10-uo-1g4" secondAttribute="bottom" id="HwX-Wj-6cV"/>
+                                        <constraint firstAttribute="trailing" secondItem="H10-uo-1g4" secondAttribute="trailing" id="LqT-L7-156"/>
+                                        <constraint firstItem="H10-uo-1g4" firstAttribute="top" secondItem="Afj-UK-OgG" secondAttribute="bottom" id="QRk-1N-BaL"/>
+                                        <constraint firstItem="H10-uo-1g4" firstAttribute="leading" secondItem="jHr-ee-3Le" secondAttribute="leading" id="ax7-aS-EM5"/>
+                                        <constraint firstAttribute="trailing" secondItem="Afj-UK-OgG" secondAttribute="trailing" id="ge9-Jf-XCi"/>
                                         <constraint firstAttribute="width" constant="300" id="guZ-NA-KZU"/>
-                                        <constraint firstItem="CjQ-Sr-lVk" firstAttribute="top" secondItem="jHr-ee-3Le" secondAttribute="top" id="q1Y-QA-V3h"/>
-                                        <constraint firstAttribute="bottom" secondItem="kQ8-wr-Wzg" secondAttribute="bottom" id="rTM-Y3-ATU"/>
+                                        <constraint firstItem="Afj-UK-OgG" firstAttribute="top" secondItem="jHr-ee-3Le" secondAttribute="top" id="kNH-qq-FSw"/>
                                     </constraints>
                                 </view>
                             </subviews>

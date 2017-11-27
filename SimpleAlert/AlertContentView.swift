@@ -14,13 +14,13 @@ open class AlertContentView: UIView {
     @IBOutlet public weak var messageLabel: UILabel!
     @IBOutlet public weak var textBackgroundView: UIView!
     @IBOutlet public weak var containerView: UIView!
-    
+
     @IBOutlet var verticalSpaceConstraint: NSLayoutConstraint!
     @IBOutlet var titleSpaceConstraint: NSLayoutConstraint!
     @IBOutlet var messageSpaceConstraint: NSLayoutConstraint!
     @IBOutlet var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var containerViewHeight: NSLayoutConstraint!
-    
+
     var textFields: [UITextField] = []
 
     func addTextField() -> UITextField {
@@ -31,6 +31,7 @@ open class AlertContentView: UIView {
     }
 
     func layoutContents() {
+        textViewHeightConstraint.constant = 0
         for textField in textFields {
             textField.frame.origin.y = textViewHeightConstraint.constant
             if textField.frame.height <= 0 {
@@ -63,5 +64,12 @@ open class AlertContentView: UIView {
         baseView.layoutIfNeeded()
 
         frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2) + containerViewHeight.constant
+    }
+    
+    func addHorizontalBorder() {
+        let borderView = UIView(frame: CGRect(x: 0, y: -CGFloat.thinWidth, width: containerView.bounds.width, height: CGFloat.thinWidth))
+        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+        borderView.autoresizingMask = .flexibleWidth
+        containerView.addSubview(borderView)
     }
 }

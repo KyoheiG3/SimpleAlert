@@ -16,8 +16,14 @@ extension UIAlertControllerStyle {
 
     var buttonHeight: CGFloat {
         switch self {
-        case .alert: return 48
-        case .actionSheet: return 44
+        case .alert:
+            return 48
+        case .actionSheet:
+            if #available(iOS 9.0, *) {
+                return 58
+            } else {
+                return 44
+            }
         }
     }
 }

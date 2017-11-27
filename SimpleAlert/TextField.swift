@@ -12,8 +12,8 @@ final class TextField: UITextField {
         autoresizingMask = .flexibleWidth
         font = .systemFont(ofSize: 14)
         backgroundColor = UIColor.white
-        layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.gray.cgColor
+        layer.borderWidth = CGFloat.thinWidth
     }
 
     required init?(coder aDecoder: NSCoder) {
