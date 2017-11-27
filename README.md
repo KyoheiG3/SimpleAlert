@@ -5,24 +5,22 @@
 [![License](https://img.shields.io/cocoapods/l/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
 [![Platform](https://img.shields.io/cocoapods/p/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
 
-It is simple and easily customizable alert.  
-Can be used as `UIAlertController`, it supports from iOS7.
+It is simple and easily customizable alert.
+Can be used as `UIAlertController`.
 
 #### [Appetize's Demo](https://appetize.io/app/w12zxu30gtr8p5a7v9t37gmzp4)
 
-<p><img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/default_view.png" alt="default_view" width="150" />
-<img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/custom_view.png" alt="custom_view" width="150" />
-<img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/custom_content.png" alt="custom_content" width="150" />
-<img src="https://github.com/KyoheiG3/assets/blob/master/SimpleAlert/rounded_view.png" alt="rounded_view" width="150" /></p>
+<p><img src="https://user-images.githubusercontent.com/5707132/33262364-56970b8c-d3a9-11e7-8f2d-54b8865bf396.png" alt="default_view" width="150" />
+<img src="https://user-images.githubusercontent.com/5707132/33262361-56423fd0-d3a9-11e7-8e81-a022b33e02a9.png" alt="custom_view" width="150" />
+<img src="https://user-images.githubusercontent.com/5707132/33262360-56206446-d3a9-11e7-9d30-f998f5d1b041.png" alt="custom_content" width="150" />
+<img src="https://user-images.githubusercontent.com/5707132/33262365-56b85bb6-d3a9-11e7-9a6b-aa933cd2a7e2.png" alt="rounded_view" width="150" /></p>
 
 ## Requirements
 
-- Swift 3.0
-- iOS 7.0 or later
+- Swift 4.0
+- iOS 8.0 or later
 
 ## How to Install SimpleAlert
-
-### iOS 8+
 
 #### Cocoapods
 
@@ -30,9 +28,7 @@ Add the following to your `Podfile`:
 
 ```Ruby
 pod "SimpleAlert"
-use_frameworks!
 ```
-Note: the `use_frameworks!` is required for pods made in Swift.
 
 #### Carthage
 
@@ -41,92 +37,72 @@ Add the following to your `Cartfile`:
 ```Ruby
 github "KyoheiG3/SimpleAlert"
 ```
-### iOS 7
-
-Just add everything in the source file to your project.
 
 ## Usage
 
-* Add `SimpleAlert` namespace for iOS7
-
-### import
-
-If target is ios8.0 or later, please import the `SimpleAlert`.
-
-```Swift
-import SimpleAlert
-```
 ### Example
 
 View simple Alert
 
 ```Swift
-let alert = AlertController(title: "title", message: "message", style: .Alert)
+let alert = AlertController(title: "title", message: "message", style: .alert)
 
-alert.addTextFieldWithConfigurationHandler()
-alert.addAction(AlertAction(title: "Cancel", style: .Cancel))
-alert.addAction(AlertAction(title: "OK", style: .OK))
+alert.addTextField()
+alert.addAction(AlertAction(title: "Cancel", style: .cancel))
+alert.addAction(AlertAction(title: "OK", style: .ok))
 
-presentViewController(alert, animated: true, completion: nil)
+present(alert, animated: true, completion: nil)
 ```
 
 Customize default contents
 
 ```Swift
-let alert = AlertController(title: "title", message: "message", style: .Alert)
-alert.addTextFieldWithConfigurationHandler() { textField in
+let alert = AlertController(title: "title", message: "message", style: .alert)
+alert.addTextField { textField in
     textField.frame.size.height = 33
     textField.backgroundColor = nil
     textField.layer.borderColor = nil
     textField.layer.borderWidth = 0
 }
-alert.configContentView = { [weak self] view in
-    if let view = view as? AlertContentView {
-        view.titleLabel.textColor = UIColor.lightGrayColor()
-        view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
-        view.messageLabel.textColor = UIColor.lightGrayColor()
-        view.messageLabel.font = UIFont.boldSystemFontOfSize(16)
-        view.textBackgroundView.layer.cornerRadius = 3.0
-        view.textBackgroundView.clipsToBounds = true
-    }
+alert.configureContentView { view in
+    view.titleLabel.textColor = UIColor.lightGrayColor()
+    view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
+    view.messageLabel.textColor = UIColor.lightGrayColor()
+    view.messageLabel.font = UIFont.boldSystemFontOfSize(16)
+    view.textBackgroundView.layer.cornerRadius = 3.0
+    view.textBackgroundView.clipsToBounds = true
 }
 
-alert.addAction(AlertAction(title: "Cancel", style: .Cancel))
-alert.addAction(AlertAction(title: "OK", style: .OK))
-presentViewController(alert, animated: true, completion: nil)
+alert.addAction(AlertAction(title: "Cancel", style: .cancel))
+alert.addAction(AlertAction(title: "OK", style: .ok))
+present(alert, animated: true, completion: nil)
 
 ```
 
 Rounded button Alert View
 
 ```Swift
-let alert = AlertController(view: UIView(), style: .Alert)
-let action = AlertAction(title: "?", style: .Cancel)
+let alert = AlertController(view: UIView(), style: .alert)
+alert.contentWidth = 144
+alert.contentCornerRadius = 72
+alert.contentColor = .white
+let action = AlertAction(title: "?", style: .cancel) { action in
+}
 
 alert.addAction(action)
 action.button.frame.size.height = 144
-action.button.titleLabel?.font = UIFont.boldSystemFontOfSize(96)
-action.button.setTitleColor(UIColor.redColor(), forState: .Normal)
+action.button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 96)
+action.button.setTitleColor(UIColor.red, for: .normal)
 
-alert.configContainerWidth = {
-    return 144
-}
-alert.configContainerCornerRadius = {
-    return 72
-}
-alert.configContentView = { view in
-    view.backgroundColor = UIColor.whiteColor()
-}
-
-presentViewController(alert, animated: true, completion: nil)
+present(alert, animated: true, completion: nil)
 ```
 
 More customizable if you create a subclass
 
 ```Swift
-class AlertController: AlertController {
-    override func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)? = nil) {
-        super.addTextFieldWithConfigurationHandler() { textField in
+class CustomAlertController: AlertController {
+    override func addTextField(configurationHandler: ((UITextField) -> Void)? = nil) {
+        super.addTextField { textField in
             textField.frame.size.height = 33
             textField.backgroundColor = nil
             textField.layer.borderColor = nil
@@ -136,157 +112,162 @@ class AlertController: AlertController {
         }
     }
 
-    override func configureButton(style :AlertAction.Style, forButton button: UIButton) {
-        super.configureButton(style, forButton: button)
+    override func configureActionButton(_ button: UIButton, at style :AlertAction.Style) {
+        super.configureActionButton(button, at: style)
 
-        if let font = button.titleLabel?.font {
-            switch style {
-            case .OK:
-                button.titleLabel?.font = UIFont.boldSystemFontOfSize(20)
-                button.setTitleColor(UIColor.grayColor(), forState: .Normal)
-            case .Cancel:
-                button.backgroundColor = UIColor.darkGrayColor()
-                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            case .Default:
-                button.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
-            default:
-                break
-            }
+        switch style {
+        case .ok:
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+            button.setTitleColor(UIColor.gray, for: UIControlState())
+        case .cancel:
+            button.backgroundColor = UIColor.darkGray
+            button.setTitleColor(UIColor.white, for: UIControlState())
+        case .default:
+            button.setTitleColor(UIColor.lightGray, for: UIControlState())
+        default:
+            break
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func configureContentView(_ contentView: AlertContentView) {
+        super.configureContentView(contentView)
 
-        configContentView = { [weak self] view in
-            if let view = view as? AlertContentView {
-                view.titleLabel.textColor = UIColor.lightGrayColor()
-                view.titleLabel.font = UIFont.boldSystemFontOfSize(30)
-                view.messageLabel.textColor = UIColor.lightGrayColor()
-                view.messageLabel.font = UIFont.boldSystemFontOfSize(16)
-                view.textBackgroundView.layer.cornerRadius = 3.0
-                view.textBackgroundView.clipsToBounds = true
-            }
-        }
+        contentView.titleLabel.textColor = UIColor.lightGray
+        contentView.titleLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        contentView.messageLabel.textColor = UIColor.lightGray
+        contentView.messageLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        contentView.textBackgroundView.layer.cornerRadius = 10.0
+        contentView.textBackgroundView.clipsToBounds = true
     }
 }
 ```
 
 ## Class
 
-### Action
+### AlertAction
 
 #### Style
 
-* Default
-* OK
-* Cancel
-* Destructive
+- default
+- ok
+- cancel
+- destructive
 
 #### Initialize
 
 ```Swift
-init(title: String, style: AlertAction.Style, handler: ((AlertAction!) -> Void)?)
+init(title: String, style: SimpleAlert.AlertAction.Style, dismissesAlert: Bool = default, handler: ((SimpleAlert.AlertAction?) -> Swift.Void)? = default)
 ```
-* Set title and style, can add button.
-* Set button action handler.
+- Set title and style, can add button.
+- Set button action handler.
 
 #### Variable
 
 ```Swift
-var enabled: Bool
+var isEnabled: Bool
 ```
-* Set button enabled.
+- Set button enabled.
 
 ```Swift
-var button: UIButton!
+let button: UIButton
 ```
-* Can get a button.
-* Can get after button has been added to the `Controller`.
+- Can get a button.
+- Can get after button has been added to the `AlertController`.
 
-### ContentView
+### AlertContentView
 
-`backgroundColor` of `ContentView` will be reflected in the overall `backgroundColor`.
+`backgroundColor` of `AlertContentView` will be reflected in the overall `backgroundColor`.
 
 ```Swift
 var baseView: UIView!
 ```
-* Base view for contents
+- Base view for contents
 
 ```Swift
 var titleLabel: UILabel!
 ```
-* Title label
+- Title label
 
 ```Swift
 var messageLabel: UILabel!
 ```
-* Message Label
+- Message Label
 
 ```Swift
 var textBackgroundView: UIView!
 ```
-* Base view for Text Field
-* `Controller.Style` is in the case of `ActionSheet` does not appear.
+- Base view for Text Field
+- `UIAlertControllerStyle` is in the case of `actionSheet` does not appear.
 
-### Controller
-
-#### Style
-
-* Alert
-* ActionSheet
-
+### AlertController
 
 #### Initialize
 
 ```Swift
-init(title:String?, message:String?, style: AlertController.Style)
+init(title: String?, message: String?, style: UIAlertControllerStyle)
 ```
-
-* Show default view.
+- Set title, message and style, can add button.
+- Set button action handler.
 
 ```Swift
-init(view: UIView?, style: Controller.Style)
+init(title: String? = default, message: String? = default, view: UIView?, style: UIAlertControllerStyle)
 ```
+- Can also set custom view.
 
-* Show custom view.
-* Automatically set the width.
+#### Variable
+
+```Swift
+open var contentWidth: CGFloat
+open var contentColor: UIColor?
+open var contentCornerRadius: CGFloat?
+open var coverColor: UIColor
+open var message: String?
+```
+- Can change alert style.
+
+```Swift
+public private(set) var actions: [SimpleAlert.AlertAction]
+public var textFields: [UITextField] { get }
+```
+- Can get actions and text fields that is added.
 
 #### Function
 
 ```Swift
-func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField!) -> Void)?)
-````
-* Add Text Field, and set handler.
-* `Controller.Style` is in the case of `ActionSheet` does not add.
+func addTextField(configurationHandler: ((UITextField) -> Swift.Void)? = default)
+```
+
+- Add Text Field, and set handler.
+- `UIAlertControllerStyle` is in the case of `actionSheet` does not add.
 
 ```Swift
-func addAction(action: AlertAction)
+func addAction(_ action: SimpleAlert.AlertAction)
 ```
-* Add action button.
-
-#### Handler
+- Add action button.
 
 ```Swift
-var configContainerWidth: (() -> CGFloat?)?
+func configureActionButton(_ button: UIButton, at style: SimpleAlert.AlertAction.Style)
 ```
-* Change view width.
+- Override if would like to configure action button.
 
 ```Swift
-var configContainerCornerRadius: (() -> CGFloat?)?
+func configureContentView(_ contentView: SimpleAlert.AlertContentView)
 ```
-* Change view corner radius.
-
-```Swift
-var configContentView: ((UIView!) -> Void)?
-```
-* Customize contents.
-* By default, `UIView` argument is `ContentView`.
+- Override if would like to configure content view.
 
 ## The difference between default `UIAlertController`
 
-* Can add a cancel button any number of the `ActionSheet`.
-* If tap the outside of the view, the action handler will not be executed of the `ActionSheet`.
+- Can add a cancel button any number of the `actionSheet`.
+- If tap the outside of the view, the action handler will not be executed of the `actionSheet`.
+
+## Author
+
+#### Kyohei Ito
+
+- [GitHub](https://github.com/kyoheig3)
+- [Twitter](https://twitter.com/kyoheig3)
+
+Follow me 🎉
 
 ## LICENSE
 
