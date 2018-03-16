@@ -63,7 +63,14 @@ open class AlertController: UIViewController {
             marginViewRightSpace.constant = newValue.right
             if #available(iOS 11.0, *) {
                 marginViewTopSpace.constant = view.safeAreaInsets.top
-                marginViewBottomSpace.constant = view.safeAreaInsets.bottom
+                if UIDevice().userInterfaceIdiom == .phone {
+                    switch UIScreen.main.nativeBounds.height {
+                    case 2436:
+                        marginViewBottomSpace.constant = view.safeAreaInsets.bottom
+                    default:
+                        marginViewBottomSpace.constant = view.safeAreaInsets.bottom + 8
+                    }
+                }
             } else {
                 let height = UIApplication.shared.statusBarFrame.height
                 marginViewTopSpace.constant = height == 0 ? newValue.top : height
