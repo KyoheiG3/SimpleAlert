@@ -17,7 +17,7 @@ Can be used as `UIAlertController`.
 
 ## Requirements
 
-- Swift 4.0
+- Swift 4.2
 - iOS 8.0 or later
 
 ## How to Install SimpleAlert
