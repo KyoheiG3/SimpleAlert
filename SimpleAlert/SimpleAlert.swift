@@ -54,7 +54,7 @@ open class AlertController: UIViewController {
     private var contentViewHandler: ((AlertContentView) -> Void)?
     private var textFieldHandlers: [((UITextField) -> Void)?] = []
     private var customView: UIView?
-    private var preferredStyle: UIAlertControllerStyle = .alert
+    private var preferredStyle: UIAlertController.Style = .alert
     private let tapGesture = UITapGestureRecognizer()
 
     private var marginInsets: UIEdgeInsets {
@@ -63,7 +63,7 @@ open class AlertController: UIViewController {
             marginViewRightSpace.constant = newValue.right
             if #available(iOS 11.0, *) {
                 marginViewTopSpace.constant = view.safeAreaInsets.top
-                marginViewBottomSpace.constant = view.safeAreaInsets.bottom
+                marginViewBottomSpace.constant = max(view.safeAreaInsets.bottom, newValue.bottom)
             } else {
                 let height = UIApplication.shared.statusBarFrame.height
                 marginViewTopSpace.constant = height == 0 ? newValue.top : height
@@ -87,14 +87,14 @@ open class AlertController: UIViewController {
         self.init(nibName: "SimpleAlert", bundle: Bundle(for: AlertController.self))
     }
 
-    public convenience init(title: String?, message: String?, style: UIAlertControllerStyle) {
+    public convenience init(title: String?, message: String?, style: UIAlertController.Style) {
         self.init()
         self.title = title
         self.message = message
         self.preferredStyle = style
     }
 
-    public convenience init(title: String? = nil, message: String? = nil, view: UIView?, style: UIAlertControllerStyle) {
+    public convenience init(title: String? = nil, message: String? = nil, view: UIView?, style: UIAlertController.Style) {
         self.init()
         self.title = title
         self.message = message
@@ -113,8 +113,8 @@ open class AlertController: UIViewController {
         modalTransitionStyle = .crossDissolve
         transitioningDelegate = self
 
-        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardDidHide(_:)), name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AlertController.keyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
 
     open override func viewDidLoad() {

@@ -14,7 +14,7 @@ struct Info {
     }
 
     var endFrame: CGRect? {
-        return userInfoRect(UIKeyboardFrameEndUserInfoKey)
+        return userInfoRect(UIResponder.keyboardFrameEndUserInfoKey)
     }
 
     private func userInfoRect(_ infoKey: String) -> CGRect? {

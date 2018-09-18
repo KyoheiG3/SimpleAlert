@@ -8,7 +8,7 @@
 
 extension UIView {
     static func animate(withDuration duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping (Bool) -> Void) {
-        let curve = UIViewAnimationOptions(rawValue: 7 << 16)
+        let curve = UIView.AnimationOptions(rawValue: 7 << 16)
         UIView.animate(withDuration: duration, delay: 0, options: curve, animations: animations, completion: completion)
     }
 }

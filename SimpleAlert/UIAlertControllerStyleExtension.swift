@@ -6,7 +6,7 @@
 //  Copyright © 2017年 kyohei_ito. All rights reserved.
 //
 
-extension UIAlertControllerStyle {
+extension UIAlertController.Style {
     var fontSize: CGFloat {
         switch self {
         case .alert: return 17

@@ -27,12 +27,12 @@ class CustomAlertController: AlertController {
         switch style {
         case .ok:
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-            button.setTitleColor(UIColor.gray, for: UIControlState())
+            button.setTitleColor(UIColor.gray, for: .normal)
         case .cancel:
             button.backgroundColor = UIColor.darkGray
-            button.setTitleColor(UIColor.white, for: UIControlState())
+            button.setTitleColor(UIColor.white, for: .normal)
         case .default:
-            button.setTitleColor(UIColor.lightGray, for: UIControlState())
+            button.setTitleColor(UIColor.lightGray, for: .normal)
         default:
             break
         }
