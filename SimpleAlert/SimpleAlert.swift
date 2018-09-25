@@ -65,8 +65,7 @@ open class AlertController: UIViewController {
                 marginViewTopSpace.constant = view.safeAreaInsets.top
                 marginViewBottomSpace.constant = max(view.safeAreaInsets.bottom, newValue.bottom)
             } else {
-                let height = UIApplication.shared.statusBarFrame.height
-                marginViewTopSpace.constant = height == 0 ? newValue.top : height
+                marginViewTopSpace.constant = newValue.top
                 marginViewBottomSpace.constant = newValue.bottom
             }
         }
