@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.23.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.16.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -55,13 +55,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0">
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" id="bZv-FF-68r"/>
                                                         </constraints>
                                                     </scrollView>
-                                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX">
+                                                    <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="48" id="Uog-n8-Fje"/>
@@ -158,21 +158,21 @@
                             <rect key="frame" x="0.0" y="62" width="220" height="0.0"/>
                             <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" id="5g5-Eq-OMM"/>
+                                <constraint firstAttribute="height" priority="750" id="5g5-Eq-OMM"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="xau-wx-Wz2" firstAttribute="top" secondItem="Nwo-PT-UIe" secondAttribute="top" id="1Ab-QV-gHg"/>
+                        <constraint firstItem="xau-wx-Wz2" firstAttribute="top" secondItem="Nwo-PT-UIe" secondAttribute="top" priority="750" id="1Ab-QV-gHg"/>
                         <constraint firstAttribute="centerX" secondItem="iC7-zZ-Tbm" secondAttribute="centerX" id="5V6-Fr-1OI"/>
                         <constraint firstItem="oUM-3e-1NC" firstAttribute="leading" secondItem="Nwo-PT-UIe" secondAttribute="leading" id="E8b-Ho-66b"/>
                         <constraint firstAttribute="trailing" secondItem="oUM-3e-1NC" secondAttribute="trailing" id="IsO-JP-vcg"/>
-                        <constraint firstItem="iC7-zZ-Tbm" firstAttribute="top" secondItem="xau-wx-Wz2" secondAttribute="bottom" constant="10" id="LPO-QY-J4G"/>
+                        <constraint firstItem="iC7-zZ-Tbm" firstAttribute="top" secondItem="xau-wx-Wz2" secondAttribute="bottom" priority="750" constant="10" id="LPO-QY-J4G"/>
                         <constraint firstItem="iC7-zZ-Tbm" firstAttribute="leading" secondItem="Nwo-PT-UIe" secondAttribute="leading" id="Yg3-x0-C6B"/>
                         <constraint firstAttribute="centerX" secondItem="xau-wx-Wz2" secondAttribute="centerX" id="iMR-5l-93o"/>
-                        <constraint firstItem="oUM-3e-1NC" firstAttribute="top" secondItem="iC7-zZ-Tbm" secondAttribute="bottom" constant="18" id="igM-Vb-fSX"/>
+                        <constraint firstItem="oUM-3e-1NC" firstAttribute="top" secondItem="iC7-zZ-Tbm" secondAttribute="bottom" priority="750" constant="18" id="igM-Vb-fSX"/>
                         <constraint firstItem="xau-wx-Wz2" firstAttribute="leading" secondItem="Nwo-PT-UIe" secondAttribute="leading" id="ly7-WR-N2G"/>
-                        <constraint firstAttribute="bottom" secondItem="oUM-3e-1NC" secondAttribute="bottom" id="p1G-jI-43A"/>
+                        <constraint firstAttribute="bottom" secondItem="oUM-3e-1NC" secondAttribute="bottom" priority="750" id="p1G-jI-43A"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pr-6J-tc6">
