@@ -183,8 +183,8 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="Nwo-PT-UIe" firstAttribute="leading" secondItem="DvE-7U-YMQ" secondAttribute="leading" constant="20" id="1ui-qU-zwm"/>
-                <constraint firstItem="Nwo-PT-UIe" firstAttribute="top" secondItem="DvE-7U-YMQ" secondAttribute="top" constant="20" id="2xx-Qa-pRw"/>
+                <constraint firstItem="Nwo-PT-UIe" firstAttribute="leading" secondItem="DvE-7U-YMQ" secondAttribute="leading" priority="750" constant="20" id="1ui-qU-zwm"/>
+                <constraint firstItem="Nwo-PT-UIe" firstAttribute="top" secondItem="DvE-7U-YMQ" secondAttribute="top" priority="750" constant="20" id="2xx-Qa-pRw"/>
                 <constraint firstItem="9pr-6J-tc6" firstAttribute="leading" secondItem="DvE-7U-YMQ" secondAttribute="leading" id="FE9-OG-oJv"/>
                 <constraint firstAttribute="trailing" secondItem="9pr-6J-tc6" secondAttribute="trailing" id="FPo-Zi-srl"/>
                 <constraint firstAttribute="centerX" secondItem="Nwo-PT-UIe" secondAttribute="centerX" id="dO5-Ul-8ho"/>
