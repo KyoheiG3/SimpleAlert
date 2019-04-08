@@ -52,7 +52,7 @@ open class AlertAction {
     let handler: ((AlertAction) -> Void)?
     let style: Style
     let dismissesAlert: Bool
-    public let button = UIButton(type: .system)
+    public var button = UIButton(type: .system)
     public var isEnabled: Bool  {
         get { return button.isEnabled }
         set { button.isEnabled = newValue }
