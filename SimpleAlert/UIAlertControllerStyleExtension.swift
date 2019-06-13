@@ -11,6 +11,7 @@ extension UIAlertController.Style {
         switch self {
         case .alert: return 17
         case .actionSheet: return 21
+        @unknown default: return 17
         }
     }
 
@@ -24,6 +25,8 @@ extension UIAlertController.Style {
             } else {
                 return 44
             }
+        @unknown default:
+            return 48
         }
     }
 }

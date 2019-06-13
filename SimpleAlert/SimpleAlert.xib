@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertController" customModule="SimpleAlert" customModuleProvider="target">
             <connections>
-                <outlet property="alertButtonView" destination="xF5-i7-QEX" id="lYl-6I-Yrv"/>
+                <outlet property="alertButtonScrollView" destination="xF5-i7-QEX" id="AkM-Kr-lJr"/>
+                <outlet property="alertButtonView" destination="oxG-ts-EX6" id="4Rw-xB-QLR"/>
                 <outlet property="alertButtonViewHeight" destination="Uog-n8-Fje" id="Ayj-r7-8UZ"/>
                 <outlet property="alertContentView" destination="DvE-7U-YMQ" id="jFa-T1-q5G"/>
                 <outlet property="backgroundView" destination="Wnv-iy-aW0" id="e0c-2f-Ke7"/>
                 <outlet property="backgroundViewBottomSpace" destination="LKr-5v-f1t" id="tXU-Y8-Vx7"/>
                 <outlet property="backgroundViewTopSpace" destination="F5M-9m-lVE" id="6y8-Hy-XJV"/>
                 <outlet property="cancelBaseView" destination="H10-uo-1g4" id="Xj2-C3-rOR"/>
-                <outlet property="cancelButtonView" destination="Eju-qm-e5H" id="f1S-uH-yWg"/>
+                <outlet property="cancelButtonScrollView" destination="Eju-qm-e5H" id="LRR-p7-rqM"/>
+                <outlet property="cancelButtonView" destination="Wgc-XY-EqX" id="oIu-OS-BTA"/>
                 <outlet property="cancelbuttonViewHeight" destination="RLP-AR-rGo" id="TD7-QK-WBC"/>
                 <outlet property="containerView" destination="jHr-ee-3Le" id="M6g-U2-Gmu"/>
                 <outlet property="containerViewBottomSpace" destination="gfS-C0-FwT" id="1FA-UL-sql"/>
                 <outlet property="containerViewWidth" destination="guZ-NA-KZU" id="7rQ-rr-zue"/>
                 <outlet property="contentBaseView" destination="Afj-UK-OgG" id="r3u-cj-LSy"/>
-                <outlet property="contentView" destination="E9Y-Wv-Bl0" id="X5K-mw-CmN"/>
+                <outlet property="contentScrollView" destination="E9Y-Wv-Bl0" id="Zb0-iC-c9W"/>
+                <outlet property="contentView" destination="ryo-eJ-GGT" id="K1b-2G-31q"/>
                 <outlet property="contentViewHeight" destination="bZv-FF-68r" id="RPb-Ec-dvl"/>
                 <outlet property="marginView" destination="Su8-qx-f1b" id="ICx-QJ-8ms"/>
                 <outlet property="marginViewBottomSpace" destination="3Jw-RC-mcC" id="JGN-i7-t5b"/>
@@ -57,14 +60,36 @@
                                                 <subviews>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-Wv-Bl0">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryo-eJ-GGT">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                            </view>
+                                                        </subviews>
                                                         <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="ryo-eJ-GGT" secondAttribute="trailing" id="1pM-qB-pzP"/>
+                                                            <constraint firstItem="ryo-eJ-GGT" firstAttribute="top" secondItem="E9Y-Wv-Bl0" secondAttribute="top" id="9pM-QJ-gTq"/>
+                                                            <constraint firstItem="ryo-eJ-GGT" firstAttribute="width" secondItem="E9Y-Wv-Bl0" secondAttribute="width" id="HDT-2Q-9hW"/>
+                                                            <constraint firstItem="ryo-eJ-GGT" firstAttribute="height" secondItem="E9Y-Wv-Bl0" secondAttribute="height" id="MKy-dN-JRb"/>
+                                                            <constraint firstItem="ryo-eJ-GGT" firstAttribute="leading" secondItem="E9Y-Wv-Bl0" secondAttribute="leading" id="Xjb-CJ-6D1"/>
                                                             <constraint firstAttribute="height" id="bZv-FF-68r"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ryo-eJ-GGT" secondAttribute="bottom" id="tf9-Db-mEt"/>
                                                         </constraints>
                                                     </scrollView>
                                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xF5-i7-QEX">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oxG-ts-EX6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
+                                                            </view>
+                                                        </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="oxG-ts-EX6" firstAttribute="width" secondItem="xF5-i7-QEX" secondAttribute="width" id="IyE-Gz-3jb"/>
+                                                            <constraint firstItem="oxG-ts-EX6" firstAttribute="height" secondItem="xF5-i7-QEX" secondAttribute="height" id="KA3-ur-gRd"/>
                                                             <constraint firstAttribute="height" constant="48" id="Uog-n8-Fje"/>
+                                                            <constraint firstItem="oxG-ts-EX6" firstAttribute="top" secondItem="xF5-i7-QEX" secondAttribute="top" id="fui-gi-OSs"/>
+                                                            <constraint firstItem="oxG-ts-EX6" firstAttribute="leading" secondItem="xF5-i7-QEX" secondAttribute="leading" id="ku9-bH-H4m"/>
+                                                            <constraint firstAttribute="bottom" secondItem="oxG-ts-EX6" secondAttribute="bottom" id="s1W-v9-39q"/>
+                                                            <constraint firstAttribute="trailing" secondItem="oxG-ts-EX6" secondAttribute="trailing" id="wb1-Da-mnh"/>
                                                         </constraints>
                                                     </scrollView>
                                                 </subviews>
@@ -88,6 +113,19 @@
                                                 <subviews>
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-qm-e5H" userLabel="Cancel Button View">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wgc-XY-EqX">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="0.0"/>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="Wgc-XY-EqX" secondAttribute="bottom" id="7Ja-wr-PBI"/>
+                                                            <constraint firstItem="Wgc-XY-EqX" firstAttribute="leading" secondItem="Eju-qm-e5H" secondAttribute="leading" id="Czm-Zq-XZJ"/>
+                                                            <constraint firstItem="Wgc-XY-EqX" firstAttribute="height" secondItem="Eju-qm-e5H" secondAttribute="height" id="Lql-P9-4yP"/>
+                                                            <constraint firstItem="Wgc-XY-EqX" firstAttribute="width" secondItem="Eju-qm-e5H" secondAttribute="width" id="WCx-vZ-hFo"/>
+                                                            <constraint firstItem="Wgc-XY-EqX" firstAttribute="top" secondItem="Eju-qm-e5H" secondAttribute="top" id="oOk-1s-KKh"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Wgc-XY-EqX" secondAttribute="trailing" id="uMz-8u-Oye"/>
+                                                        </constraints>
                                                     </scrollView>
                                                 </subviews>
                                                 <constraints>

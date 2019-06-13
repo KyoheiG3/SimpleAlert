@@ -21,9 +21,12 @@ open class AlertController: UIViewController {
     @IBOutlet weak var marginView: UIView!
     @IBOutlet weak var contentBaseView: UIVisualEffectView!
     @IBOutlet weak var cancelBaseView: UIVisualEffectView!
-    @IBOutlet weak var contentView: UIScrollView!
-    @IBOutlet weak var alertButtonView: UIScrollView!
-    @IBOutlet weak var cancelButtonView: UIScrollView!
+    @IBOutlet weak var contentScrollView: UIScrollView!
+    @IBOutlet weak var alertButtonScrollView: UIScrollView!
+    @IBOutlet weak var cancelButtonScrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var alertButtonView: UIView!
+    @IBOutlet weak var cancelButtonView: UIView!
     @IBOutlet weak var alertContentView: AlertContentView!
 
     @IBOutlet weak var containerViewWidth: NSLayoutConstraint!
@@ -132,9 +135,9 @@ open class AlertController: UIViewController {
         cancelBaseView.clipsToBounds = true
 
         if #available(iOS 11.0, *) {
-            contentView.contentInsetAdjustmentBehavior = .never
-            alertButtonView.contentInsetAdjustmentBehavior = .never
-            cancelButtonView.contentInsetAdjustmentBehavior = .never
+            contentScrollView.contentInsetAdjustmentBehavior = .never
+            alertButtonScrollView.contentInsetAdjustmentBehavior = .never
+            cancelButtonScrollView.contentInsetAdjustmentBehavior = .never
         }
 
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -193,30 +196,30 @@ open class AlertController: UIViewController {
         let margin = marginInsets.top + marginInsets.bottom
         let backgroundViewHeight = view.bounds.size.height - backgroundViewBottomSpace.constant - margin
 
-        if cancelButtonView.contentSize.height > cancelbuttonViewHeight.constant {
-            cancelbuttonViewHeight.constant = cancelButtonView.contentSize.height
+        if cancelButtonScrollView.contentSize.height > cancelbuttonViewHeight.constant {
+            cancelbuttonViewHeight.constant = cancelButtonScrollView.contentSize.height
         }
 
         if cancelbuttonViewHeight.constant > backgroundViewHeight {
-            cancelButtonView.contentSize.height = cancelbuttonViewHeight.constant
+            cancelButtonScrollView.contentSize.height = cancelbuttonViewHeight.constant
             cancelbuttonViewHeight.constant = backgroundViewHeight
 
             contentViewHeight.constant = 0
             alertButtonViewHeight.constant = 0
         } else {
             let baseViewHeight = backgroundViewHeight - cancelbuttonViewHeight.constant - spaceBetweenAlertAndCancel.constant
-            if alertButtonView.contentSize.height > alertButtonViewHeight.constant {
-                alertButtonViewHeight.constant = alertButtonView.contentSize.height
+            if alertButtonScrollView.contentSize.height > alertButtonViewHeight.constant {
+                alertButtonViewHeight.constant = alertButtonScrollView.contentSize.height
             }
 
             if alertButtonViewHeight.constant > baseViewHeight {
-                alertButtonView.contentSize.height = alertButtonViewHeight.constant
+                alertButtonScrollView.contentSize.height = alertButtonViewHeight.constant
                 alertButtonViewHeight.constant = baseViewHeight
                 contentViewHeight.constant = 0
             } else {
                 let mainViewHeight = baseViewHeight - alertButtonViewHeight.constant
                 if contentViewHeight.constant > mainViewHeight {
-                    contentView.contentSize.height = contentViewHeight.constant
+                    contentScrollView.contentSize.height = contentViewHeight.constant
                     contentViewHeight.constant = mainViewHeight
                 }
             }
@@ -270,7 +273,7 @@ extension AlertController {
     }
 
     func layoutContents() {
-        alertContentView.frame.size.width = contentView.frame.size.width
+        alertContentView.frame.size.width = contentScrollView.frame.size.width
         alertContentView.layoutContents()
 
         contentViewHeight.constant = alertContentView.bounds.height
@@ -374,6 +377,8 @@ extension AlertController: UIViewControllerTransitioningDelegate {
             return AlertControllerPresentTransition(backgroundColor: coverColor)
         case .actionSheet:
             return ActionSheetControllerPresentTransition(backgroundColor: coverColor, topSpace: self.backgroundViewTopSpace, bottomSpace: self.backgroundViewBottomSpace)
+        @unknown default:
+            fatalError()
         }
     }
 
@@ -383,6 +388,8 @@ extension AlertController: UIViewControllerTransitioningDelegate {
             return AlertControllerDismissTransition(backgroundColor: coverColor)
         case .actionSheet:
             return ActionSheetControllerDismissTransition(backgroundColor: coverColor, topSpace: self.backgroundViewTopSpace, bottomSpace: self.backgroundViewBottomSpace)
+        @unknown default:
+            fatalError()
         }
     }
 }
