@@ -12,20 +12,19 @@ open class AlertController: UIViewController {
     enum Const {
         static let alertWidth: CGFloat = 270
         static let actionSheetMargin: CGFloat = 16
-        static let cornerRadius: CGFloat = 12
+        static let cornerRadius: CGFloat = 13
         static let textFieldHeight: CGFloat = 25
     }
 
-    @IBOutlet weak var backgroundView: UIView! {
+    @IBOutlet weak var containerView: UIView! {
         didSet {
             if preferredStyle == .actionSheet {
                 tapGesture.addTarget(self, action: #selector(AlertController.backgroundViewTapAction(_:)))
-                backgroundView.addGestureRecognizer(tapGesture)
+                containerView.addGestureRecognizer(tapGesture)
             }
         }
     }
 
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containerStackView: UIStackView!
 
     @IBOutlet weak var contentEffectView: UIVisualEffectView! {
@@ -235,6 +234,7 @@ open class AlertController: UIViewController {
             constraint = containerStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         }
 
+        constraint.priority = .defaultHigh
         constraint.isActive = true
         containerStackViewYAxisConstraint = constraint
 
@@ -291,8 +291,19 @@ extension AlertController {
                 .filter { $0.style == .cancel }
                 .forEach(cancelButtonStackView.addAction)
 
+            if let borderView = cancelButtonStackView.arrangedSubviews.first {
+                cancelButtonStackView.removeArrangedSubview(borderView)
+                borderView.removeFromSuperview()
+            }
+
         case .alert:
             actions.forEach(alertButtonStackView.addAction)
+
+            if alertButtonStackView.axis == .horizontal, let borderView = alertButtonStackView.arrangedSubviews.first {
+                alertButtonStackView.removeArrangedSubview(borderView)
+                borderView.removeFromSuperview()
+                contentStackView.insertArrangedSubview(contentStackView.makeBorderView(), at: 1)
+            }
 
         @unknown default:
             break
@@ -300,12 +311,6 @@ extension AlertController {
 
         zip(actions, actions.dropFirst()).forEach { top, bottom in
             top.button.widthAnchor.constraint(equalTo: bottom.button.widthAnchor).isActive = true
-        }
-
-        if alertButtonStackView.axis == .horizontal, let borderView = alertButtonStackView.arrangedSubviews.first {
-            alertButtonStackView.removeArrangedSubview(borderView)
-            borderView.removeFromSuperview()
-            contentStackView.insertArrangedSubview(contentStackView.makeBorderView(), at: 1)
         }
     }
 
@@ -339,7 +344,9 @@ extension AlertController {
     }
 
     @objc func backgroundViewTapAction(_ gesture: UITapGestureRecognizer) {
-        dismiss()
+        if !containerStackView.frame.contains(gesture.location(in: containerView)) {
+            dismiss()
+        }
     }
 }
 

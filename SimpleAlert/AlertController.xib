@@ -15,7 +15,6 @@
                 <outlet property="alertButtonScrollView" destination="c4T-FE-9Do" id="l0G-rP-Fcu"/>
                 <outlet property="alertButtonStackView" destination="mYA-6o-Lme" id="XyH-gv-Xr6"/>
                 <outlet property="alertContentView" destination="VME-M9-hg3" id="naj-uG-swb"/>
-                <outlet property="backgroundView" destination="FSw-Ip-FKK" id="2Zy-X2-qyN"/>
                 <outlet property="cancelButtonScrollView" destination="d2d-ru-m0i" id="nr0-sx-bmD"/>
                 <outlet property="cancelButtonStackView" destination="qli-6O-fAD" id="H4q-qW-jCr"/>
                 <outlet property="cancelEffectView" destination="Bpx-DC-wqe" id="88l-Vz-73f"/>
@@ -34,9 +33,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSw-Ip-FKK">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DF-Kv-tlI">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
@@ -139,6 +135,7 @@
                         <constraint firstItem="o6A-82-Cjj" firstAttribute="centerX" secondItem="9DF-Kv-tlI" secondAttribute="centerX" id="C7k-qT-vrg"/>
                         <constraint firstItem="o6A-82-Cjj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="J8t-MN-NK4" secondAttribute="leading" constant="8" id="FZW-a6-6Ir"/>
                         <constraint firstItem="J8t-MN-NK4" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o6A-82-Cjj" secondAttribute="trailing" constant="8" id="QYl-si-6ch"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="o6A-82-Cjj" secondAttribute="bottom" constant="8" id="Y8Z-ys-OAE"/>
                         <constraint firstItem="J8t-MN-NK4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="o6A-82-Cjj" secondAttribute="bottom" id="w37-qz-T6h"/>
                         <constraint firstItem="o6A-82-Cjj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="J8t-MN-NK4" secondAttribute="top" id="xUg-w9-Xp7"/>
                     </constraints>
@@ -147,12 +144,8 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="9DF-Kv-tlI" secondAttribute="bottom" id="6To-6m-7pa"/>
-                <constraint firstItem="FSw-Ip-FKK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BS9-6c-irM"/>
-                <constraint firstAttribute="bottom" secondItem="FSw-Ip-FKK" secondAttribute="bottom" id="GVh-84-KyP"/>
-                <constraint firstAttribute="trailing" secondItem="FSw-Ip-FKK" secondAttribute="trailing" id="RPJ-0x-vxI"/>
                 <constraint firstItem="9DF-Kv-tlI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ThA-Ko-Nis"/>
                 <constraint firstItem="9DF-Kv-tlI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dX3-0e-NUt"/>
-                <constraint firstItem="FSw-Ip-FKK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vNz-NQ-EUK"/>
                 <constraint firstAttribute="trailing" secondItem="9DF-Kv-tlI" secondAttribute="trailing" id="zr6-fX-LNQ"/>
             </constraints>
         </view>
