@@ -13,8 +13,16 @@ struct Info {
         self.userInfo = userInfo
     }
 
-    var endFrame: CGRect? {
+    var keyboardFrameEnd: CGRect? {
         return userInfoRect(UIResponder.keyboardFrameEndUserInfoKey)
+    }
+
+    var duration: TimeInterval? {
+        return userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+    }
+
+    var curve: UIView.AnimationOptions? {
+        return (userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt).map(UIView.AnimationOptions.init)
     }
 
     private func userInfoRect(_ infoKey: String) -> CGRect? {

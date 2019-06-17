@@ -13,7 +13,11 @@ class AlertControllerDismissTransition: ViewControllerAnimatedTransition {
         container.addSubview(from.view)
 
         UIView.animate(withDuration: duration, animations: {
-            from.view.alpha = 0
-        }, completion: completion)
+            container.subviews.forEach { view in
+                view.alpha = 0
+            }
+        }) { _ in
+            completion(true)
+        }
     }
 }

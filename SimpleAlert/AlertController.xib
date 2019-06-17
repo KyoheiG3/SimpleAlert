@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertController" customModule="SimpleAlert" customModuleProvider="target">
+            <connections>
+                <outlet property="alertButtonScrollView" destination="c4T-FE-9Do" id="l0G-rP-Fcu"/>
+                <outlet property="alertButtonStackView" destination="mYA-6o-Lme" id="XyH-gv-Xr6"/>
+                <outlet property="alertContentView" destination="VME-M9-hg3" id="naj-uG-swb"/>
+                <outlet property="backgroundView" destination="FSw-Ip-FKK" id="2Zy-X2-qyN"/>
+                <outlet property="cancelButtonScrollView" destination="d2d-ru-m0i" id="nr0-sx-bmD"/>
+                <outlet property="cancelButtonStackView" destination="qli-6O-fAD" id="H4q-qW-jCr"/>
+                <outlet property="cancelEffectView" destination="Bpx-DC-wqe" id="88l-Vz-73f"/>
+                <outlet property="containerStackView" destination="o6A-82-Cjj" id="Hyp-Xd-vs4"/>
+                <outlet property="containerStackViewWidth" destination="peB-QG-uc9" id="2k0-Be-CC3"/>
+                <outlet property="containerView" destination="9DF-Kv-tlI" id="0Xh-Ly-t2c"/>
+                <outlet property="containerViewBottom" destination="6To-6m-7pa" id="B4W-Wd-Ako"/>
+                <outlet property="contentEffectView" destination="d7X-B5-jwf" id="TFO-oG-SBk"/>
+                <outlet property="contentScrollView" destination="jJf-De-FRm" id="2Tj-j4-UVE"/>
+                <outlet property="contentStackView" destination="vNZ-7v-d6o" id="4Jo-hf-PUk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSw-Ip-FKK">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DF-Kv-tlI">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="o6A-82-Cjj">
+                            <rect key="frame" x="57" y="252" width="300" height="392"/>
+                            <subviews>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7X-B5-jwf">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="agD-Me-Jqf">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vNZ-7v-d6o">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="256"/>
+                                                <subviews>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-De-FRm">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VME-M9-hg3" customClass="AlertContentView" customModule="SimpleAlert" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="VME-M9-hg3" secondAttribute="trailing" id="36r-t8-wWP"/>
+                                                            <constraint firstItem="VME-M9-hg3" firstAttribute="leading" secondItem="jJf-De-FRm" secondAttribute="leading" id="GgP-9A-Y3C"/>
+                                                            <constraint firstAttribute="bottom" secondItem="VME-M9-hg3" secondAttribute="bottom" id="IYy-d3-jTm"/>
+                                                            <constraint firstItem="VME-M9-hg3" firstAttribute="width" secondItem="jJf-De-FRm" secondAttribute="width" id="SIS-2M-f20"/>
+                                                            <constraint firstItem="VME-M9-hg3" firstAttribute="height" secondItem="jJf-De-FRm" secondAttribute="height" priority="251" id="ebX-Vd-Pbk"/>
+                                                            <constraint firstItem="VME-M9-hg3" firstAttribute="top" secondItem="jJf-De-FRm" secondAttribute="top" id="f0O-jl-uF0"/>
+                                                        </constraints>
+                                                    </scrollView>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4T-FE-9Do">
+                                                        <rect key="frame" x="0.0" y="128" width="300" height="128"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mYA-6o-Lme">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="mYA-6o-Lme" secondAttribute="bottom" id="Jc4-Kd-i6D"/>
+                                                            <constraint firstItem="mYA-6o-Lme" firstAttribute="width" secondItem="c4T-FE-9Do" secondAttribute="width" id="Jsq-KR-6Sc"/>
+                                                            <constraint firstItem="mYA-6o-Lme" firstAttribute="leading" secondItem="c4T-FE-9Do" secondAttribute="leading" id="Pkb-iq-X4j"/>
+                                                            <constraint firstItem="mYA-6o-Lme" firstAttribute="height" secondItem="c4T-FE-9Do" secondAttribute="height" priority="250" id="a1K-hb-Krk"/>
+                                                            <constraint firstAttribute="trailing" secondItem="mYA-6o-Lme" secondAttribute="trailing" id="i4j-nb-5iK"/>
+                                                            <constraint firstItem="mYA-6o-Lme" firstAttribute="top" secondItem="c4T-FE-9Do" secondAttribute="top" id="iaZ-S4-5vs"/>
+                                                        </constraints>
+                                                    </scrollView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="vNZ-7v-d6o" firstAttribute="leading" secondItem="agD-Me-Jqf" secondAttribute="leading" id="HyJ-2n-GOc"/>
+                                            <constraint firstAttribute="trailing" secondItem="vNZ-7v-d6o" secondAttribute="trailing" id="bhl-E8-Kq4"/>
+                                            <constraint firstAttribute="bottom" secondItem="vNZ-7v-d6o" secondAttribute="bottom" id="fSC-Iq-2iH"/>
+                                            <constraint firstItem="vNZ-7v-d6o" firstAttribute="top" secondItem="agD-Me-Jqf" secondAttribute="top" id="qWy-Pu-q8A"/>
+                                        </constraints>
+                                    </view>
+                                    <blurEffect style="extraLight"/>
+                                </visualEffectView>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpx-DC-wqe">
+                                    <rect key="frame" x="0.0" y="264" width="300" height="128"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="qk0-7a-Jyz">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2d-ru-m0i">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qli-6O-fAD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="qli-6O-fAD" secondAttribute="bottom" id="JDr-ED-DL7"/>
+                                                    <constraint firstItem="qli-6O-fAD" firstAttribute="top" secondItem="d2d-ru-m0i" secondAttribute="top" id="cyi-xf-FvX"/>
+                                                    <constraint firstItem="qli-6O-fAD" firstAttribute="height" secondItem="d2d-ru-m0i" secondAttribute="height" priority="252" id="dBI-d2-dop"/>
+                                                    <constraint firstItem="qli-6O-fAD" firstAttribute="leading" secondItem="d2d-ru-m0i" secondAttribute="leading" id="oUB-QK-JA2"/>
+                                                    <constraint firstItem="qli-6O-fAD" firstAttribute="width" secondItem="d2d-ru-m0i" secondAttribute="width" id="qpA-5f-UsO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qli-6O-fAD" secondAttribute="trailing" id="zCl-0f-wkH"/>
+                                                </constraints>
+                                            </scrollView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="d2d-ru-m0i" secondAttribute="trailing" id="3pf-vn-lWp"/>
+                                            <constraint firstAttribute="bottom" secondItem="d2d-ru-m0i" secondAttribute="bottom" id="MSJ-i6-Hee"/>
+                                            <constraint firstItem="d2d-ru-m0i" firstAttribute="top" secondItem="qk0-7a-Jyz" secondAttribute="top" id="Z2u-5H-l7c"/>
+                                            <constraint firstItem="d2d-ru-m0i" firstAttribute="leading" secondItem="qk0-7a-Jyz" secondAttribute="leading" id="tRD-G5-ZE3"/>
+                                        </constraints>
+                                    </view>
+                                    <blurEffect style="extraLight"/>
+                                </visualEffectView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" priority="750" constant="300" id="peB-QG-uc9"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="o6A-82-Cjj" firstAttribute="centerY" secondItem="9DF-Kv-tlI" secondAttribute="centerY" placeholder="YES" id="6Ty-qt-4cT"/>
+                        <constraint firstItem="o6A-82-Cjj" firstAttribute="centerX" secondItem="9DF-Kv-tlI" secondAttribute="centerX" id="C7k-qT-vrg"/>
+                        <constraint firstItem="o6A-82-Cjj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="J8t-MN-NK4" secondAttribute="leading" constant="8" id="FZW-a6-6Ir"/>
+                        <constraint firstItem="J8t-MN-NK4" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o6A-82-Cjj" secondAttribute="trailing" constant="8" id="QYl-si-6ch"/>
+                        <constraint firstItem="J8t-MN-NK4" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="o6A-82-Cjj" secondAttribute="bottom" id="w37-qz-T6h"/>
+                        <constraint firstItem="o6A-82-Cjj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="J8t-MN-NK4" secondAttribute="top" id="xUg-w9-Xp7"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="J8t-MN-NK4"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="9DF-Kv-tlI" secondAttribute="bottom" id="6To-6m-7pa"/>
+                <constraint firstItem="FSw-Ip-FKK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BS9-6c-irM"/>
+                <constraint firstAttribute="bottom" secondItem="FSw-Ip-FKK" secondAttribute="bottom" id="GVh-84-KyP"/>
+                <constraint firstAttribute="trailing" secondItem="FSw-Ip-FKK" secondAttribute="trailing" id="RPJ-0x-vxI"/>
+                <constraint firstItem="9DF-Kv-tlI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ThA-Ko-Nis"/>
+                <constraint firstItem="9DF-Kv-tlI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dX3-0e-NUt"/>
+                <constraint firstItem="FSw-Ip-FKK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vNz-NQ-EUK"/>
+                <constraint firstAttribute="trailing" secondItem="9DF-Kv-tlI" secondAttribute="trailing" id="zr6-fX-LNQ"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

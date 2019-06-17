@@ -10,15 +10,24 @@ import UIKit
 
 class AlertControllerPresentTransition: ViewControllerAnimatedTransition {
     override func animateTransition(_ from: UIViewController, to: UIViewController, container: UIView, completion: @escaping (Bool) -> Void) {
+        let backgroundView = UIView(frame: container.bounds)
+        backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundView.alpha = 0
+        backgroundView.backgroundColor = backgroundColor.withAlphaComponent(0.4)
+        container.addSubview(backgroundView)
+
         to.view.frame = container.bounds
-        to.view.backgroundColor = backgroundColor.withAlphaComponent(0.4)
         to.view.transform = from.view.transform.concatenating(CGAffineTransform(scaleX: 1.2, y: 1.2))
         to.view.alpha = 0
         container.addSubview(to.view)
 
         UIView.animate(withDuration: duration, animations: {
             to.view.transform = from.view.transform
-            to.view.alpha = 1
-        }, completion: completion)
+            container.subviews.forEach { view in
+                view.alpha = 1
+            }
+        }) { _ in
+            completion(true)
+        }
     }
 }

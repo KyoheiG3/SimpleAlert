@@ -7,9 +7,10 @@
 //
 
 final class TextField: UITextField {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        autoresizingMask = .flexibleWidth
+    var handler: ((UITextField) -> Void)?
+
+    init() {
+        super.init(frame: .zero)
         font = .systemFont(ofSize: 14)
         backgroundColor = UIColor.white
         layer.borderColor = UIColor.gray.cgColor
@@ -19,6 +20,7 @@ final class TextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.offsetBy(dx: 4, dy: 0)
     }
@@ -27,4 +29,3 @@ final class TextField: UITextField {
         return bounds.offsetBy(dx: 4, dy: 0)
     }
 }
-

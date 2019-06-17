@@ -23,44 +23,24 @@ open class AlertAction {
         }
     }
 
-    public init(title: String, style: Style, dismissesAlert: Bool = true, handler: ((AlertAction?) -> Void)? = nil) {
+    public init(title: String, style: Style, shouldDismisses: Bool = true, handler: ((AlertAction?) -> Void)? = nil) {
         self.title = title
         self.handler = handler
         self.style = style
-        self.dismissesAlert = dismissesAlert
+        self.shouldDismisses = shouldDismisses
 
         button.setTitle(title, for: .normal)
-        button.autoresizingMask = .flexibleWidth
-        addHorizontalBorder()
-    }
-
-    func addHorizontalBorder() {
-        let borderView = UIView(frame: CGRect(x: 0, y: -CGFloat.thinWidth, width: button.bounds.width, height: CGFloat.thinWidth))
-        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-        borderView.autoresizingMask = .flexibleWidth
-        button.addSubview(borderView)
-    }
-
-    func addVerticalBorder() {
-        let borderView = UIView(frame: CGRect(x: -CGFloat.thinWidth, y: 0, width: CGFloat.thinWidth, height: button.bounds.height))
-        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-        borderView.autoresizingMask = .flexibleHeight
-        button.addSubview(borderView)
+        button.setTitleColor(button.titleColor(for: .normal), for: .highlighted)
+        button.setBackgroundImage(UIImage(color: .lightGray), for: .highlighted)
     }
 
     let title: String
     let handler: ((AlertAction) -> Void)?
     let style: Style
-    let dismissesAlert: Bool
+    let shouldDismisses: Bool
     public var button = UIButton(type: .system)
     public var isEnabled: Bool  {
         get { return button.isEnabled }
         set { button.isEnabled = newValue }
-    }
-}
-
-extension UIView {
-    func addAction(_ action: AlertAction) {
-        addSubview(action.button)
     }
 }

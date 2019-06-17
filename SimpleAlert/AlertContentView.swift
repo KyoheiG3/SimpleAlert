@@ -9,67 +9,56 @@
 import UIKit
 
 open class AlertContentView: UIView {
-    @IBOutlet public weak var baseView: UIView!
-    @IBOutlet public weak var titleLabel: UILabel!
-    @IBOutlet public weak var messageLabel: UILabel!
-    @IBOutlet public weak var textBackgroundView: UIView!
-    @IBOutlet public weak var containerView: UIView!
+    @IBOutlet public private(set) weak var contentStackView: UIStackView!
+    @IBOutlet public private(set) weak var titleLabel: UILabel!
+    @IBOutlet public private(set) weak var messageLabel: UILabel!
+    @IBOutlet public private(set) weak var textBackgroundView: UIView!
+    @IBOutlet private weak var textFieldView: UIView!
+    @IBOutlet private weak var textFieldStackView: UIStackView!
 
-    @IBOutlet var verticalSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var titleSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var messageSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet var textViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var containerViewHeight: NSLayoutConstraint!
-
-    var textFields: [UITextField] = []
-
-    func addTextField() -> UITextField {
-        let textField = TextField(frame: textBackgroundView.bounds)
-        textFields.append(textField)
-        textBackgroundView.addSubview(textField)
-        return textField
+    var textFields: [UITextField] {
+        return textFieldStackView?.arrangedSubviews.compactMap { $0 as? UITextField } ?? []
     }
 
-    func layoutContents() {
-        textViewHeightConstraint.constant = 0
-        for textField in textFields {
-            textField.frame.origin.y = textViewHeightConstraint.constant
-            if textField.frame.height <= 0 {
-                textField.frame.size.height = 25
-            }
-            textViewHeightConstraint.constant += textField.frame.height
-        }
+    open override func layoutSubviews() {
+        super.layoutSubviews()
 
-        titleLabel.preferredMaxLayoutWidth = baseView.bounds.width
-        messageLabel.preferredMaxLayoutWidth = baseView.bounds.width
-
-        if textBackgroundView.subviews.isEmpty {
-            messageSpaceConstraint.constant = 0
-        }
-
-        if titleLabel.text == nil && messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-            messageSpaceConstraint.constant = 0
-
-            if textBackgroundView.subviews.isEmpty {
-                verticalSpaceConstraint.constant = 0
-            }
-        } else if titleLabel.text == nil || messageLabel.text == nil {
-            titleSpaceConstraint.constant = 0
-        }
-
-        if let view = containerView.subviews.sorted(by: { $0.frame.maxY > $1.frame.maxY }).first {
-            containerViewHeight.constant = view.frame.maxY
-        }
-        baseView.layoutIfNeeded()
-
-        frame.size.height = baseView.bounds.height + (verticalSpaceConstraint.constant * 2) + containerViewHeight.constant
+        titleLabel.isHidden = titleLabel.text?.isEmpty ?? true
+        messageLabel.isHidden = messageLabel.text?.isEmpty ?? true
+        textFieldView.isHidden = textFields.isEmpty
+        superview?.isHidden = titleLabel.isHidden && messageLabel.isHidden && textFieldView.isHidden
     }
-    
-    func addHorizontalBorder() {
-        let borderView = UIView(frame: CGRect(x: 0, y: -CGFloat.thinWidth, width: containerView.bounds.width, height: CGFloat.thinWidth))
-        borderView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-        borderView.autoresizingMask = .flexibleWidth
-        containerView.addSubview(borderView)
+
+    func append(_ textField: UITextField) {
+        textFieldStackView.addArrangedSubview(textField)
+    }
+
+    func removeAllTextField() {
+        textFieldStackView.removeAllArrangedSubviews()
+    }
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        loadNibContent()
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        loadNibContent()
+    }
+
+    private func loadNibContent() {
+        let type = AlertContentView.self
+        let nib = UINib(nibName: String(describing: type), bundle: Bundle(for: type))
+        if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
+            addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                view.topAnchor.constraint(equalTo: topAnchor),
+                view.leftAnchor.constraint(equalTo: leftAnchor),
+                view.rightAnchor.constraint(equalTo: rightAnchor),
+                view.bottomAnchor.constraint(equalTo: bottomAnchor)
+                ])
+        }
     }
 }

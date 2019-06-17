@@ -10,8 +10,7 @@
 		C70C0C3E1A5FBEC8002BC071 /* SimpleAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = C70C0C3D1A5FBEC8002BC071 /* SimpleAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C70C0C441A5FBEC8002BC071 /* SimpleAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70C0C381A5FBEC8002BC071 /* SimpleAlert.framework */; };
 		C70C0C4B1A5FBEC8002BC071 /* SimpleAlertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0C4A1A5FBEC8002BC071 /* SimpleAlertTests.swift */; };
-		C70C0C561A5FBFB4002BC071 /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C0C541A5FBFB4002BC071 /* SimpleAlert.swift */; };
-		C70C0C571A5FBFB4002BC071 /* SimpleAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */; };
+		C70C0C571A5FBFB4002BC071 /* AlertContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70C0C551A5FBFB4002BC071 /* AlertContentView.xib */; };
 		C7453D5F1D868B96004E13BD /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7453D5E1D868B96004E13BD /* AlertAction.swift */; };
 		C7453D611D868C30004E13BD /* AlertContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7453D601D868C30004E13BD /* AlertContentView.swift */; };
 		C75D875D1FC80357003592E3 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D875C1FC80357003592E3 /* TextField.swift */; };
@@ -19,12 +18,15 @@
 		C75D87651FC88175003592E3 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87641FC88175003592E3 /* Info.swift */; };
 		C75D87671FC995D2003592E3 /* ViewControllerAnimatedTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */; };
 		C75D87751FC99726003592E3 /* ActionSheetControllerPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */; };
-		C75D87761FC99726003592E3 /* ActionSheetControllerTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87731FC99725003592E3 /* ActionSheetControllerTransition.swift */; };
 		C75D87771FC99726003592E3 /* ActionSheetControllerDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */; };
 		C75D877A1FC99730003592E3 /* AlertControllerDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */; };
 		C75D877B1FC99730003592E3 /* AlertControllerPresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */; };
 		C75D877D1FC997F0003592E3 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D877C1FC997F0003592E3 /* UIViewExtension.swift */; };
 		C75D87801FCBD996003592E3 /* UIAlertControllerStyleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */; };
+		C78B849222B2991900DC995A /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B849022B2991900DC995A /* AlertController.swift */; };
+		C78B849322B2991900DC995A /* AlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78B849122B2991900DC995A /* AlertController.xib */; };
+		C78B849A22B4980600DC995A /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B849922B4980500DC995A /* UIStackViewExtension.swift */; };
+		C78B849C22B498BE00DC995A /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78B849B22B498BE00DC995A /* UIImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +46,7 @@
 		C70C0C431A5FBEC8002BC071 /* SimpleAlertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleAlertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70C0C491A5FBEC8002BC071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C70C0C4A1A5FBEC8002BC071 /* SimpleAlertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertTests.swift; sourceTree = "<group>"; };
-		C70C0C541A5FBFB4002BC071 /* SimpleAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
-		C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleAlert.xib; sourceTree = "<group>"; };
+		C70C0C551A5FBFB4002BC071 /* AlertContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertContentView.xib; sourceTree = "<group>"; };
 		C7453D5E1D868B96004E13BD /* AlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
 		C7453D601D868C30004E13BD /* AlertContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertContentView.swift; sourceTree = "<group>"; };
 		C75D875C1FC80357003592E3 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
@@ -53,12 +54,15 @@
 		C75D87641FC88175003592E3 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerAnimatedTransition.swift; sourceTree = "<group>"; };
 		C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetControllerPresentTransition.swift; sourceTree = "<group>"; };
-		C75D87731FC99725003592E3 /* ActionSheetControllerTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetControllerTransition.swift; sourceTree = "<group>"; };
 		C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetControllerDismissTransition.swift; sourceTree = "<group>"; };
 		C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerDismissTransition.swift; sourceTree = "<group>"; };
 		C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControllerPresentTransition.swift; sourceTree = "<group>"; };
 		C75D877C1FC997F0003592E3 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerStyleExtension.swift; sourceTree = "<group>"; };
+		C78B849022B2991900DC995A /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
+		C78B849122B2991900DC995A /* AlertController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertController.xib; sourceTree = "<group>"; };
+		C78B849922B4980500DC995A /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
+		C78B849B22B498BE00DC995A /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,33 +105,19 @@
 		C70C0C3A1A5FBEC8002BC071 /* SimpleAlert */ = {
 			isa = PBXGroup;
 			children = (
-				C70C0C3B1A5FBEC8002BC071 /* Supporting Files */,
-				C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */,
-				C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */,
-				C75D87731FC99725003592E3 /* ActionSheetControllerTransition.swift */,
+				C78B849D22B498C300DC995A /* Extension */,
+				C78B849422B33B1600DC995A /* Transition */,
 				C7453D5E1D868B96004E13BD /* AlertAction.swift */,
 				C7453D601D868C30004E13BD /* AlertContentView.swift */,
-				C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */,
-				C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */,
-				C75D87621FC88148003592E3 /* CGFloatExtension.swift */,
+				C70C0C551A5FBFB4002BC071 /* AlertContentView.xib */,
+				C70C0C3C1A5FBEC8002BC071 /* Info.plist */,
 				C75D87641FC88175003592E3 /* Info.swift */,
 				C70C0C3D1A5FBEC8002BC071 /* SimpleAlert.h */,
-				C70C0C541A5FBFB4002BC071 /* SimpleAlert.swift */,
-				C70C0C551A5FBFB4002BC071 /* SimpleAlert.xib */,
 				C75D875C1FC80357003592E3 /* TextField.swift */,
-				C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */,
-				C75D877C1FC997F0003592E3 /* UIViewExtension.swift */,
-				C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */,
+				C78B849022B2991900DC995A /* AlertController.swift */,
+				C78B849122B2991900DC995A /* AlertController.xib */,
 			);
 			path = SimpleAlert;
-			sourceTree = "<group>";
-		};
-		C70C0C3B1A5FBEC8002BC071 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C70C0C3C1A5FBEC8002BC071 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C70C0C471A5FBEC8002BC071 /* SimpleAlertTests */ = {
@@ -145,6 +135,30 @@
 				C70C0C491A5FBEC8002BC071 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C78B849422B33B1600DC995A /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				C75D87661FC995D2003592E3 /* ViewControllerAnimatedTransition.swift */,
+				C75D87741FC99725003592E3 /* ActionSheetControllerDismissTransition.swift */,
+				C75D87721FC99725003592E3 /* ActionSheetControllerPresentTransition.swift */,
+				C75D87781FC99730003592E3 /* AlertControllerDismissTransition.swift */,
+				C75D87791FC99730003592E3 /* AlertControllerPresentTransition.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
+		C78B849D22B498C300DC995A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C75D87621FC88148003592E3 /* CGFloatExtension.swift */,
+				C75D877F1FCBD996003592E3 /* UIAlertControllerStyleExtension.swift */,
+				C78B849922B4980500DC995A /* UIStackViewExtension.swift */,
+				C78B849B22B498BE00DC995A /* UIImageExtension.swift */,
+				C75D877C1FC997F0003592E3 /* UIViewExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,7 +254,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C70C0C571A5FBFB4002BC071 /* SimpleAlert.xib in Resources */,
+				C78B849322B2991900DC995A /* AlertController.xib in Resources */,
+				C70C0C571A5FBFB4002BC071 /* AlertContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,19 +274,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7453D611D868C30004E13BD /* AlertContentView.swift in Sources */,
+				C78B849222B2991900DC995A /* AlertController.swift in Sources */,
 				C7453D5F1D868B96004E13BD /* AlertAction.swift in Sources */,
-				C70C0C561A5FBFB4002BC071 /* SimpleAlert.swift in Sources */,
 				C75D87651FC88175003592E3 /* Info.swift in Sources */,
 				C75D875D1FC80357003592E3 /* TextField.swift in Sources */,
 				C75D877B1FC99730003592E3 /* AlertControllerPresentTransition.swift in Sources */,
 				C75D87671FC995D2003592E3 /* ViewControllerAnimatedTransition.swift in Sources */,
 				C75D87751FC99726003592E3 /* ActionSheetControllerPresentTransition.swift in Sources */,
+				C78B849C22B498BE00DC995A /* UIImageExtension.swift in Sources */,
 				C75D87771FC99726003592E3 /* ActionSheetControllerDismissTransition.swift in Sources */,
 				C75D877D1FC997F0003592E3 /* UIViewExtension.swift in Sources */,
 				C75D87801FCBD996003592E3 /* UIAlertControllerStyleExtension.swift in Sources */,
+				C78B849A22B4980600DC995A /* UIStackViewExtension.swift in Sources */,
 				C75D877A1FC99730003592E3 /* AlertControllerDismissTransition.swift in Sources */,
 				C75D87631FC88148003592E3 /* CGFloatExtension.swift in Sources */,
-				C75D87761FC99726003592E3 /* ActionSheetControllerTransition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -394,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

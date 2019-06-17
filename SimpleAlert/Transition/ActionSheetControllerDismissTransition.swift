@@ -8,15 +8,19 @@
 
 import UIKit
 
-class ActionSheetControllerDismissTransition: ActionSheetControllerTransition {
+class ActionSheetControllerDismissTransition: ViewControllerAnimatedTransition {
     override func animateTransition(_ from: UIViewController, to: UIViewController, container: UIView, completion: @escaping (Bool) -> Void) {
         container.addSubview(from.view)
 
         UIView.animate(withDuration: duration, animations: {
-            self.bottomSpace().constant = -from.view.bounds.height
-            self.topSpace().constant = from.view.bounds.height
-            from.view.backgroundColor = from.view.backgroundColor?.withAlphaComponent(0)
-            from.view.layoutIfNeeded()
-        }, completion: completion)
+            from.view.transform = CGAffineTransform(translationX: 0, y: from.view.bounds.height)
+            container.subviews.forEach { view in
+                if view !== from.view {
+                    view.alpha = 0
+                }
+            }
+        }) { _ in
+            completion(true)
+        }
     }
 }

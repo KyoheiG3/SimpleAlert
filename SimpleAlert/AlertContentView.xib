@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertContentView" customModule="SimpleAlert" customModuleProvider="target">
+            <connections>
+                <outlet property="contentStackView" destination="Gt2-ii-9Ks" id="Nb6-gp-JmU"/>
+                <outlet property="messageLabel" destination="iC7-zZ-Tbm" id="5RE-cg-d6q"/>
+                <outlet property="textBackgroundView" destination="YJG-rC-diK" id="4gw-Qq-C1E"/>
+                <outlet property="textFieldStackView" destination="7xu-bY-w1v" id="R1N-85-cfo"/>
+                <outlet property="textFieldView" destination="pfT-mP-x0x" id="kN8-1N-skc"/>
+                <outlet property="titleLabel" destination="xau-wx-Wz2" id="ZGN-ht-UQe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" id="Gt2-ii-9Ks">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DvE-7U-YMQ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qrD-dw-Wth">
+                            <rect key="frame" x="16" y="16" width="343" height="62"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xau-wx-Wz2">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="19.5"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iC7-zZ-Tbm">
+                                    <rect key="frame" x="0.0" y="29.5" width="343" height="14.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-mP-x0x">
+                                    <rect key="frame" x="0.0" y="54" width="343" height="8"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJG-rC-diK">
+                                            <rect key="frame" x="0.0" y="8" width="343" height="0.0"/>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7xu-bY-w1v">
+                                            <rect key="frame" x="0.0" y="8" width="343" height="0.0"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" priority="100" id="U1R-bb-guH"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7xu-bY-w1v" firstAttribute="top" secondItem="pfT-mP-x0x" secondAttribute="top" constant="8" id="Amb-Zp-lg2"/>
+                                        <constraint firstItem="YJG-rC-diK" firstAttribute="trailing" secondItem="7xu-bY-w1v" secondAttribute="trailing" id="KnD-St-Sdd"/>
+                                        <constraint firstItem="YJG-rC-diK" firstAttribute="top" secondItem="7xu-bY-w1v" secondAttribute="top" id="MSb-f7-LSt"/>
+                                        <constraint firstItem="YJG-rC-diK" firstAttribute="leading" secondItem="7xu-bY-w1v" secondAttribute="leading" id="ZJf-tA-Fwo"/>
+                                        <constraint firstAttribute="trailing" secondItem="7xu-bY-w1v" secondAttribute="trailing" id="hNX-Kx-6F0"/>
+                                        <constraint firstItem="YJG-rC-diK" firstAttribute="bottom" secondItem="7xu-bY-w1v" secondAttribute="bottom" id="jkB-jj-Yzd"/>
+                                        <constraint firstAttribute="bottom" secondItem="7xu-bY-w1v" secondAttribute="bottom" id="vTF-y8-QXS"/>
+                                        <constraint firstItem="7xu-bY-w1v" firstAttribute="leading" secondItem="pfT-mP-x0x" secondAttribute="leading" id="zxP-NX-qub"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="qrD-dw-Wth" secondAttribute="bottom" constant="16" id="0Uc-94-8vt"/>
+                        <constraint firstItem="qrD-dw-Wth" firstAttribute="leading" secondItem="DvE-7U-YMQ" secondAttribute="leading" constant="16" id="bjP-J7-dsf"/>
+                        <constraint firstItem="qrD-dw-Wth" firstAttribute="top" secondItem="DvE-7U-YMQ" secondAttribute="top" constant="16" id="cNL-PP-lqY"/>
+                        <constraint firstAttribute="trailing" secondItem="qrD-dw-Wth" secondAttribute="trailing" constant="16" id="snv-Ym-3Sw"/>
+                    </constraints>
+                </view>
+            </subviews>
+        </stackView>
+    </objects>
+</document>
