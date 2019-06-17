@@ -30,7 +30,6 @@ open class AlertAction {
         self.shouldDismisses = shouldDismisses
 
         button.setTitle(title, for: .normal)
-        button.setTitleColor(button.titleColor(for: .normal), for: .highlighted)
         button.setBackgroundImage(UIImage(color: .lightGray), for: .highlighted)
     }
 
