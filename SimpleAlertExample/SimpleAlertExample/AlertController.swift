@@ -47,5 +47,6 @@ class CustomAlertController: AlertController {
         contentView.messageLabel.font = UIFont.boldSystemFont(ofSize: 16)
         contentView.textBackgroundView.layer.cornerRadius = 10.0
         contentView.textBackgroundView.clipsToBounds = true
+        contentView.textBackgroundView.backgroundColor = .lightGray
     }
 }
