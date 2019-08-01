@@ -174,6 +174,7 @@ open class AlertController: UIViewController {
         }
 
         configureContentView(alertContentView)
+        alertContentView.layoutIfNeeded()
 
         layoutButtons()
 
@@ -282,8 +283,8 @@ extension AlertController {
     func layoutButtons() {
         alertButtonStackView.axis = preferredStyle == .alert && actions.count == 2 ? .horizontal : .vertical
 
-        switch preferredStyle {
-        case .actionSheet:
+        switch (preferredStyle, alertButtonStackView.axis) {
+        case (.actionSheet, _):
             actions.lazy
                 .filter { $0.style != .cancel }
                 .forEach(alertButtonStackView.addAction)
@@ -291,18 +292,34 @@ extension AlertController {
                 .filter { $0.style == .cancel }
                 .forEach(cancelButtonStackView.addAction)
 
+            if alertContentView.isHidden, let borderView = alertButtonStackView.arrangedSubviews.first {
+                alertButtonStackView.removeArrangedSubview(borderView)
+                borderView.removeFromSuperview()
+            }
+
             if let borderView = cancelButtonStackView.arrangedSubviews.first {
                 cancelButtonStackView.removeArrangedSubview(borderView)
                 borderView.removeFromSuperview()
             }
 
-        case .alert:
+        case (.alert, .horizontal):
             actions.forEach(alertButtonStackView.addAction)
 
-            if alertButtonStackView.axis == .horizontal, let borderView = alertButtonStackView.arrangedSubviews.first {
+            if let borderView = alertButtonStackView.arrangedSubviews.first {
                 alertButtonStackView.removeArrangedSubview(borderView)
                 borderView.removeFromSuperview()
+            }
+
+            if !alertContentView.isHidden {
                 contentStackView.insertArrangedSubview(contentStackView.makeBorderView(), at: 1)
+            }
+
+        case (.alert, .vertical):
+            actions.forEach(alertButtonStackView.addAction)
+
+            if alertContentView.isHidden, let borderView = alertButtonStackView.arrangedSubviews.first {
+                alertButtonStackView.removeArrangedSubview(borderView)
+                borderView.removeFromSuperview()
             }
 
         @unknown default:

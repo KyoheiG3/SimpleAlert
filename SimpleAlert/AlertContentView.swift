@@ -26,7 +26,8 @@ open class AlertContentView: UIView {
         titleLabel.isHidden = titleLabel.text?.isEmpty ?? true
         messageLabel.isHidden = messageLabel.text?.isEmpty ?? true
         textFieldView.isHidden = textFields.isEmpty
-        superview?.isHidden = titleLabel.isHidden && messageLabel.isHidden && textFieldView.isHidden
+        isHidden = titleLabel.isHidden && messageLabel.isHidden && textFieldView.isHidden
+        superview?.isHidden = isHidden
     }
 
     func append(_ textField: UITextField) {
