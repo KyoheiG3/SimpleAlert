@@ -6,6 +6,9 @@
 //  Copyright © 2017年 kyohei_ito. All rights reserved.
 //
 
+import UIKit
+import Foundation
+
 extension CGFloat {
     static var thinWidth: CGFloat {
         return 1 / UIScreen.main.scale

@@ -5,6 +5,7 @@
 //  Created by Kyohei Ito on 2017/11/27.
 //  Copyright © 2017年 kyohei_ito. All rights reserved.
 //
+import UIKit
 
 extension UIAlertController.Style {
     var fontSize: CGFloat {

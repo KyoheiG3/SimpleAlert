@@ -6,6 +6,8 @@
 //  Copyright © 2017年 kyohei_ito. All rights reserved.
 //
 
+import UIKit
+
 struct Info {
     private var userInfo: [AnyHashable: Any]?
 
