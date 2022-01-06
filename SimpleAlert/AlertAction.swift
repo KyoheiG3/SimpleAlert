@@ -5,6 +5,7 @@
 //  Created by Kyohei Ito on 2016/09/12.
 //  Copyright © 2016年 kyohei_ito. All rights reserved.
 //
+import UIKit
 
 open class AlertAction {
     public enum Style {
