@@ -22,10 +22,10 @@ final class TextField: UITextField {
     }
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.offsetBy(dx: 4, dy: 0)
+        return bounds.insetBy(dx: 4, dy: 0)
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.offsetBy(dx: 4, dy: 0)
+        return bounds.insetBy(dx: 4, dy: 0)
     }
 }
