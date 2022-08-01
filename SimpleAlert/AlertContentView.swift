@@ -26,7 +26,8 @@ open class AlertContentView: UIView {
         titleLabel.isHidden = titleLabel.text?.isEmpty ?? true
         messageLabel.isHidden = messageLabel.text?.isEmpty ?? true
         textFieldView.isHidden = textFields.isEmpty
-        isHidden = titleLabel.isHidden && messageLabel.isHidden && textFieldView.isHidden
+        contentStackView.arrangedSubviews[0].isHidden = titleLabel.isHidden && messageLabel.isHidden && textFieldView.isHidden
+        isHidden = contentStackView.arrangedSubviews.allSatisfy(\.isHidden)
         superview?.isHidden = isHidden
     }
 
