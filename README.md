@@ -1,9 +1,9 @@
 # SimpleAlert
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Version](https://img.shields.io/cocoapods/v/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
-[![License](https://img.shields.io/cocoapods/l/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
-[![Platform](https://img.shields.io/cocoapods/p/SimpleAlert.svg?style=flat)](http://cocoadocs.org/docsets/SimpleAlert)
+[![Version](https://img.shields.io/cocoapods/v/SimpleAlert.svg?style=flat)](http://cocoapods.org/pods/SimpleAlert)
+[![License](https://img.shields.io/cocoapods/l/SimpleAlert.svg?style=flat)](http://cocoapods.org/pods/SimpleAlert)
+[![Platform](https://img.shields.io/cocoapods/p/SimpleAlert.svg?style=flat)](http://cocoapods.org/pods/SimpleAlert)
 
 It is simple and easily customizable alert.
 Can be used as `UIAlertController`.
