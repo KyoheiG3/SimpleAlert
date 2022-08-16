@@ -51,7 +51,7 @@
                                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJf-De-FRm">
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VME-M9-hg3" customClass="AlertContentView" customModule="SimpleAlert" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VME-M9-hg3" customClass="AlertContentView" customModule="SimpleAlert">
                                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
                                                             </view>
                                                         </subviews>

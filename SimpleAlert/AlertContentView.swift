@@ -51,7 +51,12 @@ open class AlertContentView: UIView {
 
     private func loadNibContent() {
         let type = AlertContentView.self
-        let nib = UINib(nibName: String(describing: type), bundle: Bundle(for: type))
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        #else
+        let bundle = Bundle(for: type)
+        #endif
+        let nib = UINib(nibName: String(describing: type), bundle: bundle)
         if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
             addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false

@@ -111,7 +111,12 @@ open class AlertController: UIViewController {
 
     private convenience init() {
         let type = AlertController.self
-        self.init(nibName: String(describing: type), bundle: Bundle(for: type))
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        #else
+        let bundle = Bundle(for: type)
+        #endif
+        self.init(nibName: String(describing: type), bundle: bundle)
     }
 
     public convenience init(title: String?, message: String?, style: UIAlertController.Style) {
