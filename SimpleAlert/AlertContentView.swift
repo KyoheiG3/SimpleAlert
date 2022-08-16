@@ -16,6 +16,18 @@ open class AlertContentView: UIView {
     @IBOutlet private weak var textFieldView: UIView!
     @IBOutlet private weak var textFieldStackView: UIStackView!
 
+    private weak var titleHeightConstraint: NSLayoutConstraint? {
+        didSet {
+            oldValue?.isActive = false
+        }
+    }
+
+    private weak var messageHeightConstraint: NSLayoutConstraint? {
+        didSet {
+            oldValue?.isActive = false
+        }
+    }
+
     var textFields: [UITextField] {
         return textFieldStackView?.arrangedSubviews.compactMap { $0 as? UITextField } ?? []
     }
@@ -62,5 +74,32 @@ open class AlertContentView: UIView {
                 view.bottomAnchor.constraint(equalTo: bottomAnchor)
                 ])
         }
+    }
+}
+
+extension AlertContentView {
+    func layoutTitleAndMessageIfNeeded() {
+        titleHeightConstraint = heightConstraintForLabel(titleLabel)
+        titleHeightConstraint?.isActive = true
+
+        messageHeightConstraint = heightConstraintForLabel(messageLabel)
+        messageHeightConstraint?.isActive = true
+    }
+
+    private func heightConstraintForLabel(_ label: UILabel) -> NSLayoutConstraint? {
+        guard label.numberOfLines == 0, !(label.text?.isEmpty ?? true) else {
+            return nil
+        }
+
+        let height = label.systemLayoutSizeFitting(
+            .init(
+                width:label.bounds.width,
+                height: UIView.layoutFittingCompressedSize.height
+            ),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        ).height
+        
+        return label.heightAnchor.constraint(equalToConstant: height)
     }
 }

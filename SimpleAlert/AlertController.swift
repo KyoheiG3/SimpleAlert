@@ -176,6 +176,7 @@ open class AlertController: UIViewController {
         configureContentView(alertContentView)
         alertContentView.layoutIfNeeded()
 
+        alertContentView.layoutTitleAndMessageIfNeeded()
         layoutButtons()
 
         view.layoutIfNeeded()
