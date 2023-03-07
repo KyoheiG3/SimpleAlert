@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SimpleAlert"
-  s.version      = "5.0.5"
+  s.version      = "5.1.0"
   s.summary      = "Simply Alert for Swift"
   s.homepage     = "https://github.com/KyoheiG3/SimpleAlert"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
