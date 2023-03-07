@@ -10,8 +10,18 @@ import UIKit
 
 open class AlertContentView: UIView {
     @IBOutlet public private(set) weak var contentStackView: UIStackView!
-    @IBOutlet public private(set) weak var titleLabel: UILabel!
-    @IBOutlet public private(set) weak var messageLabel: UILabel!
+    @IBOutlet public private(set) weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.text = nil
+            titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        }
+    }
+    @IBOutlet public private(set) weak var messageLabel: UILabel! {
+        didSet {
+            messageLabel.text = nil
+            messageLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        }
+    }
     @IBOutlet public private(set) weak var textBackgroundView: UIView!
     @IBOutlet private weak var textFieldView: UIView!
     @IBOutlet private weak var textFieldStackView: UIStackView!
@@ -29,6 +39,10 @@ open class AlertContentView: UIView {
         contentStackView.arrangedSubviews[0].isHidden = titleLabel.isHidden && messageLabel.isHidden && textFieldView.isHidden
         isHidden = contentStackView.arrangedSubviews.allSatisfy(\.isHidden)
         superview?.isHidden = isHidden
+
+        let labelMaxLayoutWidth = bounds.width - 32
+        titleLabel.preferredMaxLayoutWidth = labelMaxLayoutWidth
+        messageLabel.preferredMaxLayoutWidth = labelMaxLayoutWidth
     }
 
     func append(_ textField: UITextField) {
